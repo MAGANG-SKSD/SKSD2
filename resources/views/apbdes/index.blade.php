@@ -1,43 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', __('Anggaran Kas'))
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+        <li class="breadcrumb-item">{{ __('Anggaran Kas') }}</li>
+    </ul>
+@endsection
 
 @section('content')
-<div class="container">
-    <h1>Daftar APBDes</h1>
-    <a href="{{ route('apbdes.create') }}" class="btn btn-primary mb-3">Tambah APBDes</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Desa</th>
-                <th>Tahun</th>
-                <th>Pendapatan</th>
-                <th>Belanja</th>
-                <th>Pembiayaan</th>
-                <th>Status Verifikasi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($apbdes as $item)
-                <tr>
-                    <td>{{ $item->apbdes_id }}</td>
-                    <td>{{ $item->desa->nama_desa }}</td>
-                    <td>{{ $item->tahun }}</td>
-                    <td>{{ $item->pendapatan }}</td>
-                    <td>{{ $item->belanja }}</td>
-                    <td>{{ $item->pembiayaan }}</td>
-                    <td>{{ $item->status_verifikasi }}</td>
-                    <td>
-                        <a href="{{ route('apbdes.edit', $item->apbdes_id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('apbdes.destroy', $item->apbdes_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive py-5 pb-4 dropdown_2">
+                        <div class="container-fluid">
+                            {{ $dataTable->table(['width' => '100%']) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('style')
+    @include('layouts.includes.datatable_css')
+@endpush
+
+@push('scripts')
+    @include('layouts.includes.datatable_js')
+    {{ $dataTable->scripts() }}
+@endpush
