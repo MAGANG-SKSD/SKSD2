@@ -1,0 +1,78 @@
+[
+    {
+        "name": "realisasi_id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "1",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "desa_id",
+        "dbType": "increments:unsigned:foreign,Desa,id",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "tahun",
+        "dbType": "date",
+        "htmlType": "date",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "belanja_realisasi",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "dana_tidak_terpakai",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "laporan",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,Desa,desa_id,"
+    }
+]

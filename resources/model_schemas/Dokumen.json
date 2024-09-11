@@ -1,0 +1,66 @@
+[
+    {
+        "name": "dokumen_id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "1",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "dana_id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "jenis_dokumen",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "file_path",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "status_verifikasi",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,Dana,dana_id,"
+    }
+]

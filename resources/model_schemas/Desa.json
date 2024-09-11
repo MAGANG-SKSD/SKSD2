@@ -1,0 +1,74 @@
+[
+    {
+        "name": "desa_id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "1",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "nama_desa",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "alamat_desa",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "kode_pos",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "telepon",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "email",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    }
+]
