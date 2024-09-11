@@ -1,0 +1,66 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "nama",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "id_klasifikasi_blanaja",
+        "dbType": "integer",
+        "htmlType": "text",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "date",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "date",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,klasifikasi_blanaja,id,id_klasifikasi_blanaja"
+    }
+]

@@ -655,3 +655,14 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
+
+
+
+
+Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
+
+
+Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
+
+
+Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
