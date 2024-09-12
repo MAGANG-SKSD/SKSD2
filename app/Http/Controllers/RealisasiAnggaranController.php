@@ -51,7 +51,7 @@ class RealisasiAnggaranController extends Controller
     {
         if (\Auth::user()->can('show-realisasianggaran')) {
             $realisasi = RealisasiAnggaran::find($id);
-            return view('realisasi_anggarans.show', compact('realisasi_anggarans'));
+            return view('realisasi_anggarans.show', compact('realisasi'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
@@ -61,11 +61,12 @@ class RealisasiAnggaranController extends Controller
     {
         if (\Auth::user()->can('edit-realisasianggaran')) {
             $realisasi = RealisasiAnggaran::find($id);
-            return view('realisasi_anggarans.edit', compact('realisasi_anggarans'));
+            return view('realisasi_anggarans.edit', compact('realisasi'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
-    }
+}
+
 
     public function update(Request $request, $id)
     {
