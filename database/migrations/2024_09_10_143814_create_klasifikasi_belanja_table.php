@@ -14,9 +14,10 @@ class CreateKlasifikasiBelanjaTable extends Migration
     public function up()
     {
         Schema::create('klasifikasi_belanja', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama'); // Changed to string for variable length text
+            $table->id();
+            $table->string('nama',32)->unique();
             $table->timestamps();
+
         });
     }
 
