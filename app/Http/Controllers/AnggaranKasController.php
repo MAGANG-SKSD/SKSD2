@@ -3,39 +3,148 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AnggaranKasDataTable;
-use App\Models\AnggaranKas;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateAnggaranKasRequest;
+use App\Http\Requests\UpdateAnggaranKasRequest;
+use App\Repositories\AnggaranKasRepository;
+use Flash;
+use Response;
 
-class AnggaranKasController extends Controller
+class AnggaranKasController extends AppBaseController
 {
-    public function index(AnggaranKasDataTable $dataTable)
+    /** @var AnggaranKasRepository $anggaranKasRepository */
+    private $anggaranKasRepository;
+
+    public function __construct(AnggaranKasRepository $anggaranKasRepo)
     {
-        return $dataTable->render('anggaran-kas.index');
+        $this->anggaranKasRepository = $anggaranKasRepo;
     }
 
+    /**
+     * Display a listing of the AnggaranKas.
+     *
+     * @param AnggaranKasDataTable $anggaranKasDataTable
+     *
+     * @return Response
+     */
+    public function index(AnggaranKasDataTable $anggaranKasDataTable)
+    {
+        return $anggaranKasDataTable->render('anggaran-kas.index');
+    }
+
+    /**
+     * Show the form for creating a new AnggaranKas.
+     *
+     * @return Response
+     */
     public function create()
     {
         return view('anggaran-kas.create');
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created AnggaranKas in storage.
+     *
+     * @param CreateAnggaranKasRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreateAnggaranKasRequest $request)
     {
-        // Simpan data
+        $input = $request->all();
+
+        $anggaranKas = $this->anggaranKasRepository->create($input);
+
+        Flash::success('Anggaran Kas saved successfully.');
+
+        return redirect(route('anggaranKas.index'));
     }
 
+    /**
+     * Display the specified AnggaranKas.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $anggaranKas = $this->anggaranKasRepository->find($id);
+
+        if (empty($anggaranKas)) {
+            Flash::error('Anggaran Kas not found');
+
+            return redirect(route('anggaranKas.index'));
+        }
+
+        return view('anggaran-kas.show')->with('anggaranKas', $anggaranKas);
+    }
+
+    /**
+     * Show the form for editing the specified AnggaranKas.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit($id)
     {
-        $anggaranKas = AnggaranKas::find($id);
-        return view('anggaran-kas.edit', compact('anggaranKas'));
+        $anggaranKas = $this->anggaranKasRepository->find($id);
+
+        if (empty($anggaranKas)) {
+            Flash::error('Anggaran Kas not found');
+
+            return redirect(route('anggaranKas.index'));
+        }
+
+        return view('anggaran-kas.edit')->with('anggaranKas', $anggaranKas);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified AnggaranKas in storage.
+     *
+     * @param int $id
+     * @param UpdateAnggaranKasRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateAnggaranKasRequest $request)
     {
-        // Update data
+        $anggaranKas = $this->anggaranKasRepository->find($id);
+
+        if (empty($anggaranKas)) {
+            Flash::error('Anggaran Kas not found');
+
+            return redirect(route('anggaranKas.index'));
+        }
+
+        $anggaranKas = $this->anggaranKasRepository->update($request->all(), $id);
+
+        Flash::success('Anggaran Kas updated successfully.');
+
+        return redirect(route('anggaranKas.index'));
     }
 
+    /**
+     * Remove the specified AnggaranKas from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function destroy($id)
     {
-        // Hapus data
+        $anggaranKas = $this->anggaranKasRepository->find($id);
+
+        if (empty($anggaranKas)) {
+            Flash::error('Anggaran Kas not found');
+
+            return redirect(route('anggaranKas.index'));
+        }
+
+        $this->anggaranKasRepository->delete($id);
+
+        Flash::success('Anggaran Kas deleted successfully.');
+
+        return redirect(route('anggaranKas.index'));
     }
 }

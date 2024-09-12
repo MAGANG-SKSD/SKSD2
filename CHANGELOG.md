@@ -255,3 +255,4 @@
 ## [v8.0.0 (2020-09-08)](https://github.com/laravel/laravel/compare/v7.30.1...v8.0.0)
 
 Laravel 8 comes with a lot of changes to the base skeleton. Please consult the diff to see what's changed.
+
