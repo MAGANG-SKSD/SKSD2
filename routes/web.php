@@ -17,6 +17,7 @@ use App\Http\Controllers\DanasController;
 use App\Http\Controllers\DesasController;
 use App\Http\Controllers\DokumensController;
 use App\Http\Controllers\NoRekeningsController;
+use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\RealisasiAnggaransController;
 use App\Http\Controllers\Sp2dsController;
 /*
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['auth', 'XSS']], function () {
     Route::resource('users', UserController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('modules', ModulController::class);
+    Route::resource('realisasianggaran', RealisasiAnggaranController::class);
 });
 
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware(['auth', 'XSS']);
@@ -116,13 +118,13 @@ Route::group(['prefix' => '2fa'], function () {
 Route::group(
     ['middleware' => ['auth', 'XSS']],
     function () {
-        Route::get('realisasiAnggarans', [RealisasiAnggaranController::class, 'index'])->name('realisasiAnggarans.index');
-        Route::get('realisasiAnggarans/create', [RealisasiAnggaranController::class, 'create'])->name('realisasiAnggarans.create');
-        Route::post('realisasiAnggarans/store', [RealisasiAnggaranController::class, 'store'])->name('realisasiAnggarans.store');
-        Route::get('realisasiAnggarans/{id}/edit', [RealisasiAnggaranController::class, 'edit'])->name('realisasiAnggarans.edit');
-        Route::put('realisasiAnggarans/{id}', [RealisasiAnggaranController::class, 'update'])->name('realisasiAnggarans.update');
-        Route::delete('realisasiAnggarans/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasiAnggarans.destroy');
-        Route::get('realisasiAnggarans/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasiAnggarans.show');
+        Route::get('realisasianggaran', [RealisasiAnggaranController::class, 'index'])->name('realisasi_anggarans.index');
+        Route::get('realisasianggaran/create', [RealisasiAnggaranController::class, 'create'])->name('realisasi_anggarans.create');
+        Route::post('realisasianggaran/store', [RealisasiAnggaranController::class, 'store'])->name('realisasi_anggarans.store');
+        Route::get('realisasianggaran/{id}/edit', [RealisasiAnggaranController::class, 'edit'])->name('realisasi_anggarans.edit');
+        Route::put('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'update'])->name('realisasi_anggarans.update');
+        Route::delete('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi_anggarans.destroy');
+        Route::get('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasi_anggarans.show');
     }
 );
 
@@ -166,7 +168,7 @@ Route::resource('dokumens', DokumensController::class);
 Route::resource('no_rekenings', NoRekeningsController::class);
 
 // Realisasi Anggarans Routes
-Route::resource('realisasi_anggarans', RealisasiAnggaransController::class);
+// Route::resource('realisasi_anggarans', RealisasiAnggaransController::class);
 
 // SP2Ds Routes
 Route::resource('sp2ds', Sp2dsController::class);
@@ -655,14 +657,3 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
-
-
-
-
-Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
-
-
-Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
-
-
-Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
