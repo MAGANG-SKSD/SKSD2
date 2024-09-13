@@ -18,6 +18,7 @@ class CreateKlasifikasiBelanjaTable extends Migration
             $table->increments('id');
             $table->char('nama');
             $table->timestamps();
+
         });
     }
 
