@@ -1,28 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+@section('title')
+    {{ __('Show APBDes') }}
+@endsection
 
 @section('content')
-     <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('apbdes.index') }}">Apbdes</a>
-            </li>
-            <li class="breadcrumb-item active">Detail</li>
-     </ol>
-     <div class="container-fluid">
-          <div class="animated fadeIn">
-                 @include('coreui-templates::common.errors')
-                 <div class="row">
-                     <div class="col-lg-12">
-                         <div class="card">
-                             <div class="card-header">
-                                 <strong>Details</strong>
-                                  <a href="{{ route('apbdes.index') }}" class="btn btn-light">Back</a>
-                             </div>
-                             <div class="card-body">
-                                 @include('apbdes.show_fields')
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-          </div>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2> {{ __('Show APBDes') }}</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('apbdes.index') }}"> {{ __('Back') }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('Name') }}</strong>
+                {{ $apbdes->name }} <!-- Ganti $role menjadi $apbdes -->
+            </div>
+        </div>
     </div>
 @endsection

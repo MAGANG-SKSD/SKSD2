@@ -18,3 +18,5 @@
 -   Resolve conflict file ([49aa3d5389c96cf50d026897bc9b8b5de29c7ec9]https://github.com/MAGANG-SKSD/SKSD2/commit/49aa3d5389c96cf50d026897bc9b8b5de29c7ec9)
 
 -   Editing fitur Desa
+#### [(2024-09-12)]
+-   Add UI apbdes 
