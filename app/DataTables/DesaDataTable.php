@@ -24,16 +24,9 @@ class DesaDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($desa) {
-                return '
-                    <a href="' . route('desas.show', $desa->desa_id) . '" class="btn btn-sm btn-primary">View</a>
-                    <a href="' . route('desas.edit', $desa->desa_id) . '" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="' . route('desas.destroy', $desa->desa_id) . '" method="POST" style="display:inline;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>';
-            });
+            ->addColumn('action', function (Desa $desa) {
+                return view('desas.action', compact('desas'));
+            });    
     }
 
     /**
@@ -44,7 +37,7 @@ class DesaDataTable extends DataTable
      */
     public function query(Desa $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id', 'ASC');
     }
 
     /**
@@ -55,18 +48,43 @@ class DesaDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('desas-table')
+            ->setTableId('desa-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
-            ->orderBy(0)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>'
+                ]
+            ])
+            ->parameters([
+                "dom" =>  "
+                    <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
+                    <'row'<'col-sm-12'tr>>
+                    <'row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
+                ",
+                'buttons' => [
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'pageLength', 'className' => 'btn btn-primary btn-sm no-corner'],
+                ],
+                "scrollX" => true
+            ])
+            ->language([
+                'buttons' => [
+                    'create' => __('Create'),
+                    'export' => __('Export'),
+                    'print' => __('Print'),
+                    'reset' => __('Reset'),
+                    'reload' => __('Reload'),
+                    'excel' => __('Excel'),
+                    'csv' => __('CSV'),
+                    'pageLength' => __('Show %d rows'),
+                ]
+            ]);
     }
 
     /**
@@ -77,16 +95,16 @@ class DesaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('desa_id'),
+            Column::make('id'),
             Column::make('nama_desa'),
             Column::make('alamat_desa'),
             Column::make('kode_pos'),
             Column::make('telepon'),
             Column::make('email'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center'),
         ];
     }
 

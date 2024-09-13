@@ -11,3 +11,7 @@
 #### [(2024-09-12)]
 
 -   Finishing function and role Realisasi Anggaran ([b439cce5ce8f3dc7a0027c354664bc6c8fabc3a1] https://github.com/MAGANG-SKSD/SKSD2/commit/b439cce5ce8f3dc7a0027c354664bc6c8fabc3a1)
+
+#### [(2024-09-13)]
+
+-   Editing fitur Desa

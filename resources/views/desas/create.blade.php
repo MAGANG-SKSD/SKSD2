@@ -1,38 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+@section('title', __('Create Desa '))
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('desas.index') }}">{{ __('Desa') }}</a></li>
+        <li class="breadcrumb-item">{{ __('Desa') }}
+        </li>
+    </ul>
+@endsection
 
 @section('content')
-    <div class="container">
-        <h1>Create New Desa</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+         <a href="{!! route('desas.index') !!}">Desa</a>
+      </li>
+      <li class="breadcrumb-item active">Create</li>
+    </ol>
+     <div class="container-fluid">
+          <div class="animated fadeIn">
+                @include('coreui-templates::common.errors')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-plus-square-o fa-lg"></i>
+                                <strong>Create Desa</strong>
+                            </div>
+                            <div class="card-body">
+                                {!! Form::open(['route' => 'desas.store']) !!}
 
-        <form action="{{ route('desas.store') }}" method="POST">
-            @csrf
+                                   @include('desas.fields')
 
-            <div class="form-group">
-                <label for="nama_desa">Nama Desa:</label>
-                <input type="text" name="nama_desa" id="nama_desa" class="form-control" value="{{ old('nama_desa') }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="alamat_desa">Alamat Desa:</label>
-                <input type="text" name="alamat_desa" id="alamat_desa" class="form-control" value="{{ old('alamat_desa') }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="kode_pos">Kode Pos:</label>
-                <input type="number" name="kode_pos" id="kode_pos" class="form-control" value="{{ old('kode_pos') }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telepon">Telepon:</label>
-                <input type="text" name="telepon" id="telepon" class="form-control" value="{{ old('telepon') }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
     </div>
 @endsection
