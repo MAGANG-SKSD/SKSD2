@@ -12,5 +12,9 @@
 
 -   Add function and moduls dana ([4cdf738a2966f870c5f34e2b170a2c2746d381ba]https://github.com/MAGANG-SKSD/SKSD2/commit/4cdf738a2966f870c5f34e2b170a2c2746d381ba)
 -   Finishing function and role Realisasi Anggaran ([b439cce5ce8f3dc7a0027c354664bc6c8fabc3a1] https://github.com/MAGANG-SKSD/SKSD2/commit/b439cce5ce8f3dc7a0027c354664bc6c8fabc)
+
 #### [(2024-09-13)]
-- Resolve conflict file ([49aa3d5389c96cf50d026897bc9b8b5de29c7ec9]https://github.com/MAGANG-SKSD/SKSD2/commit/49aa3d5389c96cf50d026897bc9b8b5de29c7ec9)
+
+-   Resolve conflict file ([49aa3d5389c96cf50d026897bc9b8b5de29c7ec9]https://github.com/MAGANG-SKSD/SKSD2/commit/49aa3d5389c96cf50d026897bc9b8b5de29c7ec9)
+
+-   Editing fitur Desa
