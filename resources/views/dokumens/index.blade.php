@@ -1,37 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+@section('title', __('Dokumen'))
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+        <li class="breadcrumb-item">{{ __('Dokumen') }}</li>
+    </ul>
+@endsection
 
 @section('content')
-<div class="container">
-    <h1>Data Dokumen</h1>
-    <a href="{{ route('dokumens.create') }}" class="btn btn-primary">Tambah Dokumen</a>
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Jenis Dokumen</th>
-                <th>File Path</th>
-                <th>Status Verifikasi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($dokumens as $dokumen)
-                <tr>
-                    <td>{{ $dokumen->dokumen_id }}</td>
-                    <td>{{ $dokumen->jenis_dokumen }}</td>
-                    <td>{{ $dokumen->file_path }}</td>
-                    <td>{{ $dokumen->status_verifikasi }}</td>
-                    <td>
-                        <a href="{{ route('dokumens.edit', $dokumen->dokumen_id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('dokumens.destroy', $dokumen->dokumen_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>
+                    {{ __('Dokumen') }}
+                    <a class="pull-right" href="{{ route('dokumens.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive py-5 pb-4 dropdown_2">
+                        <div class="container-fluid">
+                            {{ $dataTable->table(['width' => '100%']) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('style')
+    @include('layouts.includes.datatable_css')
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+@endpush
+
+@push('scripts')
+    @include('layouts.includes.datatable_js')
+    {{ $dataTable->scripts() }}
+@endpush
