@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 /**
  * Class Dokumen
  * @package App\Models
- * @version September 4, 2024, 2:41 pm WIB
+ * @version September 13, 2024, 9:28 am WIB
  *
- * @property \App\Models\Dana $dana
+ * @property \App\Models\dana_id $dana
  * @property integer $dana_id
  * @property string $jenis_dokumen
  * @property string $file_path
@@ -21,15 +21,13 @@ class Dokumen extends Model
 {
     use SoftDeletes;
 
-    use HasFactory;
 
-    public $table = 'dokumens';
+    public $table = 'dokumen';
     
 
     protected $dates = ['deleted_at'];
 
 
-    protected $primaryKey = 'dokumen_id';
 
     public $fillable = [
         'dana_id',
@@ -57,9 +55,7 @@ class Dokumen extends Model
      * @var array
      */
     public static $rules = [
-        'jenis_dokumen' => 'required',
-        'file_path' => 'required',
-        'status_verifikasi' => 'required'
+        
     ];
 
     /**
@@ -67,6 +63,6 @@ class Dokumen extends Model
      **/
     public function dana()
     {
-        return $this->belongsTo(\App\Models\Dana::class, 'dana_id', '');
+        return $this->belongsTo(\App\Models\dana_id::class, 'dana_id', '');
     }
 }

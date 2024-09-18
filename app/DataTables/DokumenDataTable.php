@@ -18,7 +18,7 @@ class DokumenDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'dokumens.datatables_actions');
+        return $dataTable->addColumn('action', 'dokumens.action'); // Menyesuaikan dengan action.blade.php untuk dokumen
     }
 
     /**
@@ -40,6 +40,7 @@ class DokumenDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+            ->setTableId('dokumen-table') // Set ID untuk DataTables
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->addAction(['width' => '120px', 'printable' => false])
@@ -48,12 +49,13 @@ class DokumenDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner'],
                 ],
+                'scrollX' => true
             ]);
     }
 
@@ -65,10 +67,10 @@ class DokumenDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'dana_id',
-            'jenis_dokumen',
-            'file_path',
-            'status_verifikasi'
+            'dana_id' => ['title' => 'Dana ID'], // Menyesuaikan judul kolom
+            'jenis_dokumen' => ['title' => 'Jenis Dokumen'],
+            'file_path' => ['title' => 'File Path'],
+            'status_verifikasi' => ['title' => 'Status Verifikasi'],
         ];
     }
 
@@ -79,6 +81,6 @@ class DokumenDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'dokumens_datatable_' . time();
+        return 'dokumen_datatable_' . time();
     }
 }
