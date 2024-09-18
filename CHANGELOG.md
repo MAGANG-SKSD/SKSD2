@@ -18,3 +18,17 @@
 -   Resolve conflict file ([49aa3d5389c96cf50d026897bc9b8b5de29c7ec9]https://github.com/MAGANG-SKSD/SKSD2/commit/49aa3d5389c96cf50d026897bc9b8b5de29c7ec9)
 
 -   Editing fitur Desa
+
+#### [(2024-09-17)]
+
+-   Editing function fitur desa
+
+#### [(2024-09-18)]
+
+-   Editing function fitur desa and realisasi anggaran ([538e0ebbc6a6968625e9fe9e6734d71827b12c92] https://github.com/MAGANG-SKSD/SKSD2/commit/538e0ebbc6a6968625e9fe9e6734d71827b12c92)
+
+-   Add function and moduls klasifikasi nomer rekening
+
+-   Add function in fitur dokumen
+
+-   Add index.blade.php view and create.blade.php in fitur APBDes
