@@ -18,7 +18,7 @@ class Sp2dDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'sp2ds.datatables_actions');
+        return $dataTable->addColumn('action', 'sp2ds.datatables_actions'); // Menyesuaikan dengan action.blade.php
     }
 
     /**
@@ -40,6 +40,7 @@ class Sp2dDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+            ->setTableId('sp2ds-table') // Set ID untuk DataTables
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->addAction(['width' => '120px', 'printable' => false])
@@ -48,11 +49,23 @@ class Sp2dDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Create'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Export'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Print'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Reset'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Reload'],
+                ],
+                'scrollX'   => true,
+                'language'  => [
+                    'search'         => 'Search:',
+                    'lengthMenu'     => 'Show _MENU_ entries',
+                    'info'           => 'Showing _START_ to _END_ of _TOTAL_ entries',
+                    'infoEmpty'      => 'No entries found',
+                    'infoFiltered'   => '(filtered from _MAX_ total entries)',
+                    'loadingRecords' => 'Loading...',
+                    'processing'     => 'Processing...',
+                    'searchPlaceholder' => 'Search...',
+                    'zeroRecords'    => 'No matching records found',
                 ],
             ]);
     }
@@ -65,10 +78,10 @@ class Sp2dDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'desa_id',
-            'nomor_sp2d',
-            'tanggal_sp2d',
-            'jumlah_dana'
+            'desa_id' => ['title' => 'Desa ID'],
+            'nomor_sp2d' => ['title' => 'SP2D Number'],
+            'tanggal_sp2d' => ['title' => 'SP2D Date'],
+            'jumlah_dana' => ['title' => 'Amount'],
         ];
     }
 
