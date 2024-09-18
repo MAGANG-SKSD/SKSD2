@@ -4,38 +4,36 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 /**
  * Class AnggaranKas
  * @package App\Models
- * @version September 4, 2024, 2:36 pm WIB
+ * @version September 12, 2024, 10:29 am WIB
  *
- * @property \App\Models\Desa $desa
+ * @property \App\Models\desa_id $
  * @property integer $desa_id
  * @property string $tahun
  * @property integer $total_anggaran
- * @property string $status persetujuan
+ * @property string $status_persetujuan
  */
 class AnggaranKas extends Model
 {
     use SoftDeletes;
 
-    use HasFactory;
 
-    public $table = 'anggaran_kas';
+    public $table = 'AnggaranKas';
     
 
     protected $dates = ['deleted_at'];
 
 
-    protected $primaryKey = 'anggaran_kas_id';
 
     public $fillable = [
         'desa_id',
         'tahun',
         'total_anggaran',
-        'status persetujuan'
+        'status_persetujuan'
     ];
 
     /**
@@ -44,11 +42,11 @@ class AnggaranKas extends Model
      * @var array
      */
     protected $casts = [
-        'anggaran_kas_id' => 'integer',
+        'anggaran-kas_id' => 'integer',
         'desa_id' => 'integer',
         'tahun' => 'date',
         'total_anggaran' => 'integer',
-        'status persetujuan' => 'string'
+        'status_persetujuan' => 'string'
     ];
 
     /**
@@ -57,17 +55,8 @@ class AnggaranKas extends Model
      * @var array
      */
     public static $rules = [
-        'desa_id' => 'required',
-        'tahun' => 'required',
-        'total_anggaran' => 'required',
-        'status persetujuan' => 'required'
+        
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function desa()
-    {
-        return $this->belongsTo(\App\Models\Desa::class, 'desa_id', '');
-    }
+    
 }
