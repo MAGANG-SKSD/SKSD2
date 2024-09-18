@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Dana;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class DanaDataTable extends DataTable
 {
@@ -16,9 +17,11 @@ class DanaDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'danas.datatables_actions');
+        return datatables()
+            ->eloquent($query)
+            ->addColumn('action', function (Dana $dana) {
+                return view('danas.action', compact('dana'));
+            });
     }
 
     /**
@@ -29,7 +32,7 @@ class DanaDataTable extends DataTable
      */
     public function query(Dana $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id', 'ASC');
     }
 
     /**
@@ -40,19 +43,41 @@ class DanaDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+            ->setTableId('dana-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>',
+                ],
+            ])
             ->parameters([
-                'dom'       => 'Bfrtip',
-                'stateSave' => true,
-                'order'     => [[0, 'desc']],
-                'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                "dom" => "
+                    <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
+                    <'row'<'col-sm-12'tr>>
+                    <'row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
+                ",
+                'buttons' => [
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'pageLength', 'className' => 'btn btn-primary btn-sm no-corner'],
+                ],
+                "scrollX" => true,
+            ])
+            ->language([
+                'buttons' => [
+                    'create' => __('Create'),
+                    'export' => __('Export'),
+                    'print' => __('Print'),
+                    'reset' => __('Reset'),
+                    'reload' => __('Reload'),
+                    'excel' => __('Excel'),
+                    'csv' => __('CSV'),
+                    'pageLength' => __('Show %d rows'),
                 ],
             ]);
     }
@@ -65,10 +90,15 @@ class DanaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'desa_id',
-            'jenis_dana',
-            'jumlah_dana',
-            'status_pengajuan'
+            Column::make('desa_id')->title(__('Desa ID')),
+            Column::make('jenis_dana')->title(__('Jenis Dana')),
+            Column::make('jumlah_dana')->title(__('Jumlah Dana')),
+            Column::make('status_pengajuan')->title(__('Status Pengajuan')),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->title(__('Action')),
         ];
     }
 
@@ -79,6 +109,6 @@ class DanaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'danas_datatable_' . time();
+        return 'danas_datatable_' . date('YmdHis');
     }
 }
