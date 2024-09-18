@@ -19,7 +19,7 @@ class RealisasiAnggaranDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function (RealisasiAnggaran $realisasi) {
-                return view('realisasi_anggarans.action', compact('realisasi_anggarans'));
+                return view('realisasi_anggarans.action', compact('realisasi'));
             });    
     }
 

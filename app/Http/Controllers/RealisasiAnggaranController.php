@@ -31,15 +31,19 @@ class RealisasiAnggaranController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'date' => 'required|date',
+            'desa_id' => 'required',
+            'tahun' => 'required',
+            'belanja_realisasi' => 'required',
+            'dana_tidak_terpakai' => 'required',
+            'laporan' => 'required',
         ]);
 
         RealisasiAnggaran::create([
-            'name' => $request['name'],
-            'description' => $request['description'],
-            'date' => $request['date'],
+            'desa_id' => $request['desa_id'],
+            'tahun' => $request['tahun'],
+            'belanja_realisasi' => $request['belanja_realisasi'],
+            'dana_tidak_terpakai' => $request['dana_tidak_terpakai'],
+            'laporan' => $request['laporan'],
             'created_by' => Auth::user()->id,
         ]);
 
@@ -71,9 +75,11 @@ class RealisasiAnggaranController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'date' => 'required|date',
+            'desa_id' => 'required',
+            'tahun' => 'required',
+            'belanja_realisasi' => 'required',
+            'dana_tidak_terpakai' => 'required',
+            'laporan' => 'required',
         ]);
 
         $realisasi = RealisasiAnggaran::find($id);
