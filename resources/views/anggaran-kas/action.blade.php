@@ -1,10 +1,15 @@
-<a href="{{ route('anggaran-kas.edit', $id) }}" class="btn btn-warning btn-sm">
-    <i class="ti ti-edit"></i> {{ __('Edit') }}
-</a>
-<a href="{{ route('anggaran-kas.destroy', $id) }}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure?')) document.getElementById('delete-form-{{ $id }}').submit();">
-    <i class="ti ti-trash"></i> {{ __('Delete') }}
-</a>
-<form id="delete-form-{{ $id }}" action="{{ route('anggaran-kas.destroy', $id) }}" method="POST" style="display: none;">
-    @csrf
-    @method('DELETE')
-</form>
+<div class='btn-group'>
+    <a href="{{ route('anggaranKas.show', $id) }}" class='btn btn-primary btn-sm'>
+        <i class="fa fa-eye"></i> View
+    </a>
+    <a href="{{ route('anggaranKas.edit', $id) }}" class='btn btn-warning btn-sm'>
+        <i class="fa fa-edit"></i> Edit
+    </a>
+    {!! Form::open(['route' => ['anggaranKas.destroy', $id], 'method' => 'delete', 'style' => 'display:inline']) !!}
+        {!! Form::button('<i class="fa fa-trash"></i> Delete', [
+            'type' => 'submit',
+            'class' => 'btn btn-danger btn-sm',
+            'onclick' => "return confirm('Are you sure?')"
+        ]) !!}
+    {!! Form::close() !!}
+</div>
