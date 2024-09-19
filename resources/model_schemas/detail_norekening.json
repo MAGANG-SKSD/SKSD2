@@ -1,0 +1,98 @@
+[
+    {
+        "name": "id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "1",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "nama",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "id_klasifikasi_norekening",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "id_jenis_norekening",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "id_kelompok_norekening",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "date",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "date",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,klasifikasi_norekening,id,id_klasifikasi_norekening"
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,jenis_norekening,id,id_jenis_norekening"
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,kelompok_norekening,id,id_kelompok_norekening"
+    }
+]

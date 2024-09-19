@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateKlasifikasiBelanjaTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class CreateKlasifikasiBelanjaTable extends Migration
     {
         Schema::create('klasifikasi_belanja', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('nama');
+            $table->string('nama'); // Changed to string for variable length text
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateKlasifikasiBelanjaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('klasifikasi_belanja');
+        Schema::dropIfExists('klasifikasi_belanja'); // Use dropIfExists for safety
     }
 }

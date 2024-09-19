@@ -1,14 +1,14 @@
 @extends('layouts.admin')
-
-@section('title', __('Anggaran Kas'))
+@section('title', __('APBDes'))
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-        <li class="breadcrumb-item">{{ __('Anggaran Kas') }}</li>
+        <li class="breadcrumb-item">{{ __('APBDes') }}</li>
     </ul>
 @endsection
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -22,10 +22,12 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('style')
     @include('layouts.includes.datatable_css')
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
 @endpush
 
 @push('scripts')

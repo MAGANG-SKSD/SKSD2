@@ -171,18 +171,18 @@ Route::resource('realisasi_anggarans', RealisasiAnggaransController::class);
 // SP2Ds Routes
 Route::resource('sp2ds', Sp2dsController::class);
 
-// Route::group(
-//     ['middleware' => ['auth', 'XSS']],
-//     function () {
-//         Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-//         Route::get('apbdes/create', [ApbdesController::class, 'create'])->name('apbdes.create');
-//         Route::post('apbdes/store', [ApbdesController::class, 'store'])->name('apbdes.store');
-//         Route::get('apbdes/{id}/edit', [ApbdesController::class, 'edit'])->name('apbdes.edit');
-//         Route::put('apbdes/{id}', [ApbdesController::class, 'update'])->name('apbdes.update');
-//         Route::delete('apbdes/{id}', [ApbdesController::class, 'destroy'])->name('apbdes.destroy');
-//         Route::get('apbdes/{id}', [ApbdesController::class, 'show'])->name('apbdes.show');
-//     }
-// );
+Route::group(
+    ['middleware' => ['auth', 'XSS']],
+    function () {
+        Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+        Route::get('apbdes/create', [ApbdesController::class, 'create'])->name('apbdes.create');
+        Route::post('apbdes/store', [ApbdesController::class, 'store'])->name('apbdes.store');
+        Route::get('apbdes/{id}/edit', [ApbdesController::class, 'edit'])->name('apbdes.edit');
+        Route::put('apbdes/{id}', [ApbdesController::class, 'update'])->name('apbdes.update');
+        Route::delete('apbdes/{id}', [ApbdesController::class, 'destroy'])->name('apbdes.destroy');
+        Route::get('apbdes/{id}', [ApbdesController::class, 'show'])->name('apbdes.show');
+    }
+);
 
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
@@ -236,57 +236,18 @@ Route::resource('sp2ds', Sp2dsController::class);
 //     }
 // );
 
-// Route::group(
-//     ['middleware' => ['auth', 'XSS']],
-//     function () {
-//         Route::get('sp2ds', [Sp2dController::class, 'index'])->name('sp2ds.index');
-//         Route::get('sp2ds/create', [Sp2dController::class, 'create'])->name('sp2ds.create');
-//         Route::post('sp2ds/store', [Sp2dController::class, 'store'])->name('sp2ds.store');
-//         Route::get('sp2ds/{id}/edit', [Sp2dController::class, 'edit'])->name('sp2ds.edit');
-//         Route::put('sp2ds/{id}', [Sp2dController::class, 'update'])->name('sp2ds.update');
-//         Route::delete('sp2ds/{id}', [Sp2dController::class, 'destroy'])->name('sp2ds.destroy');
-//         Route::get('sp2ds/{id}', [Sp2dController::class, 'show'])->name('sp2ds.show');
-//     }
-// );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::group(
+    ['middleware' => ['auth', 'XSS']],
+    function () {
+        Route::get('sp2ds', [Sp2dController::class, 'index'])->name('sp2ds.index');
+        Route::get('sp2ds/create', [Sp2dController::class, 'create'])->name('sp2ds.create');
+        Route::post('sp2ds/store', [Sp2dController::class, 'store'])->name('sp2ds.store');
+        Route::get('sp2ds/{id}/edit', [Sp2dController::class, 'edit'])->name('sp2ds.edit');
+        Route::put('sp2ds/{id}', [Sp2dController::class, 'update'])->name('sp2ds.update');
+        Route::delete('sp2ds/{id}', [Sp2dController::class, 'destroy'])->name('sp2ds.destroy');
+        Route::get('sp2ds/{id}', [Sp2dController::class, 'show'])->name('sp2ds.show');
+    }
+);
 Route::resource('tests', App\Http\Controllers\TestController::class)->middleware(['auth', 'XSS']);
 
 
@@ -655,3 +616,14 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
+
+
+
+
+Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
+
+
+Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
+
+
+Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);

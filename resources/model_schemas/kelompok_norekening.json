@@ -1,0 +1,30 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": "",
+        "fillable": "",
+        "primary": "1",
+        "inForm": "",
+        "inIndex": "",
+        "inView": true
+    },
+    {
+        "name": "nama",
+        "dbType": "char",
+        "htmlType": "text",
+        "validations": "",
+        "searchable": "1",
+        "fillable": "1",
+        "primary": "",
+        "inForm": "1",
+        "inIndex": "1",
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,klasifikasi_belanja,id,id_klasifikasi_belanja"
+    }
+]

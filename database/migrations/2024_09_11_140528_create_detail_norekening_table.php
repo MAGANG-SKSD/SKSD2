@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApbdesTable extends Migration
+class CreateDetailNorekeningTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,8 +14,12 @@ class CreateApbdesTable extends Migration
      */
     public function up()
     {
-        Schema::create('apbdes', function (Blueprint $table) {
-            $table->id();
+        Schema::create('detail_norekening', function (Blueprint $table) {
+            $table->integer('id');
+            $table->char('nama');
+            $table->integer('id_klasifikasi_norekening');
+            $table->integer('id_jenis_norekening');
+            $table->integer('id_kelompok_norekening');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateApbdesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apbdes');
+        Schema::drop('detail_norekening');
     }
 }
