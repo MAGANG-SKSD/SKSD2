@@ -40,3 +40,7 @@
 #### [(2024-09-19)]
 
 -   Fix in web.php
+
+-   add model & controller Anggaran ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](https://github.com/MAGANG-SKSD/SKSD2/commit/11db7b0129ad92b8af3a5bb4a1cf51bd1d993061))
+
+-   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061]())
