@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKlasifikasiBelanjaTable extends Migration
+class CreateJenisNorekening extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,11 +13,10 @@ class CreateKlasifikasiBelanjaTable extends Migration
      */
     public function up()
     {
-        Schema::create('klasifikasi_belanja', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('nama');
+        Schema::create('jenis_norekening', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama', 32)->unique();
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +27,6 @@ class CreateKlasifikasiBelanjaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('klasifikasi_belanja');
+        Schema::dropIfExists('jenis_norekening'); // Perbaikan nama tabel
     }
 }
