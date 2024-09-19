@@ -20,14 +20,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Dana extends Model
 {
     use SoftDeletes;
-
     use HasFactory;
 
     public $table = 'danas';
-    
 
     protected $dates = ['deleted_at'];
-
 
     protected $primaryKey = 'dana_id';
 
@@ -68,6 +65,6 @@ class Dana extends Model
      **/
     public function desa()
     {
-        return $this->belongsTo(\App\Models\Desa::class, 'desa_id', '');
+        return $this->belongsTo(\App\Models\Desa::class, 'desa_id', 'id');
     }
 }

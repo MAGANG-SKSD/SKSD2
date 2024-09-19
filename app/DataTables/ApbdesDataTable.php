@@ -2,85 +2,88 @@
 
 namespace App\DataTables;
 
-use App\Models\Apbdes;
+use App\Facades\UtilityFacades;
+use App\Models\Apbdes; // Ganti dengan model yang sesuai
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
 
 class ApbdesDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
-        $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'apbdes.datatables_actions');
+        return datatables()
+            ->eloquent($query)
+            ->editColumn('created_at', function (Apbdes $apbdes) {
+                return UtilityFacades::dateFormat($apbdes->created_at);
+            })
+            ->addColumn('action', function (Apbdes $apbdes) {
+                return view('apbdes.action', compact('apbdes')); // Ganti dengan view yang sesuai
+            });
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Apbdes $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(Apbdes $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id', 'ASC');
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
+            ->setTableId('apbdes-table') // Ganti ID tabel jika diperlukan
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>'
+                ]
+            ])
             ->parameters([
-                'dom'       => 'Bfrtip',
-                'stateSave' => true,
-                'order'     => [[0, 'desc']],
+                "dom" =>  "
+                                <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
+                                <'row'<'col-sm-12'tr>>
+                                <' row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
+                                ",
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'pageLength', 'className' => 'btn btn-primary btn-sm no-corner'],
                 ],
+                "scrollX" => true
+            ])
+            ->language([
+                'buttons' => [
+                    'create' => __('Create'),
+                    'export' => __('Export'),
+                    'print' => __('Print'),
+                    'reset' => __('Reset'),
+                    'reload' => __('Reload'),
+                    'excel' => __('Excel'),
+                    'csv' => __('CSV'),
+                    'pageLength' => __('Show %d rows'),
+                ]
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
-            'desa_id',
-            'tahun',
-            'pendapatan',
-            'belanja',
-            'pembiayaan',
-            'status_verifikasi'
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('created_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center'),
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename()
     {
-        return 'apbdes_datatable_' . time();
+        return 'Apbdes_' . date('YmdHis');
     }
 }
