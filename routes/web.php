@@ -155,13 +155,13 @@ Route::resource('apbdes', ApbdesController::class);
 
 // Dana Routes
 Route::middleware(['auth', 'XSS'])->group(function () {
-    Route::get('dana', [DanaController::class, 'index'])->name('realisasi_anggarans.index');
-    Route::get('dana/create', [DanaController::class, 'create'])->name('realisasi_anggarans.create');
-    Route::post('dana/store', [DanaController::class, 'store'])->name('realisasi_anggarans.store');
-    Route::get('dana/{id}/edit', [DanaController::class, 'edit'])->name('realisasi_anggarans.edit');
-    Route::put('dana/{id}', [DanaController::class, 'update'])->name('realisasi_anggarans.update');
-    Route::delete('dana/{id}', [DanaController::class, 'destroy'])->name('realisasi_anggarans.destroy');
-    Route::get('dana/{id}', [DanaController::class, 'show'])->name('realisasi_anggarans.show');
+    Route::get('dana', [DanaController::class, 'index'])->name('danas.index');
+    Route::get('dana/create', [DanaController::class, 'create'])->name('danas.create');
+    Route::post('dana/store', [DanaController::class, 'store'])->name('danas.store');
+    Route::get('dana/{id}/edit', [DanaController::class, 'edit'])->name('danas.edit');
+    Route::put('dana/{id}', [DanaController::class, 'update'])->name('danas.update');
+    Route::delete('dana/{id}', [DanaController::class, 'destroy'])->name('danas.destroy');
+    Route::get('dana/{id}', [DanaController::class, 'show'])->name('danas.show');
 });
 
 // Route::resource(
@@ -178,7 +178,7 @@ Route::middleware(['auth', 'XSS'])->group(function () {
 // );
 
 // Desas Routes
-Route::put('desas/{desa}', [DesaController::class, 'update'])->name('desas.update');
+// Route::put('desas/{desa}', [DesaController::class, 'update'])->name('desas.update');
 
 
 // Dokumens Routes
@@ -219,18 +219,18 @@ Route::resource('sp2ds', Sp2dController::class);
 //     }
 // );
 
-// Route::group(
-//     ['middleware' => ['auth', 'XSS']],
-//     function () {
-//         Route::get('desas', [DesaController::class, 'index'])->name('desas.index');
-//         Route::get('desas/create', [DesaController::class, 'create'])->name('desas.create');
-//         Route::post('desas/store', [DesaController::class, 'store'])->name('desas.store');
-//         Route::get('desas/{id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
-//         Route::put('desas/{id}', [DesaController::class, 'update'])->name('desas.update');
-//         Route::delete('desas/{id}', [DesaController::class, 'destroy'])->name('desas.destroy');
-//         Route::get('desas/{id}', [DesaController::class, 'show'])->name('desas.show');
-//     }
-// );
+Route::group(
+    ['middleware' => ['auth', 'XSS']],
+    function () {
+        Route::get('desas', [DesaController::class, 'index'])->name('desas.index');
+        Route::get('desas/create', [DesaController::class, 'create'])->name('desas.create');
+        Route::post('desas/store', [DesaController::class, 'store'])->name('desas.store');
+        Route::get('desas/{id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
+        Route::put('desas/{id}', [DesaController::class, 'update'])->name('desas.update');
+        Route::delete('desas/{id}', [DesaController::class, 'destroy'])->name('desas.destroy');
+        Route::get('desas/{id}', [DesaController::class, 'show'])->name('desas.show');
+    }
+);
 
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
