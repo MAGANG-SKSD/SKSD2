@@ -20,8 +20,8 @@ class Detail_Norekening extends Model
         return $this->belongsTo('App\Models\Jenis_norekening');
     }
 
-    public function realisasi_anggaran()
+    public function anggaran()
     {
-        return $this->hasMany('App\Models\RealisasiAnggaran');
+        return $this->hasMany('App\Models\Anggaran');
     }
 }
