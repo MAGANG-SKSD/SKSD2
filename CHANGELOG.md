@@ -36,3 +36,7 @@
 -   Add UI apbdes ([cf1bb512d92a6b11dbc0edf1364bf771ba1053b1](https://github.com/MAGANG-SKSD/SKSD2/commit/cf1bb512d92a6b11dbc0edf1364bf771ba1053b1))
 
 -   Add UI apbdes ([cf1bb512d92a6b11dbc0edf1364bf771ba1053b1](https://github.com/MAGANG-SKSD/SKSD2/commit/cf1bb512d92a6b11dbc0edf1364bf771ba1053b1))
+
+#### [(2024-09-19)]
+
+-   Fix in web.php
