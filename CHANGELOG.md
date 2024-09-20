@@ -39,7 +39,6 @@
 
 #### [(2024-09-19)]
 
-
 -   Fix in web.php
 -   add model & controller Anggaran ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](https://github.com/MAGANG-SKSD/SKSD2/commit/11db7b0129ad92b8af3a5bb4a1cf51bd1d993061))
 -   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](11db7b0129ad92b8af3a5bb4a1cf51bd1d993061)))
@@ -50,3 +49,12 @@
 
 -   Memperbaiki field tampilan view APBDes, menambahkan fungsi create dan memperbaiki fungsi edit
 
+#### [(2024-09-20)]
+
+-   Change database anggaran, anggaran model, apbdes model, and anggaran datatable. Addview for anggaran, verifikasi, and realisasi ([90c73473efdeae7fbb89456b915a21bb9d850458] https://github.com/MAGANG-SKSD/SKSD2/commit/90c73473efdeae7fbb89456b915a21bb9d850458)
+
+-   Changes database anggaran, model anggaran, controller anggaran ([b9cbdcbab2aa01c37b484e22f20de8806941b4d2] https://github.com/MAGANG-SKSD/SKSD2/commit/b9cbdcbab2aa01c37b484e22f20de8806941b4d2)
+
+-   Make view for APBDes in index and show blade ([10768bdd9dd7e4239851d82d0ffabf53e7834e98])
+
+-   Modified UI dashboard,controller and route
