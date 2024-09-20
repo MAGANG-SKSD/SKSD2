@@ -9,16 +9,25 @@ use Yajra\DataTables\Services\DataTable;
 
 class ApbdesDataTable extends DataTable
 {
-
+    /**
+     * Build DataTable class.
+     *
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
+     */
     public function dataTable($query)
     {
-        return datatables()
-            ->eloquent($query)
-            ->addColumn('action', function (Apbdes $apbdes) {
-                return view('apbdes.action', compact('apbdes'));
-            });
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable->addColumn('action', 'apbdes.datatables_actions');
     }
 
+    /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\Apbdes $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query(Apbdes $model)
     {
         return $model->newQuery()->orderBy('id', 'ASC');
@@ -27,7 +36,6 @@ class ApbdesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('apbdes-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
@@ -38,49 +46,41 @@ class ApbdesDataTable extends DataTable
                 ]
             ])
             ->parameters([
-                "dom" =>  "
-                                <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
-                                <'row'<'col-sm-12'tr>>
-                                <' row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
-                                ",
-
+                'dom'       => 'Bfrtip',
+                'stateSave' => true,
+                'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner',],
-                    ['extend' => 'pageLength', 'className' => 'btn btn-primary btn-sm no-corner',],
+                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-
-                "scrollX" => true
-            ])
-            ->language([
-                'buttons' => [
-                    'create' => __('Create'),
-                    'export' => __('Export'),
-                    'print' => __('Print'),
-                    'reset' => __('Reset'),
-                    'reload' => __('Reload'),
-                    'excel' => __('Excel'),
-                    'csv' => __('CSV'),
-                    'pageLength' => __('Show %d rows'),
-                ]
             ]);
     }
 
+    /**
+     * Get columns.
+     *
+     * @return array
+     */
     protected function getColumns()
     {
         return [
-
-            Column::make('id'),
-            Column::make('name'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center'),
+            'desa_id',
+            'tahun',
+            'pendapatan',
+            'belanja',
+            'pembiayaan',
+            'status_verifikasi'
         ];
     }
 
+    /**
+     * Get filename for export.
+     *
+     * @return string
+     */
     protected function filename()
     {
         return 'Apbdes_' . date('YmdHis');

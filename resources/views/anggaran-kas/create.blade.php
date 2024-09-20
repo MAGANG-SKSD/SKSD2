@@ -1,38 +1,41 @@
 @extends('layouts.admin')
 
 @section('title', __('Create Anggaran Kas'))
+
 @section('breadcrumb')
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('anggaran-kas.index') }}">{{ __('Anggaran Kas') }}</a></li>
-        <li class="breadcrumb-item">{{ __('Create Anggaran Kas') }}</li>
+        <li class="breadcrumb-item">
+            <a href="{!! route('anggaranKas.index') !!}">{{ __('Anggaran Kas') }}</a>
+        </li>
+        <li class="breadcrumb-item active">{{ __('Create') }}</li>
     </ul>
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 m-auto">
-            <div class="card">
-                <div class="card-header">
-                    <h5>{{ __('Create Anggaran Kas') }}</h5>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('anggaran-kas.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="nama">{{ __('Nama') }}</label>
-                            <input type="text" name="nama" id="nama" class="form-control" required>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            @include('coreui-templates::common.errors')
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-plus-square-o fa-lg"></i>
+                            <strong>{{ __('Create Anggaran Kas') }}</strong>
                         </div>
-                        <div class="form-group">
-                            <label for="jumlah">{{ __('Jumlah') }}</label>
-                            <input type="number" name="jumlah" id="jumlah" class="form-control" step="0.01" required>
+                        <div class="card-body">
+                            {!! Form::open(['route' => 'anggaranKas.store']) !!}
+                                
+                                @include('anggaran-kas.fields')
+
+                                <div class="form-group">
+                                    <a href="{{ route('anggaranKas.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+                                    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
+                                </div>
+
+                            {!! Form::close() !!}
                         </div>
-                        <div class="form-group">
-                            <label for="keterangan">{{ __('Keterangan') }}</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

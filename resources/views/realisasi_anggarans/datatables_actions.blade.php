@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['realisasiAnggarans.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['realisasi_anggarans.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('realisasiAnggarans.show', $id) }}" class='btn btn-ghost-success'>
+    <a href="{{ route('realisasi_anggarans.show', $id) }}" class='btn btn-ghost-success'>
        <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('realisasiAnggarans.edit', $id) }}" class='btn btn-ghost-info'>
+    <a href="{{ route('realisasi_anggarans.edit', $id) }}" class='btn btn-ghost-info'>
        <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

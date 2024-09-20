@@ -17,6 +17,7 @@ class CreateKlasifikasiBelanjaTable extends Migration
             $table->increments('id');
             $table->string('nama'); // Changed to string for variable length text
             $table->timestamps();
+
         });
     }
 

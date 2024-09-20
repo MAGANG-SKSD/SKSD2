@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use File;
+use App\Http\Controllers\Controller;
 
 class DesaController extends Controller
 {
@@ -37,7 +38,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desas,email',
+            'email' => 'required|email|unique:desa,email',
         ]);
 
         $desa = Desa::create([
@@ -80,7 +81,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desas,email,' . $id,
+            'email' => 'required|email|unique:desa,email,' . $id,
         ]);
 
         $input = $request->all();

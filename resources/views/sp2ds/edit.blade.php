@@ -9,39 +9,32 @@
 @endsection
 
 @section('content')
+    <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+             <a href="{!! route('sp2ds.index') !!}">Sp2D</a>
+          </li>
+          <li class="breadcrumb-item active">Edit</li>
+        </ol>
+    <div class="container-fluid">
+         <div class="animated fadeIn">
+             @include('coreui-templates::common.errors')
+             <div class="row">
+                 <div class="col-lg-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <i class="fa fa-edit fa-lg"></i>
+                              <strong>Edit Sp2D</strong>
+                          </div>
+                          <div class="card-body">
+                              {!! Form::model($sp2d, ['route' => ['sp2ds.update', $sp2d->id], 'method' => 'patch']) !!}
 
-    <!-- [ breadcrumb ] end -->
-    <!-- [ Main Content ] start -->
-    <div class="row">
-        <div class="section-body">
-            <div class="col-md-6 m-auto">
-                <div class="card ">
-                    <div class="card-header">
-                        <h5>{{ __('Edit SP2D') }}</h5>
-                    </div>
-                    {{ Form::model($sp2d, ['route' => ['sp2d.update', $sp2d->id], 'method' => 'PUT']) }}
+                              @include('sp2ds.fields')
 
-                    <div class="card-body">
-                        <div class="form-group">
-                            <strong>{{ Form::label('title', __('Title'), ['class' => 'form-label']) }}</strong>
-                            {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => __('Enter SP2D Title')]) }}
-                            @error('title')
-                                <span class="invalid-title" role="alert">
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                </span>
-                            @enderror
+                              {!! Form::close() !!}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <strong>{{ Form::label('amount', __('Amount'), ['class' => 'form-label']) }}</strong>
-                            {{ Form::number('amount', null, ['class' => 'form-control', 'placeholder' => __('Enter SP2D Amount')]) }}
-                            @error('amount')
-                                <span class="invalid-amount" role="alert">
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <!-- Add other fields as necessary -->
                     </div>
-                    <div class="card-footer">
-                        <div class="float-end">
-                            <a href="{{ route('sp2d.in
+                </div>
+         </div>
+    </div>
+@endsection

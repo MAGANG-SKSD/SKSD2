@@ -36,7 +36,7 @@
         </a>
     </li>
     <li class="nav-item {{ Request::is('realisasiAnggarans*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('realisasiAnggarans.index') }}">
+        <a class="nav-link" href="{{ route('realisasi_anggarans.index') }}">
             <i class="nav-icon fas fa-coins"></i>
             <span>Realisasi Anggaran</span>
         </a>
