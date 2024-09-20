@@ -39,6 +39,14 @@
 
 #### [(2024-09-19)]
 
+
 -   Fix in web.php
 -   add model & controller Anggaran ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](https://github.com/MAGANG-SKSD/SKSD2/commit/11db7b0129ad92b8af3a5bb4a1cf51bd1d993061))
--   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061]())
+-   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](11db7b0129ad92b8af3a5bb4a1cf51bd1d993061)))
+
+-   Fix it conflict modul, datatable, controller and view in APBDes
+
+-   Make view in dasboard and modified controller for dasboard
+
+-   Memperbaiki field tampilan view APBDes, menambahkan fungsi create dan memperbaiki fungsi edit
+
