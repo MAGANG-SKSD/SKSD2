@@ -196,15 +196,29 @@ Route::resource('sp2ds', Sp2dController::class);
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
-//         Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-//         Route::get('apbdes/create', [ApbdesController::class, 'create'])->name('apbdes.create');
-//         Route::post('apbdes/store', [ApbdesController::class, 'store'])->name('apbdes.store');
-//         Route::get('apbdes/{id}/edit', [ApbdesController::class, 'edit'])->name('apbdes.edit');
-//         Route::put('apbdes/{id}', [ApbdesController::class, 'update'])->name('apbdes.update');
-//         Route::delete('apbdes/{id}', [ApbdesController::class, 'destroy'])->name('apbdes.destroy');
-//         Route::get('apbdes/{id}', [ApbdesController::class, 'show'])->name('apbdes.show');
+//         // Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+//         // Route::get('apbdes/create', [ApbdesController::class, 'create'])->name('apbdes.create');
+//         // Route::post('apbdes/store', [ApbdesController::class, 'store'])->name('apbdes.store');
+//         // Route::get('apbdes/{id}/edit', [ApbdesController::class, 'edit'])->name('apbdes.edit');
+//         // Route::put('apbdes/{id}', [ApbdesController::class, 'update'])->name('apbdes.update');
+//         // Route::delete('apbdes/{id}', [ApbdesController::class, 'destroy'])->name('apbdes.destroy');
+//         // Route::get('apbdes/{id}', [ApbdesController::class, 'show'])->name('apbdes.show');
+//         // Route::get('/apbdes/anggaran', [ApbdesController::class, 'showAnggaran'])->name('apbdes.anggaran');
+//         // Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+//         // Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
+//         // Route::post('/apbdes/verifikasi/toggle/{id}', [ApbdesController::class, 'toggleVerifikasi'])->name('apbdes.verifikasi.toggle');
+//         // Route::post('/apbdes/realisasi/toggle/{id}', [ApbdesController::class, 'toggleStatus'])->name('apbdes.status.toggle');
+
 //     }
 // );
+
+Route::group(['middleware' => ['auth', 'XSS']], function () {
+    Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+    Route::get('/apbdes/anggaran', [ApbdesController::class, 'showAnggaran'])->name('apbdes.anggaran');
+    Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+    Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
+});
+
 
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
