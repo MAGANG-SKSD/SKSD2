@@ -54,3 +54,22 @@
         <span>Klasifikasi Belanjas</span>
     </a>
 </li>
+
+<li class="nav-item {{ Request::is('kelompokNorekenings*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('kelompokNorekenings.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Kelompok Norekenings</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('jenisNorekenings*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('jenisNorekenings.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Jenis Norekenings</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('detailNorekenings*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('detailNorekenings.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Detail Norekenings</span>
+    </a>
+</li>

@@ -648,3 +648,6 @@ Route::resource('tests', App\Http\Controllers\API\TestAPIController::class);
 
 
 
+
+
+Route::resource('kelompok_norekenings', App\Http\Controllers\API\kelompok_norekeningAPIController::class);
