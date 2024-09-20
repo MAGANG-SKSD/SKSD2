@@ -12,6 +12,6 @@ class Jenis_Norekening extends Model
 
     public function kelompok_norekening()
     {
-        return $this->hasMany('App\models\Kelompok_Norekening');
+        return $this->hasMany('App\models\kelompok_norekening');
     }
 }
