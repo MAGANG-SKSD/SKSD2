@@ -11,6 +11,31 @@ use App\Models\Kelompok_Norekening;
 
 class AnggaranController extends Controller
 {
+    // Fungsi untuk toggle verifikasi
+    public function toggleVerifikasi($id)
+    {
+        $anggaran = Anggaran::findOrFail($id);
+        $anggaran->verifikasi = !$anggaran->verifikasi; // Toggle verifikasi
+        $anggaran->save();
+
+        return response()->json([
+            'verifikasi' => $anggaran->verifikasi,
+            'message' => 'Verifikasi berhasil diubah!'
+        ]);
+    }
+
+    // Fungsi untuk toggle status
+    public function toggleStatus($id)
+    {
+        $anggaran = Anggaran::findOrFail($id);
+        $anggaran->status = !$anggaran->status; // Toggle status
+        $anggaran->save();
+
+        return response()->json([
+            'status' => $anggaran->status,
+            'message' => 'Status berhasil diubah!'
+        ]);
+    }
     public function index(Request $request)
     {
         if (!$request->tahun || !$request->jenis) {
