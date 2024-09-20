@@ -9,9 +9,7 @@ class Apbdes extends Model
 {
     use HasFactory;
 
-    protected $table = 'apbdes'; // Nama tabel yang terkait dengan model ini
-    protected $fillable = [
-        'name', // Sesuaikan dengan kolom-kolom yang ada di tabel APBDes
-        // Tambahkan kolom lainnya yang sesuai dengan struktur tabel
-    ];
+    protected $table = 'apbdes'; // Sesuaikan dengan nama tabel di database
+    protected $fillable = ['nama_apbdes', 'tahun', 'anggaran', 'status']; // Sesuaikan dengan kolom yang ada
+
 }

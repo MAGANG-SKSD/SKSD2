@@ -2,90 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ApbdesDataTable;
 use Illuminate\Http\Request;
 
 class ApbdesController extends Controller
 {
-    // Method untuk menampilkan list APBDes
-    public function index(ApbdesDataTable $table)
+    // Menampilkan halaman index
+    public function index()
     {
-        return $table->render('apbdes.index');
+        if (\Auth::user()->can('manage-apbdes')) {
+            $apbdes = Apbdes::all(); // Mengambil semua data APBDes
+            return view('apbdes.index', compact('apbdes')); // Menampilkan view index
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
     }
 
-    // Method untuk menampilkan form create APBDes
+    // Menampilkan halaman create
     public function create()
     {
-        // Mengambil data desa untuk dropdown
-        $desas = Desa::all();  // Pastikan model Desa sudah ada
-        return view('apbdes.create', compact('desas'));
+        if (\Auth::user()->can('create-apbdes')) {
+            return view('apbdes.create');
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
     }
 
-    // Method untuk menyimpan data APBDes
+    // Menyimpan data APBDes baru
     public function store(Request $request)
     {
-        $this->validate(
-            $request,
-            [
-                'desa_id' => 'required|integer|exists:desas,id',
-                'tahun' => 'required|integer',
-                'pendapatan' => 'required|numeric',
-                'belanja' => 'required|numeric',
-                'pembiayaan' => 'required|numeric',
-                'status_verifikasi' => 'nullable|string',
-                'id_detail_no_rekening' => 'nullable|integer',
-            ]
-        );
+        $this->validate($request, [
+            'desa_id' => 'required|integer',
+            'tahun' => 'required|integer',
+            'pendapatan' => 'required|numeric',
+            'belanja' => 'required|numeric',
+            'pembiayaan' => 'required|numeric',
+            'status_verifikasi' => 'required|string',
+        ]);
 
-        // Menyimpan data APBDes
-        $apbdes = new Apbdes();
-        $apbdes->desa_id = $request->desa_id;
-        $apbdes->tahun = $request->tahun;
-        $apbdes->pendapatan = $request->pendapatan;
-        $apbdes->belanja = $request->belanja;
-        $apbdes->pembiayaan = $request->pembiayaan;
-        $apbdes->status_verifikasi = $request->status_verifikasi;
-        $apbdes->id_detail_no_rekening = $request->id_detail_no_rekening;
-        $apbdes->save();
+        Apbdes::create([
+            'desa_id' => $request['desa_id'],
+            'tahun' => $request['tahun'],
+            'pendapatan' => $request['pendapatan'],
+            'belanja' => $request['belanja'],
+            'pembiayaan' => $request['pembiayaan'],
+            'status_verifikasi' => $request['status_verifikasi'],
+            'id_detail_no_rekening' => $request['id_detail_no_rekening'],
+            'created_by' => Auth::user()->id, // Menyimpan siapa yang membuat data ini
+        ]);
 
-        return redirect()->route('apbdes.index')->with('message', 'APBDes added successfully!');
+        return redirect()->route('apbdes.index')->with('success', __('APBDes created successfully.'));
     }
 
-    // Method untuk menampilkan form edit APBDes
-    public function edit(Apbdes $apbdes)
+    // Menampilkan detail APBDes
+    public function show($id)
     {
-        // Mengambil data desa untuk dropdown
-        $desas = Desa::all();
-        return view('apbdes.edit', compact('apbdes', 'desas'));
+        if (\Auth::user()->can('show-apbdes')) {
+            $apbdes = Apbdes::find($id);
+            return view('apbdes.show', compact('apbdes')); // Perbaikan nama variabel compact
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
     }
 
-    // Method untuk mengupdate data APBDes
-    public function update(Request $request, Apbdes $apbdes)
+    // Menampilkan halaman edit APBDes
+    public function edit($id)
     {
-        $this->validate(
-            $request,
-            [
-                'desa_id' => 'required|integer|exists:desas,id',
-                'tahun' => 'required|integer',
-                'pendapatan' => 'required|numeric',
-                'belanja' => 'required|numeric',
-                'pembiayaan' => 'required|numeric',
-                'status_verifikasi' => 'nullable|string',
-                'id_detail_no_rekening' => 'nullable|integer',
-            ]
-        );
-
-        // Mengupdate data APBDes
-        $apbdes->update($request->all());
-
-        return redirect()->route('apbdes.index')->with('success', 'APBDes updated successfully!');
+        if (\Auth::user()->can('edit-apbdes')) {
+            $apbdes = Apbdes::find($id);
+            return view('apbdes.edit', compact('apbdes')); // Perbaikan nama variabel compact
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
     }
 
-    // Method untuk menghapus data APBDes
-    public function destroy($id)
+    // Menampilkan halaman realisasi
+    public function showRealisasi()
     {
-        $apbdes = Apbdes::findOrFail($id);
-        $apbdes->delete();
-        return redirect()->route('apbdes.index')->with('success', 'APBDes deleted successfully!');
+        return view('apbdes.realisasi'); // Pastikan view ini ada
     }
 }

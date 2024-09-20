@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDetailNorekeningTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,11 +14,10 @@ class CreateDetailNorekeningTable extends Migration
     public function up()
     {
         Schema::create('detail_norekening', function (Blueprint $table) {
-            $table->integer('id');
-            $table->char('nama');
-            $table->integer('id_klasifikasi_norekening');
-            $table->integer('id_jenis_norekening');
-            $table->integer('id_kelompok_norekening');
+            $table->id();
+            $table->foreignId('jenis_norekening_id')->constrained('jenis_norekening')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kelompok_norekening_id')->constrained('kelompok_norekening')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('nama', 128)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateDetailNorekeningTable extends Migration
      */
     public function down()
     {
-        Schema::drop('detail_norekening');
+        Schema::dropIfExists('detail_norekening');
     }
 }

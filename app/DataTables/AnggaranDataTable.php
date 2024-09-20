@@ -2,12 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\klasifikasi_belanja;
+use App\Models\Anggaran;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
 
-class klasifikasi_belanjaDataTable extends DataTable
+class AnggaranDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,22 +17,22 @@ class klasifikasi_belanjaDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-        ->eloquent($query)
-        ->addColumn('action', function (klasifikasi_belanja $klasifikasi) {
-            return view('klasifikasi_belanjas.action', compact('klasifikasi_belanjas'));
-        });   
+            ->eloquent($query)
+            ->addColumn('action', function (Anggaran $anggaran) {
+                return view('realisasi_anggarans.action', compact('anggaran'));
+            });    
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\klasifikasi_belanja $model
+     * @param \App\Models\Anggaran $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(klasifikasi_belanja $model)
+    public function query(Anggaran $model)
     {
         return $model->newQuery()->orderBy('id', 'ASC');
-       }
+    }
 
     /**
      * Optional method if you want to use html builder.
@@ -43,7 +42,7 @@ class klasifikasi_belanjaDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('klasifikasi-table')
+            ->setTableId('anggaran-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
@@ -90,12 +89,16 @@ class klasifikasi_belanjaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('nama'),
+            Column::make('id'),
+            Column::make('desa_id'),
+            Column::make('tahun'),
+            Column::make('belanja_anggaran'),
+            Column::make('dana_tidak_terpakai'),
+            Column::make('laporan'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),
-            
         ];
     }
 
@@ -106,6 +109,6 @@ class klasifikasi_belanjaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'klasifikasi_belanjas_datatable_' . time();
+        return 'anggaran_datatable_' . date('YmdHis');
     }
 }
