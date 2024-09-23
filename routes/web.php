@@ -272,19 +272,58 @@ Route::group(
 //     }
 // );
 
-Route::group(
-    ['middleware' => ['auth', 'XSS']],
-    function () {
-        Route::get('sp2ds', [Sp2dController::class, 'index'])->name('sp2ds.index');
-        Route::get('sp2ds/create', [Sp2dController::class, 'create'])->name('sp2ds.create');
-        Route::post('sp2ds/store', [Sp2dController::class, 'store'])->name('sp2ds.store');
-        Route::get('sp2ds/{id}/edit', [Sp2dController::class, 'edit'])->name('sp2ds.edit');
-        Route::put('sp2ds/{id}', [Sp2dController::class, 'update'])->name('sp2ds.update');
-        Route::delete('sp2ds/{id}', [Sp2dController::class, 'destroy'])->name('sp2ds.destroy');
-        Route::get('sp2ds/{id}', [Sp2dController::class, 'show'])->name('sp2ds.show');
-    }
-);
-Route::resource('tests', App\Http\Controllers\TestController::class)->middleware(['auth', 'XSS']);
+// Route::group(
+//     ['middleware' => ['auth', 'XSS']],
+//     function () {
+//         Route::get('sp2ds', [Sp2dController::class, 'index'])->name('sp2ds.index');
+//         Route::get('sp2ds/create', [Sp2dController::class, 'create'])->name('sp2ds.create');
+//         Route::post('sp2ds/store', [Sp2dController::class, 'store'])->name('sp2ds.store');
+//         Route::get('sp2ds/{id}/edit', [Sp2dController::class, 'edit'])->name('sp2ds.edit');
+//         Route::put('sp2ds/{id}', [Sp2dController::class, 'update'])->name('sp2ds.update');
+//         Route::delete('sp2ds/{id}', [Sp2dController::class, 'destroy'])->name('sp2ds.destroy');
+//         Route::get('sp2ds/{id}', [Sp2dController::class, 'show'])->name('sp2ds.show');
+//     }
+// );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -652,14 +691,3 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
-
-
-
-
-Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
-
-
-Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
-
-
-Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
