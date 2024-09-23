@@ -2,43 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ApbdesDataTable; // Ganti dengan data table yang sesuai
-use App\Models\Apbdes; // Ganti dengan model yang sesuai
+use App\DataTables\ModulsDataTable;
+use App\Models\Modul;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ApbdesController extends Controller
+class ModulController extends Controller
 {
-    public function index(ApbdesDataTable $table)
+
+
+    public function index(ModulsDataTable $table)
     {
-        if (\Auth::user()->can('manage-apbdes')) { // Ganti nama permission jika diperlukan
-            return $table->render('apbdes.index'); // Ganti nama view jika diperlukan
+        if (\Auth::user()->can('manage-module')) {
+            return $table->render('moduls.index');
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
+
 
     public function create()
     {
-        if (\Auth::user()->can('create-apbdes')) { // Ganti nama permission jika diperlukan
+        if (\Auth::user()->can('create-module')) {
 
-            $apbdes = Apbdes::get(); // Ganti dengan model yang sesuai
-            return view('apbdes.create', compact('apbdes')); // Ganti nama view jika diperlukan
+            $modual = Modul::get();
+            return view('moduls.create', compact('modual'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
+
 
     public function store(Request $request)
     {
         // return redirect()->back()->with('warning', __('This Action Is Not Allowed Because Of Demo Mode.'));
+        if (\Auth::user()->can('create-module')) {
 
-        if (\Auth::user()->can('create-apbdes')) { // Ganti nama permission jika diperlukan
-
-            $apbdes = new Apbdes(); // Ganti dengan model yang sesuai
-            $apbdes->name = $request->name;
-            $apbdes->save();
+            $modual = new Modul();
+            $modual->name = $request->name;
+            $modual->save();
             $data = [];
             if (!empty($request['permissions'])) {
                 foreach ($request['permissions'] as $check) {
@@ -55,46 +58,50 @@ class ApbdesController extends Controller
                     }
                 }
             }
-            Permission::insert($data); // Ganti dengan model yang sesuai jika perlu
-            return redirect()->route('apbdes.index') // Ganti nama route jika diperlukan
-                ->with('success', __('Apbdes created successfully'));
+            permission::insert($data);
+            return redirect()->route('modules.index')
+                ->with('success', __('modual updated successfully'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
 
-    public function show(Apbdes $apbdes) // Ganti dengan model yang sesuai jika diperlukan
+
+    public function show(Modul $modual)
     {
     }
+
 
     public function edit($id)
     {
-        if (\Auth::user()->can('edit-apbdes')) { // Ganti nama permission jika diperlukan
 
-            $apbdes = Apbdes::find($id); // Ganti dengan model yang sesuai
-            return view('apbdes.edit', compact('apbdes')); // Ganti nama view jika diperlukan
+        if (\Auth::user()->can('edit-module')) {
+
+            $modual = Modul::find($id);
+            return view('moduls.edit', compact('modual'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
+
 
     public function update(Request $request, $id)
     {
         // return redirect()->back()->with('warning', __('This Action Is Not Allowed Because Of Demo Mode.'));
 
-        $apbdes = Apbdes::find($id); // Ganti dengan model yang sesuai
+        $modules = Modul::find($id);
         $this->validate($request, [
-            'name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|min:4|unique:apbdes,name,' . $apbdes->id,
+            'name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|min:4|unique:moduls,name,' . $modules->id,
         ], [
-            'regex' => 'Invalid Entry! Only letters, underscores, hyphens, and numbers are allowed',
+            'regex' => 'Invalid Entry! Only letters,underscores,hypens and numbers are allowed',
         ]);
-        $apbdes->name = str_replace(' ', '-', strtolower($request->name));
+        $modules->name = str_replace(' ', '-', strtolower($request->name));
         $permissions = DB::table('permissions')
             ->where('name', 'like', '%' . $request->old_name . '%')
             ->get();
         $module_name  = str_replace(' ', '-', strtolower($request->name));
         foreach ($permissions as $permission) {
-            $update_permission = Permission::find($permission->id); // Ganti dengan model yang sesuai jika perlu
+            $update_permission = permission::find($permission->id);
             if ($permission->name == 'manage-' . $request->old_name) {
                 $update_permission->name = 'manage-' . $module_name;
             }
@@ -112,20 +119,18 @@ class ApbdesController extends Controller
             }
             $update_permission->save();
         }
-        $apbdes->save();
-        return redirect()->route('apbdes.index') // Ganti nama route jika diperlukan
-            ->with('success', 'Apbdes updated successfully.');
+        $modules->save();
+        return redirect()->route('modules.index')->with('success', 'Module Updated Successfully.');
     }
+
 
     public function destroy($id)
     {
         // return redirect()->back()->with('warning', __('This Action Is Not Allowed Because Of Demo Mode.'));
+        if (\Auth::user()->can('delete-module')) {
 
-        if (\Auth::user()->can('delete-apbdes')) { // Ganti nama permission jika diperlukan
-
-            Apbdes::where('id', $id)->firstOrFail()->delete(); // Ganti dengan model yang sesuai
-            return redirect()->route('apbdes.index') // Ganti nama route jika diperlukan
-                ->with('success', __('Apbdes deleted successfully.'));
+            Modul::where('id', $id)->firstorfail()->delete();
+            return redirect()->route('modules.index')->with('success', __('Modul deleted Successfully.'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }

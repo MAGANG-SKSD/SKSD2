@@ -9,7 +9,8 @@ use App\Repositories\BaseRepository;
  * Class ApbdesRepository
  * @package App\Repositories
  * @version September 4, 2024, 2:37 pm WIB
- */
+*/
+
 class ApbdesRepository extends BaseRepository
 {
     /**
@@ -21,8 +22,7 @@ class ApbdesRepository extends BaseRepository
         'pendapatan',
         'belanja',
         'pembiayaan',
-        'status_verifikasi',
-        'id_detail_no_rekening' // Field ini ditambahkan untuk pencarian
+        'status_verifikasi'
     ];
 
     /**

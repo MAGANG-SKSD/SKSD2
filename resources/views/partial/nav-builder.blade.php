@@ -111,11 +111,11 @@ $settings = Utility::settings();
                     </li>
                 <!--  -->
                 <li class="dash-item dash-hasmenu {{ request()->is('apbdes*') ? 'active' : '' }}">
-                    <a class="dash-link" href="{{ route('apbdes.index') }}">
-                        <span class="dash-micon"><i class="ti ti-map"></i></span>
-                        <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
-                    </a>
-                
+                        <a class="dash-link" href="{{ route('apbdes.index') }}">
+                            <span class="dash-micon"><i class="ti ti-map"></i></span>
+                            <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
+                        </a>
+                    </li>
                 <!--  -->
                 <li class="dash-item dash-hasmenu {{ request()->is('danas*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('danas.index') }}">

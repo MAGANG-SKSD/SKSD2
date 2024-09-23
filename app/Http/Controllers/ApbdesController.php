@@ -3,28 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class APBDesController extends Controller
 {
-    public function index(APBDesDataTable $dataTable)
+    // Menampilkan halaman index
+    public function index()
     {
-        return $dataTable->render('apbdes.index');
+        // Hanya menampilkan view tanpa pengambilan data dari database
+        return view('apbdes.index'); // Pastikan view ini sudah ada
     }
 
-    public function show($id)
+    // Menampilkan halaman anggaran
+    public function showAnggaran()
     {
-        $apbdes = APBDes::findOrFail($id);
-        return view('apbdes.show', compact('apbdes'));
+        return view('apbdes.anggaran'); // Pastikan view ini ada
     }
 
-    public function anggaran($id)
+    // Menampilkan halaman verifikasi
+    public function showVerifikasi()
     {
-        if (\Auth::user()->can('edit-apbdes')) {
-            $apbdes = Apbdes::find($id);
-            return view('apbdes.edit', compact('apbdes')); // Perbaikan nama variabel compact
-        } else {
-            return redirect()->back()->with('error', 'Permission denied.');
-        }
+        return view('apbdes.verifikasi'); // Pastikan view ini ada
     }
 
     // Menampilkan halaman realisasi
