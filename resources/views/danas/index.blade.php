@@ -1,39 +1,35 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <h1>Data Dana</h1>
-    <a href="{{ route('danas.create') }}" class="btn btn-primary">Tambah Dana</a>
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Desa</th>
-                <th>Jenis Dana</th>
-                <th>Jumlah Dana</th>
-                <th>Status Pengajuan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($danas as $dana)
-                <tr>
-                    <td>{{ $dana->dana_id }}</td>
-                    <td>{{ $dana->desa->nama_desa }}</td>
-                    <td>{{ $dana->jenis_dana }}</td>
-                    <td>{{ $dana->jumlah_dana }}</td>
-                    <td>{{ $dana->status_pengajuan }}</td>
-                    <td>
-                        <a href="{{ route('danas.edit', $dana->dana_id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('danas.destroy', $dana->dana_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+@extends('layouts.admin')
+@section('title', __('Dana'))
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+        <li class="breadcrumb-item">{{ __('Dana') }}
+        </li>
+    </ul>
 @endsection
+@section('content')
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive py-5 pb-4 dropdown_2">
+                        <div class="container-fluid">
+                            {{ $dataTable->table(['width' => '100%']) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+@push('style')
+    @include('layouts.includes.datatable_css')
+
+@endpush
+@push('scripts')
+    @include('layouts.includes.datatable_js')
+    {{ $dataTable->scripts() }}
+@endpush

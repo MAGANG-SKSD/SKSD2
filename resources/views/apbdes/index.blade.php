@@ -16,8 +16,13 @@
                     <i class="fa fa-align-justify"></i> {{ __('APBDes') }}
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        {{ $dataTable->table(['class' => 'table table-bordered']) }}
+                    <div class="text-center">
+                        <h2>{{ __('APBDes Actions') }}</h2>
+                        <div class="mb-3">
+                            <a href="{{ route('apbdes.anggaran') }}" class="btn btn-primary">Anggaran</a>
+                            <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
+                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -25,6 +30,10 @@
     </div>
 @endsection
 
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+@endpush
+
 @push('scripts')
-    {{ $dataTable->scripts() }}
+    {{-- Tidak perlu scripts DataTable --}}
 @endpush

@@ -2,18 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Sp2d;
+use App\Facades\UtilityFacades;
+use App\Models\Sp2d;  // Mengganti Modul dengan Sp2d
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
 
-class Sp2dDataTable extends DataTable
+class Sp2dsDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
@@ -29,69 +25,62 @@ class Sp2dDataTable extends DataTable
      */
     public function query(Sp2d $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id', 'ASC');
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
-            ->setTableId('sp2ds-table') // Set ID untuk DataTables
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>'
+                ]
+            ])
             ->parameters([
-                'dom'       => 'Bfrtip',
-                'stateSave' => true,
-                'order'     => [[0, 'desc']],
+                "dom" =>  "
+                                <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
+                                <'row'<'col-sm-12'tr>>
+                                <'row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
+                                ",
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Create'],
-                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Export'],
-                    ['extend' => 'print', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Print'],
-                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Reset'],
-                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner', 'text' => 'Reload'],
+                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
-                'scrollX'   => true,
-                'language'  => [
-                    'search'         => 'Search:',
-                    'lengthMenu'     => 'Show _MENU_ entries',
-                    'info'           => 'Showing _START_ to _END_ of _TOTAL_ entries',
-                    'infoEmpty'      => 'No entries found',
-                    'infoFiltered'   => '(filtered from _MAX_ total entries)',
-                    'loadingRecords' => 'Loading...',
-                    'processing'     => 'Processing...',
-                    'searchPlaceholder' => 'Search...',
-                    'zeroRecords'    => 'No matching records found',
-                ],
+                "scrollX" => true
+            ])
+            ->language([
+                'buttons' => [
+                    'create' => __('Create'),
+                    'export' => __('Export'),
+                    'print' => __('Print'),
+                    'reset' => __('Reset'),
+                    'reload' => __('Reload'),
+                    'excel' => __('Excel'),
+                    'csv' => __('CSV'),
+                    'pageLength' => __('Show %d rows'),
+                ]
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
-            'desa_id' => ['title' => 'Desa ID'],
-            'nomor_sp2d' => ['title' => 'SP2D Number'],
-            'tanggal_sp2d' => ['title' => 'SP2D Date'],
-            'jumlah_dana' => ['title' => 'Amount'],
+            'desa_id',
+            'nomor_sp2d',
+            'tanggal_sp2d',
+            'jumlah_dana'
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename()
     {
-        return 'sp2ds_datatable_' . time();
+        return 'Sp2ds_' . date('YmdHis');
     }
 }

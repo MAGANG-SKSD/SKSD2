@@ -2,25 +2,33 @@
 
 namespace App\DataTables;
 
-use App\Models\APBDes;
+use App\Models\Apbdes;
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class APBDesDataTable extends DataTable
 {
+    /**
+     * Build DataTable class.
+     *
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
+     */
     public function dataTable($query)
     {
-        return datatables()
-            ->eloquent($query)
-            ->addColumn('action', function ($row) {
-                return '
-                    <a href="'.route('apbdes.anggaran', $row->id).'" class="btn btn-info btn-sm">Anggaran</a>
-                    <a href="'.route('apbdes.verifikasi', $row->id).'" class="btn btn-success btn-sm">Verifikasi</a>
-                    <a href="'.route('apbdes.realisasi', $row->id).'" class="btn btn-primary btn-sm">Realisasi</a>
-                ';
-            });
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable->addColumn('action', 'apbdes.datatables_actions');
     }
 
-    public function query(APBDes $model)
+    /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\Apbdes $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(Apbdes $model)
     {
         return $model->newQuery()->with('desa');
     }
@@ -28,21 +36,51 @@ class APBDesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->addAction(['width' => '80px']);
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>'
+                ]
+            ])
+            ->parameters([
+                'dom'       => 'Bfrtip',
+                'stateSave' => true,
+                'order'     => [[0, 'desc']],
+                'buttons'   => [
+                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                ],
+            ]);
     }
 
+    /**
+     * Get columns.
+     *
+     * @return array
+     */
     protected function getColumns()
     {
         return [
-            'desa.name' => ['title' => 'Desa'],
+            'desa_id',
             'tahun',
-            'total_anggaran',
-            'status_persetujuan',
+            'pendapatan',
+            'belanja',
+            'pembiayaan',
+            'status_verifikasi'
         ];
     }
 
+    /**
+     * Get filename for export.
+     *
+     * @return string
+     */
     protected function filename()
     {
         return 'APBDes_' . date('YmdHis');

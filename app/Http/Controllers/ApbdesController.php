@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\APBDes;
-use App\DataTables\APBDesDataTable;
 use Illuminate\Http\Request;
 
 class APBDesController extends Controller
@@ -21,24 +19,17 @@ class APBDesController extends Controller
 
     public function anggaran($id)
     {
-        $apbdes = APBDes::findOrFail($id);
-        // Logika untuk menampilkan rincian anggaran
-        return view('apbdes.anggaran', compact('apbdes'));
+        if (\Auth::user()->can('edit-apbdes')) {
+            $apbdes = Apbdes::find($id);
+            return view('apbdes.edit', compact('apbdes')); // Perbaikan nama variabel compact
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
     }
 
-    public function verifikasi($id)
+    // Menampilkan halaman realisasi
+    public function showRealisasi()
     {
-        $apbdes = APBDes::findOrFail($id);
-        $apbdes->status_persetujuan = 'verified';
-        $apbdes->save();
-        
-        return redirect()->route('apbdes.index')->with('success', 'Anggaran telah diverifikasi.');
-    }
-
-    public function realisasi($id)
-    {
-        $apbdes = APBDes::findOrFail($id);
-        // Logika untuk menampilkan rincian realisasi
-        return view('apbdes.realisasi', compact('apbdes'));
+        return view('apbdes.realisasi'); // Pastikan view ini ada
     }
 }

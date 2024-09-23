@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\RealisasiAnggaran;
+use App\Models\Anggaran;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Column;
 
-class RealisasiAnggaranDataTable extends DataTable
+class AnggaranDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,18 +18,18 @@ class RealisasiAnggaranDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function (RealisasiAnggaran $realisasi) {
-                return view('realisasi_anggarans.action', compact('realisasi'));
+            ->addColumn('action', function (Anggaran $anggaran) {
+                return view('realisasi_anggarans.action', compact('anggaran'));
             });    
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\RealisasiAnggaran $model
+     * @param \App\Models\Anggaran $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(RealisasiAnggaran $model)
+    public function query(Anggaran $model)
     {
         return $model->newQuery()->orderBy('id', 'ASC');
     }
@@ -42,7 +42,7 @@ class RealisasiAnggaranDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('realisasi-table')
+            ->setTableId('anggaran-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
@@ -92,7 +92,7 @@ class RealisasiAnggaranDataTable extends DataTable
             Column::make('id'),
             Column::make('desa_id'),
             Column::make('tahun'),
-            Column::make('belanja_realisasi'),
+            Column::make('belanja_anggaran'),
             Column::make('dana_tidak_terpakai'),
             Column::make('laporan'),
             Column::computed('action')
@@ -109,6 +109,6 @@ class RealisasiAnggaranDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'realisasi_anggarans_datatable_' . date('YmdHis');
+        return 'anggaran_datatable_' . date('YmdHis');
     }
 }

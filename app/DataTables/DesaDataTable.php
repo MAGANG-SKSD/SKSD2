@@ -25,7 +25,7 @@ class DesaDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function (Desa $desa) {
-                return view('desas.action', compact('desas'));
+                return view('desas.action', compact('desa'));
             });    
     }
 
