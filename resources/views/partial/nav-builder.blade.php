@@ -111,11 +111,11 @@ $settings = Utility::settings();
                     </li>
                 <!--  -->
                 <li class="dash-item dash-hasmenu {{ request()->is('apbdes*') ? 'active' : '' }}">
-                    <a class="dash-link" href="{{ route('apbdes.index') }}">
-                        <span class="dash-micon"><i class="ti ti-map"></i></span>
-                        <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
-                    </a>
-                
+                        <a class="dash-link" href="{{ route('apbdes.index') }}">
+                            <span class="dash-micon"><i class="ti ti-map"></i></span>
+                            <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
+                        </a>
+                    </li>
                 <!--  -->
                 <li class="dash-item dash-hasmenu {{ request()->is('danas*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('danas.index') }}">
@@ -144,14 +144,14 @@ $settings = Utility::settings();
                             <span class="dash-mtext custom-weight">{{ __('No Rekening') }}</span>
                         </a>
                     </li>
-                @can('manage-reaalisasianggaran')
+                {{-- @can('manage-reaalisasianggaran')
                     <li class="dash-item dash-hasmenu {{ request()->is('realisasi_anggarans*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('realisasi_anggarans.index') }}">
                             <span class="dash-micon"><i class="ti ti-search"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('Realisasi Anggaran') }}</span>
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
                 <li class="dash-item dash-hasmenu {{ request()->is('sp2ds*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('sp2ds.index') }}">
                             <span class="dash-micon"><i class="ti ti-folder"></i></span>
