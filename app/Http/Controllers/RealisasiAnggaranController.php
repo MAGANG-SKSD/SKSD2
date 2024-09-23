@@ -31,19 +31,19 @@ class RealisasiAnggaranController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'desa_id' => 'required',
             'tahun' => 'required',
-            'belanja_realisasi' => 'required',
-            'dana_tidak_terpakai' => 'required',
-            'laporan' => 'required',
+            'detail_norekening_id' => 'required',
+            'keterangan_lainnya' => 'required',
+            'nilai_anggaran' => 'required',
+            'status' => 'required',
         ]);
 
         RealisasiAnggaran::create([
-            'desa_id' => $request['desa_id'],
             'tahun' => $request['tahun'],
-            'belanja_realisasi' => $request['belanja_realisasi'],
-            'dana_tidak_terpakai' => $request['dana_tidak_terpakai'],
-            'laporan' => $request['laporan'],
+            'detail_norekening_id' => $request['detail_norekening_id'],
+            'keterangan_lainnya' => $request['keterangan_lainnya'],
+            'nilai_anggaran' => $request['nilai_anggaran'],
+            'status' => $request['status'],
             'created_by' => Auth::user()->id,
         ]);
 
@@ -75,11 +75,11 @@ class RealisasiAnggaranController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'desa_id' => 'required',
             'tahun' => 'required',
-            'belanja_realisasi' => 'required',
-            'dana_tidak_terpakai' => 'required',
-            'laporan' => 'required',
+            'detail_norekening_id' => 'required',
+            'keterangan_lainnya' => 'required',
+            'nilai_anggaran' => 'required',
+            'status' => 'required',
         ]);
 
         $realisasi = RealisasiAnggaran::find($id);

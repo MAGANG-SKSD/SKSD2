@@ -90,11 +90,17 @@ class RealisasiAnggaranDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('desa_id'),
             Column::make('tahun'),
-            Column::make('belanja_realisasi'),
-            Column::make('dana_tidak_terpakai'),
-            Column::make('laporan'),
+            Column::make('detail_norekening_id'),
+            Column::make('keterangan_lainnya'),
+            Column::make('nilai_anggaran'),
+            Column::computed('status')
+            ->exportable(false)
+            ->printable(false)
+            ->addClass('text-center')
+            ->format(function ($value, $row) {
+                return view('partials.toggle', ['status' => $value, 'id' => $row->id]);
+            }),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
