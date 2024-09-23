@@ -19,6 +19,7 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
+use App\Http\Controllers\AnggaranController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -214,11 +215,14 @@ Route::resource('sp2ds', Sp2dController::class);
 
 Route::group(['middleware' => ['auth', 'XSS']], function () {
     Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-    Route::get('/apbdes/anggaran', [ApbdesController::class, 'showAnggaran'])->name('apbdes.anggaran');
+    Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran'); // Ubah ke AnggaranController
     Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
     Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 });
 
+Route::group(['middleware' => ['auth', 'XSS']], function () {
+    Route::resource('anggaran', AnggaranController::class);
+});
 
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
@@ -632,6 +636,8 @@ Route::resource('anggaranKas', App\Http\Controllers\AnggaranKasController::class
 
 Route::resource('apbdes', App\Http\Controllers\ApbdesController::class);
 
+Route::resource('anggaran', App\Http\Controllers\AnggaranController::class);
+
 
 Route::resource('danas', App\Http\Controllers\DanaController::class);
 
@@ -643,23 +649,23 @@ Route::resource('dokumens', App\Http\Controllers\DokumenController::class);
 
 
 
-
-
 Route::resource('realisasiAnggarans', App\Http\Controllers\RealisasiAnggaranController::class);
 
 
 Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
-Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
+
+
+// Route::resource('klasifikasiBelanjas', App\Http\Controllers\klasifikasi_belanjaController::class);
 
 
 
 
-Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
+// Route::resource('kelompokNorekenings', App\Http\Controllers\kelompok_norekeningController::class);
 
 
-Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
+// Route::resource('jenisNorekenings', App\Http\Controllers\jenis_norekeningController::class);
 
 
-Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
+// Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);

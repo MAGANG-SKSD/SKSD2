@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Jenis_Norekening;
+use app\Models\kelompok_norekening;
 use App\Models\Modul;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -78,6 +80,67 @@ class DatabaseSeeder extends Seeder
                 'name'=>$module
             ]);
         }
-    }
+        Jenis_Norekening::create([
+            'id'    => 4,
+            'nama'  => 'PENDAPATAN'
+        ]);
+        Jenis_Norekening::create([
+            'id'    => 5,
+            'nama'  => 'BELANJA'
+        ]);
+        Jenis_Norekening::create([
+            'id'    => 6,
+            'nama'  => 'PEMBIAYAAN'
+        ]);
+        kelompok_norekening::create([
+            'id'                => 41,
+            'nama'              => 'Pendapatan Asli Desa'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 42,
+            'nama'              => 'Pendapatan transfer'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 43,
+            'nama'              => 'Pendapatan Lain-lain'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 51,
+            'nama'              => 'BIDANG PENYELENGGARAN PEMERINTAHAN DESA'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 52,
+            'nama'              => 'BIDANG PELAKSANAAN PEMBANGUNAN DESA'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 53,
+            'nama'              => 'BIDANG PEMBINAAN KEMASYARAKATAN'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 54,
+            'nama'              => 'BIDANG PEMBERDAYAAN MASYARAKAT'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 55,
+            'nama'              => 'BIDANG PENANGGULANGAN BENCANA, DARURAT DAN MENDESAK DESA'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 61,
+            'nama'              => 'Penerimaan Biaya'
+        ]);
+
+        kelompok_norekening::create([
+            'id'                => 62,
+            'nama'              => 'Pengeluaran Biaya'
+        ]); 
+}
 }
 
