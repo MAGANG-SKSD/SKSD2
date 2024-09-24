@@ -16,7 +16,7 @@
                     <div class="text-center">
                         <h2>{{ __('APBDes Actions') }}</h2>
                         <div class="mb-3">
-                            <a href="{{ route('apbdes.anggaran') }}" class="btn btn-primary">Anggaran</a>
+                            <a href="{{ route('apbdes.anggaran.index') }}" class="btn btn-primary">Anggaran</a>
                             <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
                             <a href="{{ route('realisasi_anggarans.index') }}" class="btn btn-success">Realisasi</a>
                         </div>
