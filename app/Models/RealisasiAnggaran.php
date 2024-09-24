@@ -9,14 +9,14 @@ class RealisasiAnggaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'anggaran_realisasi';
+    protected $table = 'anggaran';
 
     protected $fillable = [
-        'desa_id',
         'tahun',
-        'belanja_realisasi',
-        'dana_tidak_terpakai',
-        'laporan',
+        'detail_norekening_id',
+        'keterangan_lainnya',
+        'nilai_anggaran',
+        'status',
     ];
 
     // Optionally, specify the date fields for soft deletes

@@ -17,7 +17,7 @@ class ApbdesController extends Controller
     // Menampilkan halaman anggaran
     public function showAnggaran()
     {
-        return redirect()->route('apbdes.anggaran.index'); // Pastikan view ini ada
+        return view('apbdes.anggaran'); // Pastikan view ini ada
     }
 
     // Menampilkan halaman verifikasi
