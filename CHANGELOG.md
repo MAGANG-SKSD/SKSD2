@@ -58,3 +58,9 @@
 -   Make view for APBDes in index and show blade ([10768bdd9dd7e4239851d82d0ffabf53e7834e98])
 
 -   Modified UI dashboard,controller and route
+
+#### [(2024-09-23)]
+
+-   Change database for realisasi anggaran and make route button for realisasi in apbdes
+
+-   Edit function Dashboard

@@ -1,9 +1,3 @@
-<!-- Desa Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('desa_id', 'Desa Id:') !!}
-    {!! Form::number('desa_id', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Tahun Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tahun', 'Tahun:') !!}
@@ -27,20 +21,20 @@
 
 <!-- Belanja Realisasi Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('belanja_realisasi', 'Belanja Realisasi:') !!}
-    {!! Form::number('belanja_realisasi', null, ['class' => 'form-control']) !!}
+    {!! Form::label('detail_norekening_id', 'Nomor Rekening :') !!}
+    {!! Form::number('detail_norekening_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Dana Tidak Terpakai Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('dana_tidak_terpakai', 'Dana Tidak Terpakai:') !!}
-    {!! Form::number('dana_tidak_terpakai', null, ['class' => 'form-control']) !!}
+    {!! Form::label('keterangan_lainnya', 'Keterangan lainnya :') !!}
+    {!! Form::number('keterangan_lainnya', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Laporan Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('laporan', 'Laporan:') !!}
-    {!! Form::text('laporan', null, ['class' => 'form-control']) !!}
+    {!! Form::label('nilai_anggaran', 'Nilai Anggaran :') !!}
+    {!! Form::text('nilai_anggaran', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

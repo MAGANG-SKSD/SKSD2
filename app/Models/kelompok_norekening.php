@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kelompok_Norekening extends Model
 {
-    protected $table = "kelompok_norekenin";
+    protected $table = "kelompok_norekening";
     protected $guarded = [];
 
     public function jenis_norekenin()
