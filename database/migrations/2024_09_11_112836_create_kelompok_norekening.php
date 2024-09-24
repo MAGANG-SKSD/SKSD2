@@ -15,7 +15,7 @@ class CreateKelompokNorekening extends Migration
     {
         Schema::create('kelompok_norekening', function (Blueprint $table) {  // Ganti menjadi satu garis bawah
             $table->id();
-            $table->string('nama', 32)->unique();
+            $table->string('nama', 64);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateKelompokNorekening extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelompok_norekening');  // Pastikan nama tabel konsisten dengan `up()`
+        Schema::dropIfExists('kelompok_norekening');  // Pastikan nama tabel konsisten dengan up()
     }
 }

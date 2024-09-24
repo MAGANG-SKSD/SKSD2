@@ -19,7 +19,7 @@ class KelompokNorekeningSeeder extends Seeder
 
         Kelompok_Norekening::create([
             'id'                => 42,
-            'nama'              => 'Pendapatan transfer'
+            'nama'              => 'Transfer'
         ]);
 
         Kelompok_Norekening::create([
@@ -29,12 +29,12 @@ class KelompokNorekeningSeeder extends Seeder
 
         Kelompok_Norekening::create([
             'id'                => 51,
-            'nama'              => 'BIDANG PENYELENGGARAN PEMERINTAHAN DESA'
+            'nama'              => 'Belanja Pegawai'
         ]);
 
         Kelompok_Norekening::create([
             'id'                => 52,
-            'nama'              => 'BIDANG PELAKSANAAN PEMBANGUNAN DESA'
+            'nama'              => 'Belanja Barang dan Jasa'
         ]);
 
         Kelompok_Norekening::create([
@@ -44,14 +44,8 @@ class KelompokNorekeningSeeder extends Seeder
 
         Kelompok_Norekening::create([
             'id'                => 54,
-            'nama'              => 'BIDANG PEMBERDAYAAN MASYARAKAT'
+            'nama'              => 'Belanja Tak Terduga'
         ]);
-
-        Kelompok_Norekening::create([
-            'id'                => 55,
-            'nama'              => 'BIDANG PENANGGULANGAN BENCANA, DARURAT DAN MENDESAK DESA'
-        ]);
-
         Kelompok_Norekening::create([
             'id'                => 61,
             'nama'              => 'Penerimaan Biaya'
