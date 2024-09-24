@@ -125,6 +125,8 @@ Route::group(
         Route::put('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'update'])->name('realisasi_anggarans.update');
         Route::delete('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi_anggarans.destroy');
         Route::get('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasi_anggarans.show');
+
+        Route::post('/update-status/{id}', [RealisasiAnggaranController::class, 'updateStatus']);
     }
 );
 
