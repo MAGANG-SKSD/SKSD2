@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 class ApbdesController extends Controller
 {
     // Menampilkan halaman index
-    public function index()
-    {
-        // Mengambil semua data anggaran
-        $anggarans = Anggaran::all();
+    public function index(Request $request)
+{
+    $tahun = $request->tahun ?? date('Y');
+    $anggaran = Anggaran::where('tahun', $tahun)->paginate(10); // Sesuaikan query
 
-        // Menampilkan view dengan data anggaran
-        return view('apbdes.index', compact('anggarans'));
-    }
+    return view('apbdes.index', compact('anggaran'));
+}
 
     // Menampilkan halaman anggaran
     public function showAnggaran()
