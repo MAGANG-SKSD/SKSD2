@@ -103,18 +103,31 @@ class RealisasiAnggaranController extends Controller
         }
     }
 
-    public function updateStatus(Request $request, $id)
+    public function status($id)
     {
-        $this->validate($request, [
-            'status' => 'required|boolean',
-        ]);
+        $realisasi = RealisasiAnggaran::find($id);
+        if ($realisasi) {
+            // Toggle the status
+            $realisasi->status = $realisasi->status ? 0 : 1;
+            $realisasi->save();
 
-        $realisasi = RealisasiAnggaran::findOrFail($id);
-        $realisasi->status = $request->status;
-        $realisasi->save();
+            return response()->json(['success' => 'Status updated successfully.']);
+        }
 
-        return response()->json(['success' => 'Status updated successfully.']);
+        return response()->json(['error' => 'Realisasi not found.'], 404);
     }
+
+    public function toggleStatus(Request $request, $id)
+    {
+        $item = RealisasiAnggaran::findOrFail($id);
+        $item->status = $request->status; // 1 atau 0
+        $item->save();
+
+        return response()->json(['success' => true]);
+    }
+
+
+    
 
     // Metode lain seperti create, store, edit, update, destroy, dll.
 }
