@@ -215,17 +215,32 @@ Route::resource('sp2ds', Sp2dController::class);
 //     }
 // );
 
-Route::group(['middleware' => ['auth', 'XSS']], function () {
-    Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-    Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran'); // Ubah ke AnggaranController
-    Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
-    Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
-});
+// Route::group(['middleware' => ['auth', 'XSS']], function () {
+//     Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+//     Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran'); // Ubah ke AnggaranController
+//     Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+//     Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
+// });
 
-Route::group(['middleware' => ['auth', 'XSS']], function () {
-    Route::resource('anggaran', AnggaranController::class);
-});
+// Route::group(['middleware' => ['auth', 'XSS']], function () {
+//     Route::resource('anggaran', AnggaranController::class);
+// });
+// Rute untuk APBDes
+Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
 
+// Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
+Route::resource('apbdes/anggaran', AnggaranController::class)->names([
+    'index' => 'apbdes.anggaran.index',
+    'create' => 'apbdes.anggaran.create',
+    'store' => 'apbdes.anggaran.store',
+    'edit' => 'apbdes.anggaran.edit',
+    'update' => 'apbdes.anggaran.update',
+    'destroy' => 'apbdes.anggaran.destroy',
+]);
+
+// Rute untuk Verifikasi dan Realisasi jika diperlukan
+Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
