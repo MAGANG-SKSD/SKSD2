@@ -68,3 +68,7 @@
 #### [(2024-09-24)]
 
 -   Try to modify realisasi anggaran in apbdes for fill table with toggle
+-   add view apbdes and anggaran 
+
+#### [(2024-09-25)]
+-   make view anggaran and tabel with controllers for display in anggaran
