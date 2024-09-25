@@ -68,3 +68,11 @@
 #### [(2024-09-24)]
 
 -   Try to modify realisasi anggaran in apbdes for fill table with toggle
+
+-   Input data nomor rekening seperti jenis rekening, kelompok rekening, dan sebagian detail rekening
+
+#### [(2024-09-25)]
+
+-   Try to modify column status for realisasi anggaran toggle to button
+
+-   Add tombol create anggaran dan membuat view anggaran
