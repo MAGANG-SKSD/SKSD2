@@ -20,9 +20,9 @@ class Anggaran extends Model
     ];
 
     public function detail_norekening()
-    {
-        return $this->belongsTo('App\Models\DetailNorekening'); // Ensure class name matches convention
-    }
+{
+    return $this->belongsTo('App\Models\Detail_Norekening', 'detail_norekening_id');
+}
 
     // Function to toggle verification status
     public function toggleVerifikasi()
