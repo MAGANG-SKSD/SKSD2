@@ -27,6 +27,6 @@ class CreateKelompokNorekening extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelompok_norekening');  // Pastikan nama tabel konsisten dengan `up()`
+        Schema::dropIfExists('kelompok_norekening');  // Pastikan nama tabel konsisten dengan up()
     }
 }

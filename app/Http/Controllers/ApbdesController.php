@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggaran;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ApbdesController extends Controller
 {
     // Menampilkan halaman index
     public function index()
     {
-        // Hanya menampilkan view tanpa pengambilan data dari database
-        return view('apbdes.index'); // Pastikan view ini sudah ada
+        // Mengambil semua data anggaran
+        $anggarans = Anggaran::all();
+
+        // Menampilkan view dengan data anggaran
+        return view('apbdes.index', compact('anggarans'));
     }
 
     // Menampilkan halaman anggaran
