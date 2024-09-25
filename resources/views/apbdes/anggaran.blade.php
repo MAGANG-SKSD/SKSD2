@@ -22,7 +22,7 @@
                                     <th>{{ __('No Rekening') }}</th>
                                     <th>{{ __('Keterangan') }}</th>
                                     <th>{{ __('Nilai Anggaran') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ __('Status') }}</th>  <!-- Ganti Action menjadi Status -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,10 +32,11 @@
                                     <td>{{ $item->detail_norekening_id }}</td>
                                     <td>{{ $item->keterangan_lainnya }}</td>
                                     <td>{{ $item->nilai_anggaran }}</td>
-                                    <td><a href="{{ route('anggaran.edit', $item->id) }}">{{ __('Edit') }}</a></td>
+                                    <td>{{ $item->status ? 'Aktif' : 'Tidak Aktif' }}</td> <!-- Menampilkan status -->
                                 </tr>
                                 @endforeach
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
