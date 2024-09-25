@@ -126,7 +126,11 @@ Route::group(
         Route::delete('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi_anggarans.destroy');
         Route::get('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasi_anggarans.show');
 
-        Route::post('/update-status/{id}', [RealisasiAnggaranController::class, 'updateStatus']);
+        // Rute untuk Toggle, Edit, dan Delete
+        Route::post('/realisasi/toggle-status/{id}', [RealisasiAnggaranController::class, 'toggleStatus'])->name('realisasi.toggleStatus');
+        Route::get('realisasi/edit/{id}', [RealisasiAnggaranController::class, 'edit'])->name('realisasi.edit');
+        Route::delete('realisasi/delete/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi.delete');
+
     }
 );
 
