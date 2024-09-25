@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Modul;
 use App\Models\Jenis_Norekening;
 use App\Models\Kelompok_Norekening;
+use App\Models\Detail_Norekening;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -80,22 +81,6 @@ class DatabaseSeeder extends Seeder
                 'name'=>$module
             ]);
         }
-        Jenis_Norekening::create([
-            'id'    => 4,
-            'nama'  => 'PENDAPATAN'
-        ]);
-        Jenis_Norekening::create([
-            'id'    => 5,
-            'nama'  => 'BELANJA'
-        ]);
-        Jenis_Norekening::create([
-            'id'    => 6,
-            'nama'  => 'PEMBIAYAAN'
-        ]);
-        Kelompok_Norekening::create([
-            'id'                => 62,
-            'nama'              => 'Pengeluaran Biaya'
-        ]);
     }
 }
 

@@ -35,7 +35,7 @@ class RealisasiAnggaranController extends Controller
             'detail_norekening_id' => 'required',
             'keterangan_lainnya' => 'required',
             'nilai_anggaran' => 'required',
-            'status' => 'required',
+            'status' => 'required|boolean',
         ]);
 
         RealisasiAnggaran::create([
@@ -101,6 +101,19 @@ class RealisasiAnggaranController extends Controller
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $this->validate($request, [
+            'status' => 'required|boolean',
+        ]);
+
+        $realisasi = RealisasiAnggaran::findOrFail($id);
+        $realisasi->status = $request->status;
+        $realisasi->save();
+
+        return response()->json(['success' => 'Status updated successfully.']);
     }
 
     // Metode lain seperti create, store, edit, update, destroy, dll.
