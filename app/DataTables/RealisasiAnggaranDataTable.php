@@ -95,12 +95,14 @@ class RealisasiAnggaranDataTable extends DataTable
             Column::make('keterangan_lainnya'),
             Column::make('nilai_anggaran'),
             Column::computed('status')
-            ->exportable(false)
-            ->printable(false)
-            ->addClass('text-center')
-            ->format(function ($value, $row) {
-                return view('partials.toggle', ['status' => $value, 'id' => $row->id]);
-            }),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->format(function ($value, $row) {
+                        return (string) view('partial.toggle', ['status' => (bool) $value, 'id' => $row->id]);
+                        dd($view); // Cek hasil render
+                        return (string) $view;
+                }),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
