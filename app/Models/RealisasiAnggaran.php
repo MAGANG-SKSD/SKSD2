@@ -12,6 +12,7 @@ class RealisasiAnggaran extends Model
     protected $table = 'anggaran';
 
     protected $fillable = [
+        'id',
         'tahun',
         'detail_norekening_id',
         'keterangan_lainnya',

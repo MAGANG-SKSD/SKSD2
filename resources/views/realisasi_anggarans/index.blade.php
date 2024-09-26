@@ -32,38 +32,57 @@
     {{ $dataTable->scripts() }}
 
     <script>
+        // Fungsi untuk toggle status
+        function toggleStatus(id, status) {
+            $.ajax({
+                url: '{{ route('realisasi_anggarans.toggle-status', '') }}/' + id,
+                type: 'POST',
+                data: {
+                    status: status,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    alert(response.success);
+                    $('#realisasi-table').DataTable().ajax.reload();
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.responseJSON.error);
+                }
+            });
+        }
+
         $(document).ready(function() {
+            if ($.fn.dataTable.isDataTable('#realisasi-table')) {
+                $('#realisasi-table').DataTable().destroy();
+            }
+
             $('#realisasi-table').DataTable({
-                // Other configurations...
+                ajax: {
+                    url: '{{ route('realisasi_anggarans.index') }}',
+                    dataSrc: '',
+                },
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'tahun', name: 'tahun' },
                     { data: 'detail_norekening_id', name: 'detail_norekening_id' },
                     { data: 'keterangan_lainnya', name: 'keterangan_lainnya' },
                     { data: 'nilai_anggaran', name: 'nilai_anggaran' },
-                    { data: 'status', name: 'status', orderable: false, searchable: false }, // Your added column
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            var buttonClass = data === 1 ? 'btn-success' : 'btn-danger';
+                            var buttonText = data === 1 ? 'Enable' : 'Disable';
+                            var disabled = data === 0 ? 'disabled' : '';
+
+                            return `<button class="btn ${buttonClass}" ${disabled} onclick="toggleStatus(${row.id}, ${data})">${buttonText}</button>`;
+                        }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
             });
-
-            function edit(id) {
-                window.location.href = '/path/to/edit/' + id;
-            }
-
-            function delete(id) {
-                if (confirm('Anda yakin ingin menghapus item ini?')) {
-                    $.ajax({
-                        url: '/path/to/delete/' + id,
-                        type: 'DELETE',
-                        success: function(result) {
-                            $('#realisasi-table').DataTable().ajax.reload();
-                        },
-                        error: function(err) {
-                            alert('Terjadi kesalahan!');
-                        }
-                    });
-                }
-            }
         });
     </script>
 @endpush
