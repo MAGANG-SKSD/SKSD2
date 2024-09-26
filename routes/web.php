@@ -232,6 +232,10 @@ Route::resource('sp2ds', Sp2dController::class);
 // });
 // Rute untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+Route::get('/apbdes/anggaran', [ApbdesController::class, 'showAnggaran'])->name('apbdes.anggaran');
+Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 
 // Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
 Route::resource('apbdes/anggaran', AnggaranController::class)->names([
@@ -242,9 +246,9 @@ Route::resource('apbdes/anggaran', AnggaranController::class)->names([
     'update' => 'apbdes.anggaran.update',
     'destroy' => 'apbdes.anggaran.destroy',
 ]);
-
-// Rute untuk Verifikasi dan Realisasi jika diperlukan
-Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+Route::resource('anggaran', AnggaranController::class);
+Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
+Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');
 Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],

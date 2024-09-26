@@ -16,7 +16,7 @@ class Anggaran extends Model
         'keterangan_lainnya', 
         'nilai_anggaran', 
         'verifikasi', 
-        'status'
+        'status',
     ];
 
     public function detail_norekening()
