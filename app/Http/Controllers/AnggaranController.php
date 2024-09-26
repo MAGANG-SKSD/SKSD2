@@ -12,18 +12,29 @@ use App\Models\Kelompok_Norekening;
 class AnggaranController extends Controller
 {
     // Fungsi untuk toggle verifikasi
-    public function toggleVerifikasi($id)
-    {
-        $anggaran = Anggaran::findOrFail($id);
-        $anggaran->verifikasi = !$anggaran->verifikasi; // Toggle verifikasi
-        $anggaran->save();
+   // Fungsi untuk menampilkan halaman verifikasi
+   public function verifikasi()
+   {
+       // Mengambil semua anggaran, tidak hanya yang belum diverifikasi
+    $anggaran = Anggaran::paginate(10);
 
-        return response()->json([
-            'verifikasi' => $anggaran->verifikasi,
-            'message' => 'Verifikasi berhasil diubah!'
-        ]);
-    }
-
+    // Menampilkan view verifikasi dengan data anggaran
+    return view('apbdes.verifikasi', compact('anggaran'));
+   }
+   
+   public function toggleVerifikasi($id)
+   {
+       // Mengambil anggaran berdasarkan ID
+       $anggaran = Anggaran::findOrFail($id);
+   
+       // Mengubah status verifikasi
+       $keterangan = 'Disetujui'; // Misalnya, bisa diubah sesuai kebutuhan
+       $anggaran->toggleVerifikasi($keterangan);
+   
+       // Redirect kembali ke halaman verifikasi
+       return redirect()->route('apbdes.verifikasi')->with('success', 'Status verifikasi berhasil diubah.');
+   }
+   
     // Fungsi untuk toggle status
     public function toggleStatus($id)
     {
