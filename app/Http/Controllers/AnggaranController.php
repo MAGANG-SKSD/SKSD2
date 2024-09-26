@@ -92,9 +92,10 @@ class AnggaranController extends Controller
 
     public function create()
     {
-        $jenis_norekening = Jenis_Norekening::all();
-        return view('anggaran.create', compact('jenis_norekening'));
+    $jenis_norekening = Jenis_Norekening::all();
+    return view('apbdes.anggaran.create', compact('jenis_norekening'));
     }
+
 
     public function store(Request $request)
 {

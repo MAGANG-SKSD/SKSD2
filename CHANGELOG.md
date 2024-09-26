@@ -68,13 +68,6 @@
 #### [(2024-09-24)]
 
 -   Try to modify realisasi anggaran in apbdes for fill table with toggle
-<<<<<<< HEAD
--   add view apbdes and anggaran 
-
-#### [(2024-09-25)]
--   make view anggaran and tabel with controllers for display in anggaran
--   add database seeder 200 file
-=======
 
 -   Input data nomor rekening seperti jenis rekening, kelompok rekening, dan sebagian detail rekening
 
@@ -83,4 +76,9 @@
 -   Try to modify column status for realisasi anggaran toggle to button
 
 -   Add tombol create anggaran dan membuat view anggaran
->>>>>>> 4a6e6e86cd9b7c45b5311ebdcf0f17f1a4b9efd3
+
+#### [(2024-09-25)]
+
+-   add view create anggaran anda edit controller and route anggaran
+
+-   Menyempurnakan data Seeder, Membuat fungsi Apbdes dan menyesuaikan dengan view anggaran
