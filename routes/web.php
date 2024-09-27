@@ -20,7 +20,8 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
-//use App\Http\Controllers\SP2DSController;
+use App\Http\Controllers\LaporanController; // Pastikan untuk mengimpor controller yang sesuai
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -737,3 +738,24 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 // Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
 
 //Route::resource('sp2ds', SP2DSController::class);
+
+Route::get('/sp2d', [SP2DController::class, 'index'])->name('sp2d.index');
+Route::get('/sp2d/berita-acara', [SP2DController::class, 'beritaAcara'])->name('berita_acara.index');
+Route::get('/sp2d/berita-desa', [SP2DController::class, 'beritaDesa'])->name('berita_desa.index');
+Route::get('/sp2d/laporan', [SP2DController::class, 'laporan'])->name('laporan.index');
+Route::get('/sp2d/lembaran-desa', [SP2DController::class, 'lembaranDesa'])->name('lembaran_desa.index');
+Route::get('/sp2d/notulen', [SP2DController::class, 'notulen'])->name('notulen.index');
+Route::get('/sp2d/rekomendasi', [SP2DController::class, 'rekomendasi'])->name('rekomendasi.index');
+Route::get('/sp2d/surat-pengantar', [SP2DController::class, 'suratPengantar'])->name('surat_pengantar.index');
+
+
+
+Route::prefix('laporan')->group(function () {
+    Route::get('/', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/create', [LaporanController::class, 'create'])->name('laporan.create');
+    Route::post('/', [LaporanController::class, 'store'])->name('laporan.store');
+    Route::get('/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+    Route::put('/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+    Route::delete('/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
+});

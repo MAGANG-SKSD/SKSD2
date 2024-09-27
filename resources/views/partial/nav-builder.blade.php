@@ -155,7 +155,7 @@ $settings = Utility::settings();
                 <li class="dash-item dash-hasmenu {{ request()->is('sp2ds*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('sp2ds.index') }}">
                             <span class="dash-micon"><i class="ti ti-folder"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('SP2D') }}</span>
+                            <span class="dash-mtext custom-weight">{{ __('Kelola Surat') }}</span>
                         </a>
                     </li>
             </ul>
