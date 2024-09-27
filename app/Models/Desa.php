@@ -10,16 +10,20 @@ class Desa extends Model
 {
     use HasFactory;
 
-    protected $table = 'desa';
+    protected $table = 'desas';
 
     // Specify which attributes are mass assignable
     protected $fillable = [
+        'desa_id',
         'nama_desa',
         'alamat_desa',
         'kode_pos',
         'telepon',
         'email',
     ];
+
+    protected $primaryKey = 'desa_id'; // Set primary key if different from 'id'
+    public $timestamps = false;
 
     // Optionally, specify the date fields for soft deletes
     protected $dates = ['deleted_at'];

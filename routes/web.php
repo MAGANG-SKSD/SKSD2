@@ -269,10 +269,12 @@ Route::group(
         Route::get('desas', [DesaController::class, 'index'])->name('desas.index');
         Route::get('desas/create', [DesaController::class, 'create'])->name('desas.create');
         Route::post('desas/store', [DesaController::class, 'store'])->name('desas.store');
-        Route::get('desas/{id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
-        Route::put('desas/{id}', [DesaController::class, 'update'])->name('desas.update');
-        Route::delete('desas/{id}', [DesaController::class, 'destroy'])->name('desas.destroy');
-        Route::get('desas/{id}', [DesaController::class, 'show'])->name('desas.show');
+        Route::get('desas/{desa_id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
+        Route::put('desas/{desa_id}', [DesaController::class, 'update'])->name('desas.update');
+        Route::delete('desas/{desa_id}', [DesaController::class, 'destroy'])->name('desas.destroy');
+        Route::get('desas/{desa_id}', [DesaController::class, 'show'])->name('desas.show');
+
+        Route::get('desas/{desa_id}/profile', [DesaController::class, 'profile'])->name('desas.profile');
     }
 );
 
