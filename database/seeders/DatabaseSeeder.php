@@ -208,7 +208,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Pemanfaatan Lapangan/Prasarana Olah raga Milik Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41290,
+            'id'                        => 41299,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Aset Lain-Lain'
@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Swadaya, partisipasi dan gotong royong'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41390,
+            'id'                        => 41399,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Swadaya, partisipasi dan gotong royon Lain Lain'
@@ -238,7 +238,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Hasil Pungutan Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41490,
+            'id'                        => 41499,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Pendapatan Lain Lain'
@@ -280,7 +280,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Bantuan Keuangan dari APBD Provinsi'
         ]);
         Detail_Norekening::create([
-            'id'                        => 42490,
+            'id'                        => 42499,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 42,
             'nama'                      => 'Bantuan Lain Lain'
@@ -358,7 +358,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51190,
+            'id'                        => 51199,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Penerimaan Lain Perangkat Desa yang sah'
@@ -370,13 +370,13 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Penghasilan Tetap dan Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51202,
+            'id'                        => 51201,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51290,
+            'id'                        => 51299,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Penerimaan Lain Perangkat Desa yang sah'
@@ -508,7 +508,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Belanja Pupuk/Obat-Obatan Pertanian'
         ]);
         Detail_Norekening::create([
-            'id'                        => 52190,
+            'id'                        => 52199,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 52,
             'nama'                      => 'Belanja Barang Perlengkapan Lainnya'
@@ -550,7 +550,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Belanja Jasa Honorarium Petugas'
         ]);
         Detail_Norekening::create([
-            'id'                        => 52290,
+            'id'                        => 52299,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 52,
             'nama'                      => 'Belanja Jasa Honorarium Lainnya'
@@ -1152,19 +1152,19 @@ class DatabaseSeeder extends Seeder
         Detail_Norekening::create([
             'id'                        => 621,
             'jenis_norekening_id'         => 6,
-            'kelompok_norekening_id'=> 61,
+            'kelompok_norekening_id'=> 62,
             'nama'                      => 'Pembentukan Dana Cadangan'
         ]);
         Detail_Norekening::create([
             'id'                        => 622,
             'jenis_norekening_id'         => 6,
-            'kelompok_norekening_id'=> 61,
+            'kelompok_norekening_id'=> 62,
             'nama'                      => 'Penyertaan Modal Desa'
         ]);
         Detail_Norekening::create([
             'id'                        => 629,
             'jenis_norekening_id'         => 6,
-            'kelompok_norekening_id'=> 61,
+            'kelompok_norekening_id'=> 62,
             'nama'                      => 'Pengeluaran Pembiayaan Lainnya'
         ]);
     }

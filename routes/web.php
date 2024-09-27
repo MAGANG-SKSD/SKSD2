@@ -20,6 +20,7 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
+//use App\Http\Controllers\SP2DSController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,7 +127,12 @@ Route::group(
         Route::delete('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi_anggarans.destroy');
         Route::get('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasi_anggarans.show');
 
-        Route::post('/update-status/{id}', [RealisasiAnggaranController::class, 'updateStatus']);
+        // Rute untuk Toggle, Edit, dan Delete
+        Route::post('realisasi_anggarans/toggle-status/{id}', [RealisasiAnggaranController::class, 'toggleStatus'])->name('realisasi_anggarans.toggle-status');
+        // Route::get('realisasi/edit/{id}', [RealisasiAnggaranController::class, 'edit'])->name('realisasi.edit');
+        Route::delete('realisasi/delete/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi.delete');
+        Route::get('realisasianggaran/data', [RealisasiAnggaranController::class, 'getData'])->name('realisasi_anggarans.data');
+
     }
 );
 
@@ -215,17 +221,36 @@ Route::resource('sp2ds', Sp2dController::class);
 //     }
 // );
 
-Route::group(['middleware' => ['auth', 'XSS']], function () {
-    Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-    Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran'); // Ubah ke AnggaranController
-    Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
-    Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
-});
+// Route::group(['middleware' => ['auth', 'XSS']], function () {
+//     Route::get('apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+//     Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran'); // Ubah ke AnggaranController
+//     Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+//     Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
+// });
 
-Route::group(['middleware' => ['auth', 'XSS']], function () {
-    Route::resource('anggaran', AnggaranController::class);
-});
+// Route::group(['middleware' => ['auth', 'XSS']], function () {
+//     Route::resource('anggaran', AnggaranController::class);
+// });
+// Rute untuk APBDes
+Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+Route::get('/apbdes/anggaran', [ApbdesController::class, 'showAnggaran'])->name('apbdes.anggaran');
+Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
+Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 
+// Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
+Route::resource('apbdes/anggaran', AnggaranController::class)->names([
+    'index' => 'apbdes.anggaran.index',
+    'create' => 'apbdes.anggaran.create',
+    'store' => 'apbdes.anggaran.store',
+    'edit' => 'apbdes.anggaran.edit',
+    'update' => 'apbdes.anggaran.update',
+    'destroy' => 'apbdes.anggaran.destroy',
+]);
+Route::resource('anggaran', AnggaranController::class);
+Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
+Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');
+Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
@@ -710,3 +735,5 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 // Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
+
+//Route::resource('sp2ds', SP2DSController::class);

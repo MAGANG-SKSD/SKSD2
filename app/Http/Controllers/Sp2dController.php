@@ -55,6 +55,7 @@ class Sp2dController extends AppBaseController
         app()->setLocale('en'); // Set locale to English for Sp2d
         $input = $request->all();
 
+        // Tambahkan field baru ke input
         $sp2d = $this->sp2dRepository->create($input);
 
         Flash::success(__('Sp2d saved successfully.'));
@@ -123,6 +124,7 @@ class Sp2dController extends AppBaseController
             return redirect(route('sp2ds.index'));
         }
 
+        // Tambahkan field baru ke input
         $sp2d = $this->sp2dRepository->update($request->all(), $id);
 
         Flash::success(__('Sp2d updated successfully.'));

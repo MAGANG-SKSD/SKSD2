@@ -16,18 +16,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $nomor_sp2d
  * @property string $tanggal_sp2d
  * @property integer $jumlah_dana
+ * @property string $laporan
+ * @property string $rekomendasi
+ * @property string $surat_pengantar
+ * @property string $lembaran_desa
+ * @property string $berita_desa
+ * @property string $berita_acara
+ * @property string $notulen
+ * @property string $daftar_hadir_pertemuan
+ * @property string $daftar_hadir
  */
 class Sp2d extends Model
 {
     use SoftDeletes;
-
     use HasFactory;
 
     public $table = 'sp2ds';
-    
 
     protected $dates = ['deleted_at'];
-
 
     protected $primaryKey = 'sp2d_id';
 
@@ -35,7 +41,16 @@ class Sp2d extends Model
         'desa_id',
         'nomor_sp2d',
         'tanggal_sp2d',
-        'jumlah_dana'
+        'jumlah_dana',
+        'laporan',
+        'rekomendasi',
+        'surat_pengantar',
+        'lembaran_desa',
+        'berita_desa',
+        'berita_acara',
+        'notulen',
+        'daftar_hadir_pertemuan',
+        'daftar_hadir'
     ];
 
     /**
@@ -48,7 +63,16 @@ class Sp2d extends Model
         'desa_id' => 'integer',
         'nomor_sp2d' => 'integer',
         'tanggal_sp2d' => 'date',
-        'jumlah_dana' => 'integer'
+        'jumlah_dana' => 'integer',
+        'laporan' => 'string',
+        'rekomendasi' => 'string',
+        'surat_pengantar' => 'string',
+        'lembaran_desa' => 'string',
+        'berita_desa' => 'string',
+        'berita_acara' => 'string',
+        'notulen' => 'string',
+        'daftar_hadir_pertemuan' => 'string',
+        'daftar_hadir' => 'string',
     ];
 
     /**
@@ -59,7 +83,16 @@ class Sp2d extends Model
     public static $rules = [
         'nomor_sp2d' => 'required',
         'tanggal_sp2d' => 'required',
-        'jumlah_dana' => 'required'
+        'jumlah_dana' => 'required',
+        'laporan' => 'required|string|max:255',
+        'rekomendasi' => 'required|string|max:255',
+        'surat_pengantar' => 'required|string|max:255',
+        'lembaran_desa' => 'required|string|max:255',
+        'berita_desa' => 'required|string|max:255',
+        'berita_acara' => 'required|string|max:255',
+        'notulen' => 'required|string|max:255',
+        'daftar_hadir_pertemuan' => 'required|string|max:255',
+        'daftar_hadir' => 'required|string|max:255',
     ];
 
     /**

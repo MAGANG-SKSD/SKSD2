@@ -20,7 +20,16 @@ class RealisasiAnggaranDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function (RealisasiAnggaran $realisasi) {
                 return view('realisasi_anggarans.action', compact('realisasi'));
-            });    
+            })
+            ->of($query)
+            ->addColumn('status', function ($row) {
+            $button = $row->status == 1 
+                ? '<button class="btn btn-danger btn-sm" onclick="toggleStatus(' . $row->id . ', 0)">Disable</button>' 
+                : '<button class="btn btn-success btn-sm" onclick="toggleStatus(' . $row->id . ', 1)">Enable</button>';
+                
+            return $button;
+            })
+            ->rawColumns(['status']);    
     }
 
     /**
@@ -94,15 +103,7 @@ class RealisasiAnggaranDataTable extends DataTable
             Column::make('detail_norekening_id'),
             Column::make('keterangan_lainnya'),
             Column::make('nilai_anggaran'),
-            Column::computed('status')
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center')
-                ->format(function ($value, $row) {
-                        return (string) view('partial.toggle', ['status' => (bool) $value, 'id' => $row->id]);
-                        dd($view); // Cek hasil render
-                        return (string) $view;
-                }),
+            Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

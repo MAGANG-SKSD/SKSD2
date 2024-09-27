@@ -19,8 +19,8 @@ class CreateAnggaran extends Migration
             $table->foreignId('detail_norekening_id')->constrained('detail_norekening')->onDelete('cascade')->onUpdate('cascade');
             $table->text('keterangan_lainnya')->nullable();
             $table->bigInteger('nilai_anggaran');
-            $table->boolean('verifikasi')->default(false); // default false (belum diverifikasi)
-            $table->boolean('status')->default(false); // default "tidak aktif"
+            $table->integer('verifikasi')->default(0); // default false (belum diverifikasi)
+            $table->integer('status')->default(0); // default "tidak aktif"
             // $table->bigInteger('nilai_realisasi');
             $table->timestamps();
         });

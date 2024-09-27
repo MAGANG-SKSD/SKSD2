@@ -12,18 +12,29 @@ use App\Models\Kelompok_Norekening;
 class AnggaranController extends Controller
 {
     // Fungsi untuk toggle verifikasi
-    public function toggleVerifikasi($id)
-    {
-        $anggaran = Anggaran::findOrFail($id);
-        $anggaran->verifikasi = !$anggaran->verifikasi; // Toggle verifikasi
-        $anggaran->save();
+   // Fungsi untuk menampilkan halaman verifikasi
+   public function verifikasi()
+   {
+       // Mengambil semua anggaran, tidak hanya yang belum diverifikasi
+    $anggaran = Anggaran::paginate(10);
 
-        return response()->json([
-            'verifikasi' => $anggaran->verifikasi,
-            'message' => 'Verifikasi berhasil diubah!'
-        ]);
-    }
-
+    // Menampilkan view verifikasi dengan data anggaran
+    return view('apbdes.verifikasi', compact('anggaran'));
+   }
+   
+   public function toggleVerifikasi($id)
+   {
+       // Mengambil anggaran berdasarkan ID
+       $anggaran = Anggaran::findOrFail($id);
+   
+       // Mengubah status verifikasi
+       $keterangan = 'Disetujui'; // Misalnya, bisa diubah sesuai kebutuhan
+       $anggaran->toggleVerifikasi($keterangan);
+   
+       // Redirect kembali ke halaman verifikasi
+       return redirect()->route('apbdes.verifikasi')->with('success', 'Status verifikasi berhasil diubah.');
+   }
+   
     // Fungsi untuk toggle status
     public function toggleStatus($id)
     {
@@ -38,33 +49,32 @@ class AnggaranController extends Controller
     }
 
     public function index(Request $request)
-    {
-        if (!$request->tahun || !$request->jenis) {
-            return redirect('anggaran?jenis=pendapatan&tahun=' . date('Y'));
-        }
-
-        $anggaranQuery = Anggaran::whereTahun($request->tahun);
-
-        if ($request->jenis == "pendapatan") {
-            $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
-                $data->where('jenis_norekening_id', 4);
-            })->latest()->paginate(10);
-        } elseif ($request->jenis == "belanja") {
-            $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
-                $data->where('jenis_norekening_id', 5);
-            })->latest()->paginate(10);
-        } elseif ($request->jenis == "pembiayaan") {
-            $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
-                $data->where('jenis_norekening_id', 6);
-            })->latest()->paginate(10);
-        } else {
-            return redirect('anggaran?jenis=pendapatan&tahun=' . date('Y'));
-        }
-
-        $anggaran->appends(request()->input())->links();
-
-        return view('anggaran.index', compact('anggaran'));
+{
+    if (!$request->tahun || !$request->jenis) {
+        return redirect('anggaran?jenis=pendapatan&tahun=' . date('Y'));
     }
+
+    $anggaranQuery = Anggaran::whereTahun($request->tahun);
+
+    if ($request->jenis == "pendapatan") {
+        $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
+            $data->where('jenis_norekening_id', 4); // Pendapatan
+        })->latest()->paginate(10);
+    } elseif ($request->jenis == "belanja") {
+        $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
+            $data->where('jenis_norekening_id', 5); // Belanja
+        })->latest()->paginate(10);
+    } elseif ($request->jenis == "pembiayaan") {
+        $anggaran = $anggaranQuery->whereHas('detail_norekening', function ($data) {
+            $data->where('jenis_norekening_id', 6); // Pembiayaan
+        })->latest()->paginate(10);
+    } else {
+        return redirect('anggaran?jenis=pendapatan&tahun=' . date('Y'));
+    }
+
+    // Pastikan variabel $anggaran dikirimkan ke view
+    return view('anggaran.index', compact('anggaran'));
+}
 
     public function cart(Request $request)
     {
@@ -101,15 +111,9 @@ class AnggaranController extends Controller
 {
     $data = $request->validate([
         'tahun' => ['required', 'numeric', 'min:1900'],
-        'jenis_norekening' => ['required', 'exists:jenis_norekening,id'], // Pastikan ini sesuai
-        'detail_norekening_id' => ['required', 'exists:detail_norekening,id'],
+        'detail_norekening_id' => ['required', 'exists:detail_norekening,id'], // Menggunakan ID dari detail norekening
         'nilai_anggaran' => ['required', 'numeric', 'min:0'],
         'keterangan_lainnya' => ['nullable']
-    ], [
-        'tahun.required' => 'Tahun wajib diisi',
-        'nilai_anggaran.min' => 'Nilai anggaran tidak boleh kurang dari 0',
-        'jenis_norekening.required' => 'Jenis norekening wajib diisi',
-        'detail_norekening_id.required' => 'Detail jenis anggaran wajib diisi'
     ]);
 
     Anggaran::create($data);
@@ -130,20 +134,17 @@ class AnggaranController extends Controller
     }
 
     public function update(Request $request, Anggaran $anggaran)
-    {
-        $data = $request->validate([
-            'tahun' => ['required', 'numeric', 'min:1900'],
-            'jenis_norekening' => ['required'],
-            'detail_norekening_id' => ['required'],
-            'nilai_anggaran' => ['required', 'numeric', 'min:0'],
-            'keterangan_lainnya' => ['nullable']
-        ], [
-            'detail_norekening_id.required' => 'Detail jenis anggaran wajib diisi'
-        ]);
+{
+    $data = $request->validate([
+        'tahun' => ['required', 'numeric', 'min:1900'],
+        'detail_norekening_id' => ['required', 'exists:detail_norekening,id'],
+        'nilai_anggaran' => ['required', 'numeric', 'min:0'],
+        'keterangan_lainnya' => ['nullable']
+    ]);
 
-        $anggaran->update($data);
-        return redirect()->route('anggaran.index')->with('success', 'Anggaran APBDes berhasil diperbarui');
-    }
+    $anggaran->update($data);
+    return redirect()->route('anggaran.index')->with('success', 'Anggaran APBDes berhasil diperbarui');
+}
 
     public function destroy(Anggaran $anggaran)
     {
