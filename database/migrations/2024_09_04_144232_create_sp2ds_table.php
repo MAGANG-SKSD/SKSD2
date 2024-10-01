@@ -17,7 +17,7 @@ class CreateSp2dsTable extends Migration
             $table->increments('sp2d_id');
 
             // Menggunakan unsignedInteger untuk foreign key, bukan increments
-            $table->unsignedInteger('desa_id');
+            $table->unsignedBigInteger('desa_id');
 
             $table->integer('nomor_sp2d');
             $table->date('tanggal_sp2d');
