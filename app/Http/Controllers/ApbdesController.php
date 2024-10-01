@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use Illuminate\Http\Request;
 
-class ApbdesController extends Controller
+class APBDesController extends Controller
 {
     public function index(Request $request)
     {
