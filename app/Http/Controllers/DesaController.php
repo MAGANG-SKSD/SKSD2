@@ -39,7 +39,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desa,email',
+            'email' => 'required|email|unique:desas,email',
         ]);
 
         $desa = Desa::create([
@@ -83,7 +83,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desa,email,' . $desa_id,
+            'email' => 'required|email|unique:desas,email,' . $desa_id, ',desa_id',
         ]);
 
         $input = $request->all();
@@ -111,14 +111,11 @@ class DesaController extends Controller
 
     public function profile($desa_id)
     {
-        $desa = Desa::where('desa_id', $desa_id)->first();
-
-        if (!$desa) {
-            return redirect()->route('desas.index')->with('error', 'Desa not found.');
-        }
+        $desa = Desa::where('desa_id', $desa_id)->firstOrFail(); // Jika tidak ditemukan, akan menampilkan 404 error
 
         return view('desas.profile', compact('desa'));
     }
+
 
 
 
