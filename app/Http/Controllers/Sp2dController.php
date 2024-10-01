@@ -157,7 +157,13 @@ class Sp2dController extends AppBaseController
         return redirect(route('sp2ds.index'));
     }
 
+    
     // Halaman Tambahan Sesuai Tombol
+    public function suratPerintah()
+    {
+        return view('sp2ds.surat_perintah');
+    }
+
     public function beritaAcara()
     {
         return view('sp2ds.berita_acara');

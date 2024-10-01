@@ -20,13 +20,14 @@
                         <div class="mb-3">
                             <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
                             <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
-                            <a href="{{ route('realisasi_anggarans.index') }}" class="btn btn-success">Realisasi</a>
+                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                         </div>
                     </div>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>{{ __('No Rekening') }}</th> <!-- Kolom No Rekening -->
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('No Rekening') }}</th>
                                 <th>{{ __('Jenis Rekening') }}</th>
                                 <th>{{ __('Kelompok Rekening') }}</th>
                                 <th>{{ __('Nama Rekening') }}</th>
@@ -38,7 +39,8 @@
                         <tbody>
                             @foreach ($anggaran as $item)
                                 <tr>
-                                    <td>{{ $item->detail_norekening_id }}</td> <!-- Menampilkan ID detail_norekening -->
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->detail_norekening_id }}</td>
                                     <td>{{ $item->detail_norekening->jenis_norekening->nama }}</td>
                                     <td>{{ $item->detail_norekening->kelompok_norekening->nama }}</td>
                                     <td>{{ $item->detail_norekening->nama }}</td>
@@ -57,6 +59,16 @@
                                                 {{ $item->verifikasi ? 'Batalkan Verifikasi' : 'Verifikasi' }}
                                             </button>
                                         </form>
+
+                                        @if($item->status === 'realisasi')
+                                            <span class="badge bg-success">Realisasi</span>
+                                        @elseif($item->status === 'belum_realisasi')
+                                            <form action="{{ route('status.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class="btn btn-info">Realisasi</button>
+                                            </form>
+                                        @else
+                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,3 +83,11 @@
         </div>
     </div>
 @endsection
+
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+@endpush
+
+@push('scripts')
+    {{-- Script tambahan jika diperlukan --}}
+@endpush

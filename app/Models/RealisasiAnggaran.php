@@ -18,6 +18,7 @@ class RealisasiAnggaran extends Model
         'keterangan_lainnya',
         'nilai_anggaran',
         'status',
+        'dana_realisasi',
     ];
 
     // Optionally, specify the date fields for soft deletes

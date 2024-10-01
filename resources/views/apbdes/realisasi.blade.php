@@ -1,60 +1,115 @@
 @extends('layouts.admin')
-@section('title', __('APBDes'))
+
+@section('title', 'Realisasi Anggaran')
+
 @section('breadcrumb')
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-        <li class="breadcrumb-item">{{ __('APBDes') }}</li>
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+        <li class="breadcrumb-item">APBDes</li>
+        <li class="breadcrumb-item active">Realisasi</li>
     </ul>
 @endsection
 
 @section('content')
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h2>{{ __('Status Anggaran (Realisasi)') }}</h2>
-                    <div class="table-responsive py-5 pb-4">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('Tahun') }}</th>
-                                    <th>{{ __('No Rekening') }}</th>
-                                    <th>{{ __('Status') }}</th>
-                                    <th>{{ __('Action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($anggaran as $item)
-                                <tr>
-                                    <td>{{ $item->tahun }}</td>
-                                    <td>{{ $item->detail_norekening_id }}</td>
-                                    <td>{{ $item->status ? __('Active') : __('Inactive') }}</td>
-                                    <td>
-                                        <form method="POST" action="{{ route('apbdes.status.toggle', $item->id) }}">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm {{ $item->status ? 'btn-danger' : 'btn-success' }}">
-                                                {{ $item->status ? __('Deactivate') : __('Activate') }}
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <h2 class="text-center">Daftar Anggaran untuk Realisasi</h2>
+                    <div class="text-center mb-5"> <!-- Tambahkan margin bottom -->
+                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
+                        <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
+                        <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
+                    </div>
+                    <div class="mb-5"> <!-- Tambahkan margin bottom -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('ID') }}</th>
+                                        <th>{{ __('Nama Anggaran') }}</th>
+                                        <th>{{ __('Anggaran') }}</th>
+                                        <th>{{ __('Realisasi') }}</th>
+                                        <th>{{ __('Anggaran Tidak Terpakai') }}</th>
+                                        <th>{{ __('Status') }}</th>
+                                        <th>{{ __('Aksi') }}</th>
+                                        <th>{{ __('Update Realisasi') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($anggaran as $item)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->detail_norekening->nama }}</td>
+                                            <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
+                                            <td>{{ number_format($item->nilai_realisasi, 2, ',', '.') }}</td>
+                                            <td>{{ number_format($item->nilai_anggaran - $item->nilai_realisasi, 2, ',', '.') }}</td>
+                                            <td>
+                                                @if($item->status)
+                                                    <span class="badge bg-success">TerRealisasi</span>
+                                                @else
+                                                    <span class="badge bg-warning">Belum TerRealisasi</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('status.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-info btn-sm">
+                                                        {{ $item->status ? 'Batalkan Realisasi' : 'Realisasikan' }}
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('anggaran.realisasi.update', $item->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="input-group">
+                                                        <input type="number" name="nilai_realisasi" required class="form-control" style="width: 100px;">
+                                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        {{ $anggaran->links() }} <!-- Untuk paginasi -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <style>
+        /* Menyesuaikan tampilan font */
+        table {
+            font-family: Arial, sans-serif; /* Mengubah font tabel */
+            font-size: 14px; /* Ukuran font untuk tabel */
+        }
+
+        .table th, .table td {
+            padding: 10px; /* Menyesuaikan padding untuk sel tabel */
+        }
+
+        /* Responsif untuk input dan tombol */
+        .table-responsive {
+            overflow-x: auto; /* Mengizinkan scroll horizontal jika diperlukan */
+        }
+
+        /* Menambahkan jarak lebih banyak antara tombol dan tabel */
+        .mb-5 {
+            margin-bottom: 60px; /* Meningkatkan jarak bawah */
+        }
+    </style>
 @endpush
 
 @push('scripts')
-    {{-- If you still need DataTable scripts, you can keep this --}}
-    @include('layouts.includes.datatable_js')
+    {{-- Script tambahan jika diperlukan --}}
 @endpush
