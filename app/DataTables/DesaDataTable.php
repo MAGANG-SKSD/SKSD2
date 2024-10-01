@@ -37,7 +37,7 @@ class DesaDataTable extends DataTable
      */
     public function query(Desa $model)
     {
-        return $model->newQuery()->orderBy('id', 'ASC');
+        return $model->newQuery()->orderBy('desa_id', 'ASC');
     }
 
     /**
@@ -95,7 +95,7 @@ class DesaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('desa_id'),
             Column::make('nama_desa'),
             Column::make('alamat_desa'),
             Column::make('kode_pos'),

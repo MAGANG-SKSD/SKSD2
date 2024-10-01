@@ -7,31 +7,40 @@ use Illuminate\Http\Request;
 
 class ApbdesController extends Controller
 {
-    // Menampilkan halaman index
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data anggaran
-        $anggarans = Anggaran::all();
-
-        // Menampilkan view dengan data anggaran
-        return view('apbdes.index', compact('anggarans'));
+        $tahun = $request->tahun ?? date('Y');
+        $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
+        return view('apbdes.index', compact('anggaran'));
     }
 
-    // Menampilkan halaman anggaran
+    public function show($id)
+    {
+        $anggaran = Anggaran::findOrFail($id);
+        return view('anggaran.show', compact('anggaran'));
+    }
+
     public function showAnggaran()
     {
-        return view('apbdes.anggaran'); // Pastikan view ini ada
+        {
+            $tahun = $request->tahun ?? date('Y');
+            $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
+            return view('apbdes.anggaran.index', compact('anggaran'));
+        }
     }
 
-    // Menampilkan halaman verifikasi
-    public function showVerifikasi()
+    public function verifikasi(Request $request)
     {
-        return view('apbdes.verifikasi'); // Pastikan view ini ada
+        $tahun = $request->tahun ?? date('Y');
+        $anggaran = Anggaran::where('verifikasi', 0)->paginate(10);
+        return view('apbdes.verifikasi', compact('anggaran'));
     }
 
-    // Menampilkan halaman realisasi
-    public function showRealisasi()
+    // Method for displaying the realization view
+    public function realisasi(Request $request)
     {
-        return view('apbdes.realisasi'); // Pastikan view ini ada
+        $tahun = $request->tahun ?? date('Y');
+        $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
+        return view('apbdes.realisasi', compact('anggaran'));
     }
 }

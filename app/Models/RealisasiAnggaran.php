@@ -12,11 +12,13 @@ class RealisasiAnggaran extends Model
     protected $table = 'anggaran';
 
     protected $fillable = [
+        'id',
         'tahun',
         'detail_norekening_id',
         'keterangan_lainnya',
         'nilai_anggaran',
         'status',
+        'dana_realisasi',
     ];
 
     // Optionally, specify the date fields for soft deletes

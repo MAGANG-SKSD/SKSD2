@@ -68,3 +68,31 @@
 #### [(2024-09-24)]
 
 -   Try to modify realisasi anggaran in apbdes for fill table with toggle
+
+-   Input data nomor rekening seperti jenis rekening, kelompok rekening, dan sebagian detail rekening
+
+#### [(2024-09-25)]
+
+-   Try to modify column status for realisasi anggaran toggle to button
+
+-   Add tombol create anggaran dan membuat view anggaran
+
+#### [(2024-09-26)]
+
+-   Try to fix realisasi anggaran status, and edit function in desa
+
+-   Add view APBDes anggaran (done)
+
+-   Membuat fitur verifikasi sehingga dapat berfungsi dengan seharusnya
+
+-   Input data detail rekening to database dan menyesuaikan view anggaran
+
+#### [(2024-09-27)]
+
+-   Fix function desa and make view for profile desa
+
+-   make realisasi fitur hingga terimplemen tasikan dengan sempurna
+
+-   Membuat ulang fungsi sp2d ke kelola surat dan membuat crud untuk laporan
+
+-   Make CRUD in anggaran (on prosses)

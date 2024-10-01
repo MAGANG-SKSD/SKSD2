@@ -1,44 +1,70 @@
 @extends('layouts.admin')
-@section('title', __('APBDes'))
+
+@section('title', 'APBDes Anggaran')
+
 @section('breadcrumb')
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-        <li class="breadcrumb-item">{{ __('APBDes') }}</li>
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+        <li class="breadcrumb-item">APBDes</li>
+        <li class="breadcrumb-item active">Anggaran</li>
     </ul>
 @endsection
 
 @section('content')
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <h2 class="text-center">{{ __('Daftar Anggaran APBDes ') . request()->tahun }}</h2>
                     <div class="text-center">
-                        <h2>{{ __('APBDes Actions') }}</h2>
                         <div class="mb-3">
                             <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
                             <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
-                            <a href="{{ route('realisasi_anggarans.index') }}" class="btn btn-success">Realisasi</a>
+                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <a href="{{ route('anggaran.create') }}" class="btn btn-success">Tambah Anggaran</a>
+                    </div>
 
-                    <h3 class="mt-4">{{ __('Daftar Anggaran') }}</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>{{ __('Nama Anggaran') }}</th>
-                                <th>{{ __('Jumlah') }}</th>
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('Jenis Rekening') }}</th>
+                                <th>{{ __('Kelompok Rekening') }}</th>
+                                <th>{{ __('Nama Rekening') }}</th>
+                                <th>{{ __('Nilai Anggaran') }}</th>
+                                <th>{{ __('Verifikasi') }}</th>
+                                <th>{{ __('Status') }}</th>
                                 <th>{{ __('Aksi') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anggarans as $anggaran)
+                            @foreach ($anggaran as $item)
                                 <tr>
-                                    <td>{{ $anggaran->nama }}</td>
-                                    <td>{{ number_format($anggaran->jumlah, 2, ',', '.') }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->detail_norekening->jenis_norekening->nama }}</td>
+                                    <td>{{ $item->detail_norekening->kelompok_norekening->nama }}</td>
+                                    <td>{{ $item->detail_norekening->nama }}</td>
+                                    <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
                                     <td>
-                                        <a href="{{ route('apbdes.anggaran.edit', $anggaran) }}" class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('apbdes.anggaran.destroy', $anggaran) }}" method="POST" style="display:inline;">
+                                        @if($item->verifikasi)
+                                            <span class="badge bg-success">Terverifikasi</span>
+                                        @else
+                                            <span class="badge bg-warning">Belum Terverifikasi</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->status)
+                                            <span class="badge bg-success">TerRealisasi</span>
+                                        @else
+                                            <span class="badge bg-warning">Belum TerRealisasi</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
@@ -48,14 +74,14 @@
                             @endforeach
                         </tbody>
                     </table>
+
                     <div class="mt-3">
-                        <a href="{{ route('apbdes.anggaran.create') }}" class="btn btn-success">Tambah Anggaran</a>
+                        {{ $anggaran->links() }} <!-- Untuk paginasi -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('style')
@@ -63,5 +89,5 @@
 @endpush
 
 @push('scripts')
-    {{-- Tidak perlu scripts DataTable --}}
+    {{-- Script tambahan jika diperlukan --}}
 @endpush

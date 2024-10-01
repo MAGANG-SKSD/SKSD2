@@ -126,7 +126,12 @@ Route::group(
         Route::delete('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi_anggarans.destroy');
         Route::get('realisasianggaran/{id}', [RealisasiAnggaranController::class, 'show'])->name('realisasi_anggarans.show');
 
-        Route::post('/update-status/{id}', [RealisasiAnggaranController::class, 'updateStatus']);
+        // Rute untuk Toggle, Edit, dan Delete
+        Route::post('realisasi_anggarans/toggle-status/{id}', [RealisasiAnggaranController::class, 'toggleStatus'])->name('realisasi_anggarans.toggle-status');
+        // Route::get('realisasi/edit/{id}', [RealisasiAnggaranController::class, 'edit'])->name('realisasi.edit');
+        Route::delete('realisasi/delete/{id}', [RealisasiAnggaranController::class, 'destroy'])->name('realisasi.delete');
+        Route::get('realisasianggaran/data', [RealisasiAnggaranController::class, 'getData'])->name('realisasi_anggarans.data');
+
     }
 );
 
@@ -225,8 +230,18 @@ Route::resource('sp2ds', Sp2dController::class);
 // Route::group(['middleware' => ['auth', 'XSS']], function () {
 //     Route::resource('anggaran', AnggaranController::class);
 // });
-// Rute untuk APBDes
+// Route untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+
+// Rute untuk halaman APBDes
+Route::get('apbdes', [AnggaranController::class, 'index'])->name('apbdes.index');
+Route::get('/apbdes/anggaran', [ApbdesController::class, 'index'])->name('apbdes.anggaran');
+Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran');
+Route::get('/apbdes/anggaran/create', [AnggaranController::class, 'create'])->name('anggaran.create');
+Route::post('/apbdes/anggaran', [AnggaranController::class, 'store'])->name('anggaran.store');
+Route::get('/apbdes/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('anggaran.edit');
+Route::put('/apbdes/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
+Route::delete('/apbdes/anggaran/{id}', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
 
 // Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
 Route::resource('apbdes/anggaran', AnggaranController::class)->names([
@@ -237,10 +252,16 @@ Route::resource('apbdes/anggaran', AnggaranController::class)->names([
     'update' => 'apbdes.anggaran.update',
     'destroy' => 'apbdes.anggaran.destroy',
 ]);
+Route::resource('anggaran', AnggaranController::class);
+Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
+Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');
+Route::get('/realisasi', [AnggaranController::class, 'realisasi'])->name('apbdes.realisasi');
 
-// Rute untuk Verifikasi dan Realisasi jika diperlukan
-Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
-Route::get('/apbdes/realisasi', [ApbdesController::class, 'showRealisasi'])->name('apbdes.realisasi');
+// Rute untuk mengupdate nilai realisasi
+Route::put('/anggaran/realisasi/{id}', [AnggaranController::class, 'updateRealisasi'])->name('anggaran.realisasi.update');
+
+// Rute untuk toggle status realisasi
+Route::post('/realisasi/{id}/toggle', [AnggaranController::class, 'toggleStatus'])->name('status.toggle');
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
@@ -260,10 +281,12 @@ Route::group(
         Route::get('desas', [DesaController::class, 'index'])->name('desas.index');
         Route::get('desas/create', [DesaController::class, 'create'])->name('desas.create');
         Route::post('desas/store', [DesaController::class, 'store'])->name('desas.store');
-        Route::get('desas/{id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
-        Route::put('desas/{id}', [DesaController::class, 'update'])->name('desas.update');
-        Route::delete('desas/{id}', [DesaController::class, 'destroy'])->name('desas.destroy');
-        Route::get('desas/{id}', [DesaController::class, 'show'])->name('desas.show');
+        Route::get('desas/{desa_id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
+        Route::put('desas/{desa_id}', [DesaController::class, 'update'])->name('desas.update');
+        Route::delete('desas/{desa_id}', [DesaController::class, 'destroy'])->name('desas.destroy');
+        Route::get('desas/{desa_id}', [DesaController::class, 'show'])->name('desas.show');
+
+        Route::get('desas/{desa_id}/profile', [DesaController::class, 'profile'])->name('desas.profile');
     }
 );
 
