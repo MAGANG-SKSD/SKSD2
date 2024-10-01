@@ -63,7 +63,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('apbdes.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                                         <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')

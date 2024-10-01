@@ -24,8 +24,8 @@ class ApbdesController extends Controller
     {
         {
             $tahun = $request->tahun ?? date('Y');
-            $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
-            return view('apbdes.anggaran.index', compact('anggaran'));
+            $anggaran = Anggaran::where('anggaran', 0)->paginate(10);
+            return view('apbdes.anggaran', compact('anggaran'));
         }
     }
 

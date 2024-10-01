@@ -12,12 +12,14 @@ class Detail_Norekening extends Model
 
     public function kelompok_norekening()
     {
-        return $this->belongsTo('App\Models\Kelompok_Norekening');
+        return $this->belongsTo(Kelompok_Norekening::class);
+        // return $this->belongsTo('App\Models\Kelompok_Norekening');
     }
 
     public function jenis_norekening()
     {
-        return $this->belongsTo('App\Models\Jenis_norekening');
+        return $this->belongsTo(Jenis_Norekening::class);
+        // return $this->belongsTo('App\Models\Jenis_norekening');
     }
 
     public function anggaran()
