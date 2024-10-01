@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anggaran extends Model
 {
-    use HasFactory; // Added the HasFactory trait
+    use HasFactory;
 
     protected $table = 'anggaran';
     protected $fillable = [
@@ -20,18 +20,18 @@ class Anggaran extends Model
     ];
 
     public function detail_norekening()
-{
-    return $this->belongsTo('App\Models\Detail_Norekening', 'detail_norekening_id');
-}
+    {
+        return $this->belongsTo(Detail_Norekening::class, 'detail_norekening_id');
+    }
 
-    // Function to toggle verification status
+    // Fungsi untuk toggle verifikasi
     public function toggleVerifikasi()
     {
         $this->verifikasi = !$this->verifikasi;
         $this->save();
     }
 
-    // Function to toggle active status
+    // Fungsi untuk toggle status
     public function toggleStatus()
     {
         $this->status = !$this->status;

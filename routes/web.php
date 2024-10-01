@@ -248,15 +248,15 @@ Route::resource('apbdes/anggaran', AnggaranController::class)->names([
     'edit' => 'apbdes.anggaran.edit',
     'update' => 'apbdes.anggaran.update',
     'destroy' => 'apbdes.anggaran.destroy',
-
 ]);
-Route::get('/kelompok-norekening/{id}', function ($id) {
-    return response()->json(Kelompok_Norekening::where('jenis_norekening_id', $id)->get());
-});
 
-Route::get('/detail-norekening/{id}', function ($id) {
-    return response()->json(Detail_Norekening::where('kelompok_norekening_id', $id)->get());
-});
+// Route untuk mengambil kelompok no rekening berdasarkan jenis
+Route::get('/kelompok_norekening/{Id}', [AnggaranController::class, 'getKelompokNorekening']);
+
+// Route untuk mengambil detail no rekening berdasarkan kelompok
+Route::get('/detail_norekening/{Id}', [AnggaranController::class, 'getDetailNorekening']);
+
+
 
 // Rute untuk Verifikasi dan Realisasi jika diperlukan
 Route::get('/apbdes/verifikasi', [ApbdesController::class, 'showVerifikasi'])->name('apbdes.verifikasi');
