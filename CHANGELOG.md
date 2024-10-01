@@ -96,3 +96,11 @@
 -   Membuat ulang fungsi sp2d ke kelola surat dan membuat crud untuk laporan
 
 -   Make CRUD in anggaran (on prosses)
+
+#### [(2024-09-30)]
+
+-   modify view for profile desa (on progress)
+
+#### [(2024-10-1)]
+
+-   Modify view for profile desa (finish) and editing function for update profile desa
