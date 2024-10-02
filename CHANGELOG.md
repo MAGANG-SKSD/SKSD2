@@ -104,3 +104,7 @@
 #### [(2024-10-1)]
 
 -   Modify view for profile desa (finish) and editing function for update profile desa
+
+#### [(2024-10-2)]
+
+-   Editing function for update profile desa (finish)
