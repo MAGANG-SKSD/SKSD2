@@ -22,7 +22,16 @@ class Anggaran extends Model
 
     public function detail_norekening()
     {
-        return $this->belongsTo(Detail_Norekening::class, 'detail_norekening_id');
+        return $this->belongsTo('App\Models\Detail_Norekening', 'detail_norekening_id');
+    }
+    public function jenis_norekening()
+    {
+        return $this->hasOneThrough(Jenis_Norekening::class, Detail_Norekening::class, 'id', 'id', 'detail_norekening_id', 'jenis_norekening_id');
+    }
+
+    public function kelompok_norekening()
+    {
+        return $this->hasOneThrough(Kelompok_Norekening::class, Jenis_Norekening::class, 'id', 'id', 'jenis_norekening_id', 'kelompok_norekening_id');
     }
 
     // Fungsi untuk toggle verifikasi

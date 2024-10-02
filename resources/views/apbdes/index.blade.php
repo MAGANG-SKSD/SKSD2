@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('anggaran.create') }}" class="btn btn-success">Tambah Anggaran</a>
+                        <a href="{{ route('apbdes.create') }}" class="btn btn-success">Tambah Anggaran</a>
                     </div>
 
                     <table class="table table-bordered">
@@ -66,7 +66,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('apbdes.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                                         <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')

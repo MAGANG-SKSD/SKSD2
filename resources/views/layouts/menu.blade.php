@@ -48,9 +48,9 @@
         </a>
     </li>
 </ul>
-<li class="nav-item {{ Request::is('klasifikasiBelanjas*') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ Request::is('klasifikasiBelanjas*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('klasifikasiBelanjas.index') }}">
         <i class="nav-icon icon-cursor"></i>
         <span>Klasifikasi Belanjas</span>
     </a>
-</li>
+</li> --}}
