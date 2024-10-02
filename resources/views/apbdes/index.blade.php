@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('anggaran.create') }}" class="btn btn-success">Tambah Anggaran</a>
+                        <a href="{{ route('apbdes.create') }}" class="btn btn-success">Tambah Anggaran</a>
                     </div>
 
                     <table class="table table-bordered">

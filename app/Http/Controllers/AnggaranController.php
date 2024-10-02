@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Anggaran;
 use App\Models\Detail_Norekening;
 use App\Models\Jenis_Norekening;
+use App\Models\Kelompok_Norekening;
 
 class AnggaranController extends Controller
 {
@@ -26,7 +27,7 @@ class AnggaranController extends Controller
     }
 
     // Fungsi untuk menampilkan status realisasi
-    public function Status()
+    public function status()
     {
         $anggaran = Anggaran::paginate(10);
         return view('apbdes.realisasi', compact('anggaran'));
@@ -66,10 +67,7 @@ class AnggaranController extends Controller
         // Kembalikan tampilan dengan data anggaran
         return view('apbdes.index', compact('anggaran'));
     }
-    
 
-
-    // Fungsi untuk mengelola rincian anggaran
     // Fungsi untuk mengelola rincian anggaran
     public function cart(Request $request)
     {
@@ -89,7 +87,6 @@ class AnggaranController extends Controller
         return response()->json(['detail' => $rincian]);
     }
 
-
     private function cart_rincian($jenis, $anggaran, $rincian)
     {
         return [
@@ -102,26 +99,40 @@ class AnggaranController extends Controller
     // Fungsi untuk membuat anggaran baru
     public function create()
     {
+        // Mengambil semua data jenis norekening dan detail norekening
         $jenis_norekening = Jenis_Norekening::all();
-        return view('anggaran.create', compact('jenis_norekening'));
+        $detail_norekening = Detail_Norekening::all();
+
+        return view('apbdes.create', compact('jenis_norekening', 'detail_norekening'));
     }
 
-    // Fungsi untuk menyimpan anggaran baru
+    // Method untuk mengambil detail norekening berdasarkan jenis norekening
+    public function getDetailNorekening(Request $request)
+    {
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $request->jenis_id)->get();
+        return response()->json($detail_norekening);
+    }
+
+    // Menyimpan data anggaran
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'tahun' => ['required', 'numeric', 'min:1900'],
-            'detail_norekening_id' => ['required', 'exists:detail_norekening,id'],
-            'nilai_anggaran' => ['required', 'numeric', 'min:0'],
-            'keterangan_lainnya' => ['nullable']
+        $request->validate([
+            'tahun' => 'required|integer',
+            'detail_norekening_id' => 'required|exists:detail_norekening,id',
+            'keterangan_lainnya' => 'nullable|string',
+            'nilai_anggaran' => 'required|numeric',
         ]);
 
-        // Menambahkan nilai_realisasi yang awalnya sama dengan nilai_anggaran
-        $data['nilai_realisasi'] = $data['nilai_anggaran'];
+        // Membuat data anggaran baru
+        Anggaran::create([
+            'tahun' => $request->tahun,
+            'detail_norekening_id' => $request->detail_norekening_id,
+            'keterangan_lainnya' => $request->keterangan_lainnya,
+            'nilai_anggaran' => $request->nilai_anggaran,
+            // Tambahkan kolom lain sesuai kebutuhan
+        ]);
 
-        Anggaran::create($data);
-        return redirect('/anggaran?jenis=' . $request->jenis_norekening . "&tahun=" . $request->tahun)
-               ->with('success', 'Anggaran APBDes berhasil ditambahkan');
+        return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil dibuat.');
     }
 
     // Fungsi untuk menampilkan detail anggaran berdasarkan id
@@ -150,14 +161,14 @@ class AnggaranController extends Controller
         // Update nilai anggaran dan detail_norekening
         $anggaran->update($data);
 
-        return redirect()->route('anggaran.index')->with('success', 'Anggaran APBDes berhasil diperbarui');
+        return redirect()->route('apbdes.index')->with('success', 'Anggaran APBDes berhasil diperbarui.');
     }
 
     // Fungsi untuk menghapus anggaran
     public function destroy(Anggaran $anggaran)
     {
         $anggaran->delete();
-        return redirect()->route('anggaran.index')->with('success', 'Anggaran APBDes berhasil dihapus');
+        return redirect()->route('anggaran.index')->with('success', 'Anggaran APBDes berhasil dihapus.');
     }
 
     // Menampilkan halaman realisasi
