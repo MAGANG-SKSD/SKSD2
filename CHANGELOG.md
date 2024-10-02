@@ -107,5 +107,4 @@
 
 #### [(2024-10-2)]
 
--   Editing function for update profile desa (finish)
--   menambahkan tampilan edit anggaran ketika data sudah masuk
+-   Editing function for update profile desa (finish), Make index for desa list and make function to create desa

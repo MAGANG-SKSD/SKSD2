@@ -91,6 +91,8 @@ class Sp2dDataTable extends DataTable
             'notulen' => ['title' => 'Notulen'],
             'daftar_hadir_pertemuan' => ['title' => 'Daftar Hadir Pertemuan Rapat'],
             'daftar_hadir' => ['title' => 'Daftar Hadir'],
+            'pencairan_dana' => ['title' => 'Pencairan Dana'],
+            'Surat_Perintah' => ['title' => 'Surat Perintah'],
         ];
     }
 
