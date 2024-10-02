@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
 use Illuminate\Http\Request;
+use App\Models\Detail_Norekening;
+use App\Models\Jenis_Norekening;
 
 class APBDesController extends Controller
 {
@@ -12,6 +14,14 @@ class APBDesController extends Controller
         $tahun = $request->tahun ?? date('Y');
         $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
         return view('apbdes.index', compact('anggaran'));
+    }
+    public function create()
+    {
+        // Mengambil semua data jenis norekening dan detail norekening
+        $jenis_norekening = Jenis_Norekening::all();
+        $detail_norekening = Detail_Norekening::all();
+
+        return view('apbdes.create', compact('jenis_norekening', 'detail_norekening'));
     }
 
     public function show($id)
@@ -24,8 +34,8 @@ class APBDesController extends Controller
     {
         {
             $tahun = $request->tahun ?? date('Y');
-            $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
-            return view('apbdes.anggaran.index', compact('anggaran'));
+            $anggaran = Anggaran::where('anggaran', 0)->paginate(10);
+            return view('apbdes.anggaran', compact('anggaran'));
         }
     }
 

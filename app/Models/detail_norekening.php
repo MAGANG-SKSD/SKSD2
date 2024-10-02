@@ -7,21 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detail_Norekening extends Model
 {
-    protected $table = "detail_norekening";
-    protected $guarded = [];
+   
+    protected $table = 'detail_norekening';
+    protected $fillable = ['jenis_norekening_id', 'kelompok_norekening_id', 'nama'];
 
-    public function kelompok_norekening()
-    {
-        return $this->belongsTo('App\Models\Kelompok_Norekening');
-    }
-
+    // Relasi ke Jenis Norekening
     public function jenis_norekening()
     {
-        return $this->belongsTo('App\Models\Jenis_norekening');
+        return $this->belongsTo(Jenis_Norekening::class);
     }
 
-    public function anggaran()
+    // Relasi ke Kelompok Norekening
+    public function kelompok_norekening()
     {
-        return $this->hasMany('App\Models\Anggaran');
+        return $this->belongsTo(Kelompok_Norekening::class);
     }
 }
