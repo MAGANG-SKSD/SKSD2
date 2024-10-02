@@ -16,7 +16,7 @@ class DesaController extends Controller
     public function index(DesaDataTable $table)
     {
         if (\Auth::user()->can('manage-desa')) {
-            $desa = Desa::all(); // Ambil semua data desa
+            $desas = Desa::all(); // Ambil semua data desa
             return $table->render('desas.index', compact('desas'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
@@ -83,7 +83,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desas,email,' . $desa_id, ',desa_id',
+            'email' => 'required|email|unique:desas,email,' . $desa_id . ',desa_id',
         ]);
 
         $input = $request->all();
@@ -91,9 +91,10 @@ class DesaController extends Controller
         $desa = Desa::find($desa_id);
         $desa->update($input);
 
-        return redirect()->route('desas.index')
+        return redirect()->route('desas.profile', ['desa_id' => $desa_id])
             ->with('success', __('Desa updated successfully.'));
     }
+
 
     public function destroy($desa_id)
     {

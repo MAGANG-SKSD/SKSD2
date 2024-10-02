@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    @include('partial.nav-builder', ['desas' => $desas])
+    {{-- @include('partial.nav-builder', ['desas' => $desas]) --}}
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
