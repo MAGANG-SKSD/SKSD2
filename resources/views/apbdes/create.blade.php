@@ -33,7 +33,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="tahun">{{ __('Tahun') }}</label>
-                            <input type="number" name="tahun" id="tahun" class="form-control" required>
+                            <input type="number" name="tahun" id="tahun" class="form-control" value="{{ old('tahun') }}" required>
                         </div>
 
                         <!-- Jenis No Rekening -->
@@ -42,7 +42,7 @@
                             <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
                                 <option value="">{{ __('Pilih Jenis No Rekening') }}</option>
                                 @foreach($jenis_norekening as $jn)
-                                    <option value="{{ $jn->id }}">{{ $jn->nama }}</option>
+                                    <option value="{{ $jn->id }}" {{ old('jenis_norekening_id') == $jn->id ? 'selected' : '' }}>{{ $jn->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,6 +52,11 @@
                             <label for="kelompok_norekening_id">{{ __('Kelompok No Rekening') }}</label>
                             <select name="kelompok_norekening_id" id="kelompok_norekening_id" class="form-control" required>
                                 <option value="">{{ __('Pilih Kelompok No Rekening') }}</option>
+                                @if(old('jenis_norekening_id'))
+                                    @foreach($kelompok_norekening as $kn)
+                                        <option value="{{ $kn->id }}" {{ old('kelompok_norekening_id') == $kn->id ? 'selected' : '' }}>{{ $kn->nama }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
 
@@ -60,17 +65,22 @@
                             <label for="detail_norekening_id">{{ __('Detail No Rekening') }}</label>
                             <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
                                 <option value="">{{ __('Pilih Detail No Rekening') }}</option>
+                                @if(old('kelompok_norekening_id'))
+                                    @foreach($detail_norekening as $dn)
+                                        <option value="{{ $dn->id }}" {{ old('detail_norekening_id') == $dn->id ? 'selected' : '' }}>{{ $dn->nama }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="nilai_anggaran">{{ __('Nilai Anggaran') }}</label>
-                            <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" required min="0">
+                            <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" value="{{ old('nilai_anggaran') }}" required min="0">
                         </div>
 
                         <div class="form-group">
                             <label for="keterangan_lainnya">{{ __('Keterangan Lainnya') }}</label>
-                            <textarea name="keterangan_lainnya" id="keterangan_lainnya" class="form-control"></textarea>
+                            <textarea name="keterangan_lainnya" id="keterangan_lainnya" class="form-control">{{ old('keterangan_lainnya') }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
@@ -93,18 +103,19 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        $('#kelompok_norekening_id').empty();
-                        $('#kelompok_norekening_id').append('<option value="">{{ __("Pilih Kelompok No Rekening") }}</option>');
+                        $('#kelompok_norekening_id').empty().append('<option value="">{{ __("Pilih Kelompok No Rekening") }}</option>');
                         $.each(data, function(key, value) {
                             $('#kelompok_norekening_id').append('<option value="'+ value.id +'">'+ value.nama +'</option>');
                         });
+                        $('#detail_norekening_id').empty().append('<option value="">{{ __("Pilih Detail No Rekening") }}</option>'); // Reset detail dropdown
                     },
                     error: function() {
                         alert('Gagal mengambil data kelompok norekening');
                     }
                 });
             } else {
-                $('#kelompok_norekening_id').empty();
+                $('#kelompok_norekening_id').empty().append('<option value="">{{ __("Pilih Kelompok No Rekening") }}</option>');
+                $('#detail_norekening_id').empty().append('<option value="">{{ __("Pilih Detail No Rekening") }}</option>'); // Reset detail dropdown
             }
         });
 
@@ -117,8 +128,7 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        $('#detail_norekening_id').empty();
-                        $('#detail_norekening_id').append('<option value="">{{ __("Pilih Detail No Rekening") }}</option>');
+                        $('#detail_norekening_id').empty().append('<option value="">{{ __("Pilih Detail No Rekening") }}</option>');
                         $.each(data, function(key, value) {
                             $('#detail_norekening_id').append('<option value="'+ value.id +'">'+ value.nama +'</option>');
                         });
@@ -128,7 +138,7 @@
                     }
                 });
             } else {
-                $('#detail_norekening_id').empty();
+                $('#detail_norekening_id').empty().append('<option value="">{{ __("Pilih Detail No Rekening") }}</option>');
             }
         });
     });

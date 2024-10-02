@@ -8,7 +8,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class ApbdesDataTable extends DataTable
+class APBDesDataTable extends DataTable
 {
     public function dataTable($query)
     {
@@ -24,7 +24,7 @@ class ApbdesDataTable extends DataTable
 
     public function query(Apbdes $model)
     {
-        return $model->newQuery()->orderBy('id', 'ASC');
+        return $model->newQuery()->with('desa');
     }
 
     public function html()
@@ -84,6 +84,6 @@ class ApbdesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Apbdes_' . date('YmdHis');
+        return 'APBDes_' . date('YmdHis');
     }
 }

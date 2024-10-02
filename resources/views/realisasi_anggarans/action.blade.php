@@ -4,10 +4,10 @@
     </button>
 
     <div class="dropdown-menu" x-placement="bottom-start">
-        <a href="{{ route('realisasi.toggle', $realisasi->id) }}" class="dropdown-item">
+        <button class="dropdown-item" onclick="toggleStatus({{ $realisasi->id }}, {{ $realisasi->status ? 0 : 1 }})">
             <i class="ti ti-toggle-{{ $realisasi->status ? 'on' : 'off' }} action-btn"></i>
             {{ $realisasi->status ? 'Disable' : 'Enable' }}
-        </a>
+        </button>
         
         <a href="{{ route('realisasi_anggarans.edit', $realisasi->id) }}" class="dropdown-item">
             <i class="ti ti-edit action-btn"></i>{{ __('Edit') }}

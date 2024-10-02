@@ -14,7 +14,7 @@ class CreateDesasTable extends Migration
     public function up()
     {
         Schema::create('desas', function (Blueprint $table) {
-            $table->increments('desa_id');
+            $table->id('desa_id');
             
             // Menggunakan string dengan panjang yang jelas
             $table->string('nama_desa', 255);

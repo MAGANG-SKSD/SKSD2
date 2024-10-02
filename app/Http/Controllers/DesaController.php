@@ -16,7 +16,8 @@ class DesaController extends Controller
     public function index(DesaDataTable $table)
     {
         if (\Auth::user()->can('manage-desa')) {
-            return $table->render('desas.index');
+            $desa = Desa::all(); // Ambil semua data desa
+            return $table->render('desas.index', compact('desas'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
@@ -38,7 +39,7 @@ class DesaController extends Controller
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desa,email',
+            'email' => 'required|email|unique:desas,email',
         ]);
 
         $desa = Desa::create([
@@ -54,56 +55,69 @@ class DesaController extends Controller
             ->with('success', __('Desa created successfully.'));
     }
 
-    public function show($id)
-    {
-        if (\Auth::user()->can('show-desa')) {
-            $desa = Desa::find($id);
-            return view('desas.show', compact('desa'));
-        } else {
-            return redirect()->back()->with('error', 'Permission denied.');
-        }
+    public function show($desa_id)
+{
+    if (\Auth::user()->can('show-desa')) {
+        $desa = Desa::find($desa_id);
+        return view('desas.show', compact('desa')); // Pastikan ini
+    } else {
+        return redirect()->back()->with('error', 'Permission denied.');
     }
+}
 
-    public function edit($id)
+
+    public function edit($desa_id)
     {
         if (\Auth::user()->can('edit-desa')) {
-            $desa = Desa::find($id);
+            $desa = Desa::find($desa_id);
             return view('desas.edit', compact('desa'));
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $desa_id)
     {
         $this->validate($request, [
             'nama_desa' => 'required',
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
             'telepon' => 'required',
-            'email' => 'required|email|unique:desa,email,' . $id,
+            'email' => 'required|email|unique:desas,email,' . $desa_id, ',desa_id',
         ]);
 
         $input = $request->all();
 
-        $desa = Desa::find($id);
+        $desa = Desa::find($desa_id);
         $desa->update($input);
 
         return redirect()->route('desas.index')
             ->with('success', __('Desa updated successfully.'));
     }
 
-    public function destroy($id)
+    public function destroy($desa_id)
     {
         if (\Auth::user()->can('delete-desa')) {
-            if ($id == 1) {
+            if ($desa_id == 1) {
                 return redirect()->back()->with('error', 'Permission denied.');
             } else {
-                Desa::destroy($id);
+                Desa::destroy($desa_id);
                 return redirect()->route('desas.index')->with('success', __('Desa deleted successfully.'));
             }
         } else {
             return redirect()->back()->with('error', 'Permission denied.');
         }
     }
+
+    public function profile($desa_id)
+    {
+        $desa = Desa::where('desa_id', $desa_id)->firstOrFail(); // Jika tidak ditemukan, akan menampilkan 404 error
+
+        return view('desas.profile', compact('desa'));
+    }
+
+
+
+
+
 }

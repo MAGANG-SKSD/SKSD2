@@ -11,7 +11,6 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder;
 
-
 class DesaDataTable extends DataTable
 {
     /**
@@ -26,7 +25,7 @@ class DesaDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function (Desa $desa) {
                 return view('desas.action', compact('desa'));
-            });    
+            });
     }
 
     /**
@@ -37,7 +36,7 @@ class DesaDataTable extends DataTable
      */
     public function query(Desa $model)
     {
-        return $model->newQuery()->orderBy('id', 'ASC');
+        return $model->newQuery()->orderBy('desa_id', 'ASC');
     }
 
     /**
@@ -95,7 +94,7 @@ class DesaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('desa_id'),
             Column::make('nama_desa'),
             Column::make('alamat_desa'),
             Column::make('kode_pos'),

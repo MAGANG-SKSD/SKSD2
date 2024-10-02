@@ -14,13 +14,16 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> {{ __('APBDes') }}
+                </div>
                 <div class="card-body">
                     <h2 class="text-center">{{ __('Daftar Anggaran APBDes ') . request()->tahun }}</h2>
                     <div class="text-center">
                         <div class="mb-3">
                             <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
                             <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
-                            <a href="{{ route('realisasi_anggarans.index') }}" class="btn btn-success">Realisasi</a>
+                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -30,6 +33,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>{{ __('ID') }}</th>
                                 <th>{{ __('Jenis Rekening') }}</th>
                                 <th>{{ __('Kelompok Rekening') }}</th>
                                 <th>{{ __('Nama Rekening') }}</th>
@@ -42,6 +46,7 @@
                         <tbody>
                             @foreach ($anggaran as $item)
                                 <tr>
+                                    <td>{{ $item->id }}</td>
                                     <td>{{ $item->detail_norekening->jenis_norekening->nama }}</td>
                                     <td>{{ $item->detail_norekening->kelompok_norekening->nama }}</td>
                                     <td>{{ $item->detail_norekening->nama }}</td>
@@ -55,9 +60,9 @@
                                     </td>
                                     <td>
                                         @if($item->status)
-                                            <span class="badge bg-success">Aktif</span>
+                                            <span class="badge bg-success">TerRealisasi</span>
                                         @else
-                                            <span class="badge bg-danger">Tidak Aktif</span>
+                                            <span class="badge bg-warning">Belum TerRealisasi</span>
                                         @endif
                                     </td>
                                     <td>

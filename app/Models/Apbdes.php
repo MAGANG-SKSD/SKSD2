@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Anggaran;
 use App\Models\RealisasiAnggaran;
 
-class Apbdes extends Model
+class APBDes extends Model
 {
     use HasFactory;
 
