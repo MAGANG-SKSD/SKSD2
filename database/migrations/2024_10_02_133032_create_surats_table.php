@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuratPerintahTable extends Migration
+class CreateSuratsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSuratPerintahTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_perintah', function (Blueprint $table) {
+        Schema::create('surats', function (Blueprint $table) {
             $table->id(); // Kolom ID
-            $table->string('judul'); // Kolom judul
-            $table->date('tanggal'); // Kolom tanggal
+            $table->string('judul'); // Kolom Judul
+            $table->date('tanggal'); // Kolom Tanggal
             $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
@@ -28,6 +28,6 @@ class CreateSuratPerintahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_perintah');
+        Schema::dropIfExists('surats');
     }
 }

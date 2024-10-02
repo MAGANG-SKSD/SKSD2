@@ -21,8 +21,8 @@
                     <h2 class="text-center">{{ __('Daftar Kelola Surat ') . request()->tahun }}</h2>
                     <div class="text-center">
                         <div class="mb-3">
-                            <a href="{{ route('surat_perintah.index') }}" class="btn btn-outline-primary btn-lg m-2">
-                                <i class="fa fa-file-alt"></i> Surat Perintah
+                            <a href="{{ route('surat.index') }}" class="btn btn-outline-primary btn-lg m-2">
+                                <i class="fa fa-file-alt"></i> Surat
                             </a>
                             <a href="{{ route('berita_acara.index') }}" class="btn btn-outline-success btn-lg m-2">
                                 <i class="fa fa-clipboard-list"></i> Berita Acara
@@ -44,6 +44,7 @@
                             </a>
                             <a href="{{ route('surat_pengantar.index') }}" class="btn btn-outline-primary btn-lg m-2">
                                 <i class="fa fa-envelope"></i> Surat Pengantar
+                           
                             </a>
                         </div>
                     </div>

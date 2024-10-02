@@ -50,7 +50,8 @@ class Sp2d extends Model
         'berita_acara',
         'notulen',
         'daftar_hadir_pertemuan',
-        'daftar_hadir'
+        'daftar_hadir',
+        'surat_perintah'
     ];
 
     /**
