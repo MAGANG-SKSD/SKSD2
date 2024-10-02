@@ -87,7 +87,9 @@ $desaDetail = Desa::find(request()->route('desa_id')); // Assuming your route pa
                                         </div>
                                     </div>
                                     <div class="card-footer text-center"> <!-- Pusatkan tombol -->
+                                        <a href="{{ route('desas.index') }}" class="btn btn-secondary mb-3">{{ __('Desa List') }}</a>
                                         <button type="submit" class="btn btn-primary mb-3">{{ __('Update Desa Info') }}</button>
+                                        
                                     </div>
                                     {{ Form::close() }}
                                 </div>

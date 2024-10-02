@@ -236,24 +236,17 @@ Route::resource('sp2ds', Sp2dController::class);
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
 
 // Rute untuk halaman APBDes
-Route::get('apbdes', [AnggaranController::class, 'index'])->name('apbdes.index');
-Route::get('/apbdes/anggaran', [ApbdesController::class, 'index'])->name('apbdes.anggaran');
-Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran');
-Route::get('/apbdes/anggaran/create', [AnggaranController::class, 'create'])->name('anggaran.create');
-Route::post('/apbdes/anggaran', [AnggaranController::class, 'store'])->name('anggaran.store');
-Route::get('/apbdes/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('anggaran.edit');
-Route::put('/apbdes/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
-Route::delete('/apbdes/anggaran/{id}', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
+Route::resource('anggaran', AnggaranController::class);
 
-// Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
-Route::resource('apbdes/anggaran', AnggaranController::class)->names([
-    'index' => 'apbdes.anggaran.index',
-    'create' => 'apbdes.anggaran.create',
-    'store' => 'apbdes.anggaran.store',
-    'edit' => 'apbdes.anggaran.edit',
-    'update' => 'apbdes.anggaran.update',
-    'destroy' => 'apbdes.anggaran.destroy',
-]);
+Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
+Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');
+Route::get('/realisasi', [AnggaranController::class, 'realisasi'])->name('apbdes.realisasi');
+
+// Rute untuk mengupdate nilai realisasi
+Route::put('/anggaran/realisasi/{id}', [AnggaranController::class, 'updateRealisasi'])->name('anggaran.realisasi.update');
+
+// Rute untuk toggle status realisasi
+Route::post('/realisasi/{id}/toggle', [AnggaranController::class, 'toggleStatus'])->name('status.toggle');
 Route::resource('anggaran', AnggaranController::class);
 Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
 Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');

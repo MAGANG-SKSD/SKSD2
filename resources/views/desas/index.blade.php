@@ -10,6 +10,9 @@
 @section('content')
     {{-- @include('partial.nav-builder', ['desas' => $desas]) --}}
     <div class="row">
+        <div class="col-lg-12 mb-3"> <!-- Tambahkan margin bawah -->
+            <a href="{{ route('desas.profile', ['desa_id' => 1]) }}" class="btn btn-primary">Kembali ke Profil Desa</a> <!-- Ganti 1 dengan ID desa yang sesuai -->
+        </div>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
