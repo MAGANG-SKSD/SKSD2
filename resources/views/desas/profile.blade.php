@@ -47,10 +47,10 @@ $desaDetail = Desa::find(request()->route('desa_id')); // Assuming your route pa
                                     </div>
                                 </div>
                                 <div desa_id="desas-add-2" class="card">
-                                    <div class="card-header text-center"> <!-- Pusatkan teks -->
+                                    {{-- <div class="card-header text-center"> <!-- Pusatkan teks -->
                                         <h5>Basic Info</h5>
                                         <small class="text-muted">{{ __('Mandatory informations') }}</small>
-                                    </div>
+                                    </div> --}}
                                     {{ Form::model($desaDetail, ['route' => ['desas.update', $desaDetail->desa_id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) }}
                                     <div class="card-body">
                                         <div class="row mt-3 container-fluid">
@@ -87,7 +87,7 @@ $desaDetail = Desa::find(request()->route('desa_id')); // Assuming your route pa
                                         </div>
                                     </div>
                                     <div class="card-footer text-center"> <!-- Pusatkan tombol -->
-                                        <button type="submit" class="btn btn-primary mb-3">{{ __('Update desas Info') }}</button>
+                                        <button type="submit" class="btn btn-primary mb-3">{{ __('Update Desa Info') }}</button>
                                     </div>
                                     {{ Form::close() }}
                                 </div>
