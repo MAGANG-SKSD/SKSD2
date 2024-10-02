@@ -106,14 +106,14 @@ $settings = Utility::settings();
                 <!-- Penambahan baru dari rizky -->
                 <li class="dash-item dash-hasmenu {{ request()->is('anggaranKas*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('anggaranKas.index') }}">
-                            <span class="dash-micon"><i class="ti ti-wallet"></i></span>
+                            <span class="dash-micon"><i class="ti ti-map"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('Anggaran kas') }}</span>
                         </a>
                     </li>
                 <!--  -->
                 <li class="dash-item dash-hasmenu {{ request()->is('apbdes*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('apbdes.index') }}">
-                            <span class="dash-micon"><i class="ti ti-map"></i></span>
+                            <span class="dash-micon"><i class="ti ti-wallet"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
                         </a>
                     </li>
@@ -126,8 +126,8 @@ $settings = Utility::settings();
                     </li>
                 <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
                     <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => 1]) }}">
-                        <span class="dash-micon"><i class="ti ti-bell"></i></span>
-                        <span class="dash-mtext custom-weight">{{ __('Desa') }}</span>
+                        <span class="dash-micon"><i class="ti ti-crown"></i></span>
+                        <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
                     </a>
                 </li>
 
@@ -172,10 +172,10 @@ $settings = Utility::settings();
                         </a>
                     </li>
                 @endcan --}}
-                <li class="dash-item dash-hasmenu {{ request()->is('sp2ds*') ? 'active' : '' }}">
-                        <a class="dash-link" href="{{ route('sp2ds.index') }}">
+                <li class="dash-item dash-hasmenu {{ request()->is('surat_perintah*') ? 'active' : '' }}">
+                        <a class="dash-link" href="{{ route('surat_perintah.index') }}">
                             <span class="dash-micon"><i class="ti ti-folder"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('SP2D') }}</span>
+                            <span class="dash-mtext custom-weight">{{ __('Kelola Surat') }}</span>
                         </a>
                     </li>
             </ul>

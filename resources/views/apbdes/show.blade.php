@@ -1,24 +1,19 @@
 @extends('layouts.admin')
-@section('title')
-    {{ __('Show APBDes') }}
-@endsection
+@section('title', __('Show APBDes'))
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> {{ __('Show APBDes') }}</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('apbdes.index') }}"> {{ __('Back') }}</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('Name') }}</strong>
-                {{ $apbdes->name }} <!-- Ganti $role menjadi $apbdes -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ __('Detail APBDes') }}</strong>
+                </div>
+                <div class="card-body">
+                    <p><strong>{{ __('Desa') }}:</strong> {{ $apbdes->desa->name }}</p>
+                    <p><strong>{{ __('Tahun') }}:</strong> {{ $apbdes->tahun }}</p>
+                    <p><strong>{{ __('Total Anggaran') }}:</strong> {{ number_format($apbdes->total_anggaran, 0, ',', '.') }}</p>
+                    <p><strong>{{ __('Status Persetujuan') }}:</strong> {{ ucfirst($apbdes->status_persetujuan) }}</p>
+                </div>
             </div>
         </div>
     </div>

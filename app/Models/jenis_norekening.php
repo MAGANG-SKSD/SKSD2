@@ -10,8 +10,9 @@ class Jenis_Norekening extends Model
     protected $table = "jenis_norekening";
     protected $guarded = [];
 
-    public function kelompok_norekening()
+    // Relasi ke Detail Norekening
+    public function detail_norekenings()
     {
-        return $this->hasMany('App\models\kelompok_norekening');
+        return $this->hasMany(Detail_Norekening::class);
     }
 }

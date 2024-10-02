@@ -20,6 +20,8 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
+use App\Http\Controllers\LaporanController; // Pastikan untuk mengimpor controller yang sesuai
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -232,30 +234,23 @@ Route::resource('sp2ds', Sp2dController::class);
 // });
 // Route untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
+Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
+Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
-// Rute untuk halaman APBDes
-Route::get('apbdes', [AnggaranController::class, 'index'])->name('apbdes.index');
-Route::get('/apbdes/anggaran', [ApbdesController::class, 'index'])->name('apbdes.anggaran');
-Route::get('/apbdes/anggaran', [AnggaranController::class, 'index'])->name('apbdes.anggaran');
-Route::get('/apbdes/anggaran/create', [AnggaranController::class, 'create'])->name('anggaran.create');
-Route::post('/apbdes/anggaran', [AnggaranController::class, 'store'])->name('anggaran.store');
-Route::get('/apbdes/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('anggaran.edit');
-Route::put('/apbdes/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
-Route::delete('/apbdes/anggaran/{id}', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
 
-// Rute untuk Anggaran (menggunakan Route::resource untuk CRUD)
-Route::resource('apbdes/anggaran', AnggaranController::class)->names([
-    'index' => 'apbdes.anggaran.index',
-    'create' => 'apbdes.anggaran.create',
-    'store' => 'apbdes.anggaran.store',
-    'edit' => 'apbdes.anggaran.edit',
-    'update' => 'apbdes.anggaran.update',
-    'destroy' => 'apbdes.anggaran.destroy',
-]);
 Route::resource('anggaran', AnggaranController::class);
+
+Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
+Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
+Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');
+
+// Route::get('/anggaran/detail_norekening', [AnggaranController::class, 'getDetailNorekening'])->name('anggaran.detail_norekening');
+// Route::get('/create', [AnggaranController::class, 'create'])->name('anggaran.create');
+
 Route::get('/verifikasi', [AnggaranController::class, 'verifikasi'])->name('apbdes.verifikasi');
 Route::post('/verifikasi/{id}/toggle', [AnggaranController::class, 'toggleVerifikasi'])->name('verifikasi.toggle');
 Route::get('/realisasi', [AnggaranController::class, 'realisasi'])->name('apbdes.realisasi');
+
 
 // Rute untuk mengupdate nilai realisasi
 Route::put('/anggaran/realisasi/{id}', [AnggaranController::class, 'updateRealisasi'])->name('anggaran.realisasi.update');
@@ -748,3 +743,51 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 // Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
+
+//Route::resource('sp2ds', SP2DSController::class);
+
+Route::get('/sp2d', [SP2DController::class, 'index'])->name('surat_perintah.index');
+Route::get('/sp2d/berita-acara', [SP2DController::class, 'beritaAcara'])->name('berita_acara.index');
+Route::get('/sp2d/berita-desa', [SP2DController::class, 'beritaDesa'])->name('berita_desa.index');
+Route::get('/sp2d/laporan', [SP2DController::class, 'laporan'])->name('laporan.index');
+Route::get('/sp2d/lembaran-desa', [SP2DController::class, 'lembaranDesa'])->name('lembaran_desa.index');
+Route::get('/sp2d/notulen', [SP2DController::class, 'notulen'])->name('notulen.index');
+Route::get('/sp2d/rekomendasi', [SP2DController::class, 'rekomendasi'])->name('rekomendasi.index');
+Route::get('/sp2d/surat-pengantar', [SP2DController::class, 'suratPengantar'])->name('surat_pengantar.index');
+
+
+
+Route::prefix('laporan')->group(function () {
+    Route::get('/', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/create', [LaporanController::class, 'create'])->name('laporan.create');
+    Route::post('/', [LaporanController::class, 'store'])->name('laporan.store');
+    Route::get('/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+    Route::put('/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+    Route::delete('/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
+
+
+    Route::resource('sp2ds/surat-perintah', App\Http\Controllers\SuratPerintahController::class);
+    Route::get('sp2ds/surat-perintah', [Sp2dController::class, 'suratPerintah'])->name('sp2ds.surat-perintah');
+
+
+// Rute untuk mengelola surat perintah
+Route::get('sp2ds/surat-perintah', [Sp2dController::class, 'suratPerintah'])->name('sp2ds.surat-perintah');
+
+// Rute untuk membuat surat perintah (tambahkan ini jika belum ada)
+Route::get('sp2ds/surat-perintah/create', [SuratPerintahController::class, 'create'])->name('surat_perintah.create');
+
+// Rute untuk menyimpan surat perintah
+Route::post('sp2ds/surat-perintah', [SuratPerintahController::class, 'store'])->name('surat_perintah.store');
+
+// Rute untuk mengedit surat perintah
+Route::get('sp2ds/surat-perintah/{id}/edit', [SuratPerintahController::class, 'edit'])->name('surat_perintah.edit');
+
+// Rute untuk memperbarui surat perintah
+Route::put('sp2ds/surat-perintah/{id}', [SuratPerintahController::class, 'update'])->name('surat_perintah.update');
+
+// Rute untuk menghapus surat perintah
+Route::delete('sp2ds/surat-perintah/{id}', [SuratPerintahController::class, 'destroy'])->name('surat_perintah.destroy');
+
+
+});

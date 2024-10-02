@@ -11,7 +11,6 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder;
 
-
 class DesaDataTable extends DataTable
 {
     /**
@@ -26,7 +25,7 @@ class DesaDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function (Desa $desa) {
                 return view('desas.action', compact('desa'));
-            });    
+            });
     }
 
     /**

@@ -8,130 +8,104 @@
     <!-- [ breadcrumb ] end -->
     <!-- [ Main Content ] start -->
     <div class="row">
-        <!-- [ sample-page ] start -->
-        <!-- analytic card start -->
-        @can('manage-user')
-        <div class="col-xl-3 col-md-12">
-            <a href="users">
-                <div class="card comp-card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="m-b-0 text-muted">{{ __('Total Users') }}</h6>
-                                <h3 class="m-b-5">{{ $user }}</h3>
-                            </div>
-                            <div class="col-auto">
-                                <i class="ti ti-users bg-primary text-white d-block"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <div class="col-12">
+            <h2 class="text-center mb-4">{{ __('Selamat Datang di Dashboard') }}</h2>
         </div>
-        @endcan
-        @can('manage-role')
-        <div class="col-xl-3 col-md-12">
-            <a href="roles">
-                <div class="card comp-card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="m-b-0 text-muted">{{ __('Total Role') }}</h6>
-                                <h3 class="m-b-5">{{ $role }}</h3>
-                            </div>
-                            <div class="col-auto">
-                                <i class="ti ti-key bg-info text-white d-block"></i>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+    <div class="row">
+        <!-- analytic cards start -->
+        <div class="col-xl-3 col-md-6">
+            @can('manage-user')
+            <div class="card comp-card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">{{ __('Total Users') }}</h6>
+                    <h3>{{ $user }}</h3>
+                    <a href="users" class="btn btn-primary">{{ __('View Users') }}</a>
                 </div>
-            </a>
-        </div>
-        @endcan
-        @can('manage-module')
-        <div class="col-xl-3 col-md-12">
-            <a href="modules">
-                <div class="card comp-card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="m-b-0 text-muted">{{ __('Total Module') }}</h6>
-                                <h3 class="m-b-5">{{ $modual }}</h3>
-                            </div>
-                            <div class="col-auto">
-                                <i class="ti ti-users bg-success text-white d-block"></i>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-footer bg-primary text-white">
+                    <i class="ti ti-users"></i>
                 </div>
-            </a>
+            </div>
+            @endcan
         </div>
-        @endcan
-        @can('manage-language')
-        <div class="col-xl-3 col-md-12">
-            <a href="language">
-                <div class="card comp-card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="m-b-0 text-muted">{{ __('Total Languages') }}</h6>
-                                <h3 class="m-b-5">{{ $languages }}</h3>
-                            </div>
-                            <div class="col-auto">
-                                <i class="ti ti-world bg-danger text-white d-block"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endcan
 
-        <!-- project-ticket end -->
+        <div class="col-xl-3 col-md-6">
+            @can('manage-role')
+            <div class="card comp-card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">{{ __('Total Role') }}</h6>
+                    <h3>{{ $role }}</h3>
+                    <a href="roles" class="btn btn-info">{{ __('View Roles') }}</a>
+                </div>
+                <div class="card-footer bg-info text-white">
+                    <i class="ti ti-key"></i>
+                </div>
+            </div>
+            @endcan
+        </div>
 
-        {{-- <div class="row"> --}}
-        <div class="col-lg-12 ">
+        <div class="col-xl-3 col-md-6">
+            @can('manage-module')
+            <div class="card comp-card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">{{ __('Total Module') }}</h6>
+                    <h3>{{ $modual }}</h3>
+                    <a href="modules" class="btn btn-success">{{ __('View Modules') }}</a>
+                </div>
+                <div class="card-footer bg-success text-white">
+                    <i class="ti ti-book"></i>
+                </div>
+            </div>
+            @endcan
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            @can('manage-language')
+            <div class="card comp-card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">{{ __('Total Languages') }}</h6>
+                    <h3>{{ $languages }}</h3>
+                    <a href="language" class="btn btn-danger">{{ __('View Languages') }}</a>
+                </div>
+                <div class="card-footer bg-danger text-white">
+                    <i class="ti ti-world"></i>
+                </div>
+            </div>
+            @endcan
+        </div>
+
+        <!-- Chart Section -->
+        <div class="col-lg-12 mt-4">
             @role('admin')
             <div class="card">
                 <div class="card-body">
+                    <h4 class="card-title mb-4">{{ __('User Statistics') }}</h4>
                     <div class="row">
                         <div class="col-sm-5">
-                            <h4 class="card-title mb-0">{{ 'Users' }}</h4>
-                        </div>
+                            <div class="btn-group btn-group-toggle" role="group" aria-label="User Stats Toggle">
+                                <input type="radio" class="btn-check" id="option1" name="options" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="option1">{{ __('Month') }}</label>
 
-                        <div class="col-sm-7 d-none d-md-block">
-
-                            <div class="btn-group btn-group-toggle float-end mr-3" role="group" data-toggle="buttons">
-                                <label class="btn btn-light-primary active" for="option1" id="option1" >
-                                    <input id="option1" type="radio" class="btn-ckeck" name="options" autocomplete="off" checked="">
-                                    {{ __('Month') }}
-                                </label>
-                                <label class="btn btn-light-primary" for="option2" id="option2">
-                                    <input id="option2" type="radio" class="btn-ckeck" name="options" autocomplete="off"> {{ __('Year') }}
-                                </label>
+                                <input type="radio" class="btn-check" id="option2" name="options" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="option2">{{ __('Year') }}</label>
                             </div>
-
                         </div>
                     </div>
-                    <div class="c-chart-wrapper chartbtn">
+                    <div class="c-chart-wrapper">
                         <canvas class="chart" id="main-chart" height="300"></canvas>
                     </div>
                 </div>
             </div>
             @endrole
         </div>
-
     </div>
     <!-- [ Main Content ] end -->
-    </div>
-    </div>
-
 @endsection
-@push('style')
-    {{--  @include('layouts.includes.datatable_css')  --}}
-    {{--  <link href="{{ asset('css/custom.css') }}" rel="stylesheet">  --}}
-@endpush
 
+@push('style')
+    {{-- Custom CSS --}}
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+@endpush
 
 @section('javascript')
 @role('admin')
@@ -146,12 +120,12 @@
         $(document).on("click", "#option1", function() {
             getChartData('month');
         });
+        
         $(document).ready(function() {
             getChartData('month');
-        })
+        });
 
         function getChartData(type) {
-
             $.ajax({
                 url: "{{ route('get.chart.data') }}",
                 type: 'POST',
@@ -159,11 +133,10 @@
                     type: type,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
-
                 success: function(result) {
-                    mainChart.data.labels = result.lable;
+                    mainChart.data.labels = result.label;
                     mainChart.data.datasets[0].data = result.value;
-                    mainChart.update()
+                    mainChart.update();
                 },
                 error: function(data) {
                     console.log(data.responseJSON);

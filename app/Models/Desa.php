@@ -23,6 +23,8 @@ class Desa extends Model
     ];
 
     protected $primaryKey = 'desa_id'; // Set primary key if different from 'id'
+    public $incrementing = true;
+    protected $keyType = 'int'; 
     public $timestamps = false;
 
     // Optionally, specify the date fields for soft deletes
