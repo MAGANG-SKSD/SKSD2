@@ -172,10 +172,10 @@ $settings = Utility::settings();
                         </a>
                     </li>
                 @endcan --}}
-                <li class="dash-item dash-hasmenu {{ request()->is('sp2ds*') ? 'active' : '' }}">
-                        <a class="dash-link" href="{{ route('sp2ds.index') }}">
+                <li class="dash-item dash-hasmenu {{ request()->is('surat_perintah*') ? 'active' : '' }}">
+                        <a class="dash-link" href="{{ route('surat_perintah.index') }}">
                             <span class="dash-micon"><i class="ti ti-folder"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('SP2D') }}</span>
+                            <span class="dash-mtext custom-weight">{{ __('Kelola Surat') }}</span>
                         </a>
                     </li>
             </ul>

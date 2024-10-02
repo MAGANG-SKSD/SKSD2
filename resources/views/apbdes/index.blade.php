@@ -14,6 +14,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> {{ __('APBDes') }}
+                </div>
                 <div class="card-body">
                     <h2 class="text-center">{{ __('Daftar Anggaran APBDes ') . request()->tahun }}</h2>
                     <div class="text-center">

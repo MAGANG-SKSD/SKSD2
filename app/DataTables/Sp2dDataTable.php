@@ -82,6 +82,15 @@ class Sp2dDataTable extends DataTable
             'nomor_sp2d' => ['title' => 'SP2D Number'],
             'tanggal_sp2d' => ['title' => 'SP2D Date'],
             'jumlah_dana' => ['title' => 'Amount'],
+            'laporan' => ['title' => 'Laporan'],
+            'rekomendasi' => ['title' => 'Rekomendasi'],
+            'surat_pengantar' => ['title' => 'Surat Pengantar'],
+            'lembaran_desa' => ['title' => 'Lembaran Desa'],
+            'berita_desa' => ['title' => 'Berita Desa'],
+            'berita_acara' => ['title' => 'Berita Acara'],
+            'notulen' => ['title' => 'Notulen'],
+            'daftar_hadir_pertemuan' => ['title' => 'Daftar Hadir Pertemuan Rapat'],
+            'daftar_hadir' => ['title' => 'Daftar Hadir'],
         ];
     }
 

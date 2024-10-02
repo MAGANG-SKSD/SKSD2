@@ -208,7 +208,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Pemanfaatan Lapangan/Prasarana Olah raga Milik Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41290,
+            'id'                        => 41299,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Aset Lain-Lain'
@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Swadaya, partisipasi dan gotong royong'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41390,
+            'id'                        => 41399,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Swadaya, partisipasi dan gotong royon Lain Lain'
@@ -238,7 +238,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Hasil Pungutan Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 41490,
+            'id'                        => 41499,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 41,
             'nama'                      => 'Pendapatan Lain Lain'
@@ -280,7 +280,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Bantuan Keuangan dari APBD Provinsi'
         ]);
         Detail_Norekening::create([
-            'id'                        => 42490,
+            'id'                        => 42499,
             'jenis_norekening_id'         => 4,
             'kelompok_norekening_id'=> 42,
             'nama'                      => 'Bantuan Lain Lain'
@@ -358,7 +358,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51190,
+            'id'                        => 51199,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Penerimaan Lain Perangkat Desa yang sah'
@@ -370,13 +370,13 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Penghasilan Tetap dan Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51202,
+            'id'                        => 51201,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Tunjangan Perangkat Desa'
         ]);
         Detail_Norekening::create([
-            'id'                        => 51290,
+            'id'                        => 51299,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 51,
             'nama'                      => 'Penerimaan Lain Perangkat Desa yang sah'
@@ -508,7 +508,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Belanja Pupuk/Obat-Obatan Pertanian'
         ]);
         Detail_Norekening::create([
-            'id'                        => 52190,
+            'id'                        => 52199,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 52,
             'nama'                      => 'Belanja Barang Perlengkapan Lainnya'
@@ -550,7 +550,7 @@ class DatabaseSeeder extends Seeder
             'nama'                      => 'Belanja Jasa Honorarium Petugas'
         ]);
         Detail_Norekening::create([
-            'id'                        => 52290,
+            'id'                        => 52299,
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 52,
             'nama'                      => 'Belanja Jasa Honorarium Lainnya'
@@ -584,6 +584,588 @@ class DatabaseSeeder extends Seeder
             'jenis_norekening_id'         => 5,
             'kelompok_norekening_id'=> 52,
             'nama'                      => 'Belanja Jasa Sewa'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52401,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Sewa Bangunan/Gedung/Ruang'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52402,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Sewa Peralatan/Perlengkapan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52403,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Sewa Sarana Mobilitas'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52499,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Sewa Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 525,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Operasional Perkantoran'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52501,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Langganan Listrik'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52502,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Langganan Air Bersih'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52503,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Langganan Majalah/Surat Kabar'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52504,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Langganan Telepon'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52505,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Langganan Internet'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52506,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Kurir/Pos/Giro'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52507,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Jasa Perpanjangan Ijin/Pajak'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52599,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Operasional Perkantoran Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 526,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52601,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Mesin dan Peralatan Berat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52602,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Kendaraan Bermotor'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52603,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52604,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Bangunan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52605,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Jalan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52606,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Jembatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52607,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Irigasi/Saluran Sungai/Embung/Air Bersih, jaringan Air Limbah, Persampahan, dll'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52608,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Jaringan dan Instalasi (Listrik, Telepon, Internet, Komunikasi, dll'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52699,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Pemeliharaan Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 527,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Barang Dan Jasa yang Diserahkan Kepada Masyarakat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52701,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Bahan Perlengkapan yang Diserahkan Ke Masyarakat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52702,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Bantuan Mesin/Kendaraaan bermotor/Peralatan yang diserahkan ke masyarakat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52703,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Bantuan Bangunan yang Diserahkan ke Masyarakat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52704,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Beasiswa Berprestasi/Masyarakat Miskin'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52705,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Bantuan Bibit Tanaman/Hewan/Ikan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 52799,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 52,
+            'nama'                      => 'Belanja Barang dan Jasa yang Diserahkan kepada Masyarakat Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 531,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pengadaan Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53101,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pembebasan/Pembelian Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53102,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pembayaran Honorarium Tim Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53103,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pengukuran dan Pembuatan Sertifikat Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53104,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pengukuran dan Pematangan Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53105,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Perjalanan Pengadaan Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53199,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pengadaan Tanah Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 532,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan, Mesin, dan Alat Berat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53201,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melakukan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53202,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Elektronik dan Alat Studio'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53203,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Komputer'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53204,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Mebeulair dan Aksesori Ruangan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53205,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Dapur'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53206,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Alat Ukur/Rambu-Rambu'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53207,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Rambu-Rambu/Patok Tanah'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53208,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Khusus Kesehatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53209,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan Khusus Pertanian/Perikanan/Peternakan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53210,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Mesin'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53211,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Pengadaan Alat-alat Berat'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53299,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Peralatan, Mesin, dan Alat Berat Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 533,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Kendaraan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53301,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melakukan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53302,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Kendaraan Darat Bermotor'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53303,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Angkutan Darat Tidak Bermotor'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53304,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Kendaraan Air Bermotor'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53305,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Kendaraan Air Tidak Bermotor'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53399,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Kendaraan Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 534,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Gedung, Bangunan dan Taman'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53401,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melaksanakan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53402,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Upah Tenaga Kerja'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53403,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Bahan Baku'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53404,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Sewa Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 535,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Jalan/Prasarana Jalan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53501,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melaksanakan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53502,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Upah Tenaga Kerja'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53503,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Bahan Baku'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53504,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Sewa Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 536,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Jembatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53601,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melaksanakan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53602,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Upah Tenaga Kerja'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53603,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Bahan Baku'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53604,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Sewa Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 537,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Irigasi/Embung/Air Sungai/Drainase/Air Limbah/Persampahan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53701,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melaksanakan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53702,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Upah Tenaga Kerja'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53703,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Bahan Baku'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53704,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Sewa Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 538,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Jaringan/Instalasi'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53801,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Honor Tim yang Melaksanakan Kegiatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53802,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Upah Tenaga Kerja'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53803,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Bahan Baku'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53804,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Sewa Peralatan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 539,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal LAINNYA'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53901,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Khusus Pendidikan dan Perpustakaan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53902,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal khusus Olahraga'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53903,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal khusus Kesenian/Kebudayaan/Keagamaan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53904,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Tumbuhan/Tanaman'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53905,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Hewan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 53999,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 53,
+            'nama'                      => 'Belanja Modal Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 541,
+            'jenis_norekening_id'         => 5,
+            'kelompok_norekening_id'=> 54,
+            'nama'                      => 'Belanja Tak Terduga'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 611,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 61,
+            'nama'                      => 'SILPA Tahun Sebeumnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 612,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 61,
+            'nama'                      => 'Pencairan Dana Cadangan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 613,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 61,
+            'nama'                      => 'Hasil Penjualan Kekayaan Desa yang Dipisahkan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 619,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 61,
+            'nama'                      => 'Penerimaan Pembiayaan Lainnya'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 621,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 62,
+            'nama'                      => 'Pembentukan Dana Cadangan'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 622,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 62,
+            'nama'                      => 'Penyertaan Modal Desa'
+        ]);
+        Detail_Norekening::create([
+            'id'                        => 629,
+            'jenis_norekening_id'         => 6,
+            'kelompok_norekening_id'=> 62,
+            'nama'                      => 'Pengeluaran Pembiayaan Lainnya'
         ]);
     }
 }
