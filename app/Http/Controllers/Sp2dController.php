@@ -159,9 +159,9 @@ class Sp2dController extends AppBaseController
 
     
     // Halaman Tambahan Sesuai Tombol
-    public function suratPerintah()
+    public function surat()
     {
-        return view('sp2ds.surat_perintah');
+        return view('sp2ds.surat');
     }
 
     public function beritaAcara()
