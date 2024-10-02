@@ -15,13 +15,14 @@ class AnggaranDataTable extends DataTable
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
-    {
-        return datatables()
-            ->eloquent($query)
-            ->addColumn('action', function (Anggaran $anggaran) {
-                return view('realisasi_anggarans.action', compact('anggaran'));
-            });    
-    }
+{
+    return datatables()
+        ->eloquent($query)
+        ->addColumn('status', function (Anggaran $anggaran) {
+            return $anggaran->status ? 'Aktif' : 'Tidak Aktif';
+        });
+}
+
 
     /**
      * Get query source of dataTable.
@@ -87,20 +88,21 @@ class AnggaranDataTable extends DataTable
      * @return array
      */
     protected function getColumns()
-    {
-        return [
-            Column::make('id'),
-            Column::make('desa_id'),
-            Column::make('tahun'),
-            Column::make('belanja_anggaran'),
-            Column::make('dana_tidak_terpakai'),
-            Column::make('laporan'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center'),
-        ];
-    }
+{
+    return [
+        Column::make('id'),
+        Column::make('desa_id'),
+        Column::make('tahun'),
+        Column::make('belanja_anggaran'),
+        Column::make('dana_tidak_terpakai'),
+        Column::make('laporan'),
+        Column::make('status')
+            ->title('Status')  // Set judul kolom menjadi "Status"
+            ->searchable(true)
+            ->orderable(true),
+    ];
+}
+
 
     /**
      * Get filename for export.

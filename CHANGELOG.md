@@ -108,3 +108,9 @@
 #### [(2024-10-2)]
 
 -   Editing function for update profile desa (finish), Make index for desa list and make function to create desa
+
+-   membuat tampilan edit anggaran ketika data sudah masuk dapat di update
+
+-   membuat fungsi surat crud 
+
+-   membuat file migration
