@@ -76,3 +76,41 @@
 -   Try to modify column status for realisasi anggaran toggle to button
 
 -   Add tombol create anggaran dan membuat view anggaran
+
+#### [(2024-09-26)]
+
+-   Try to fix realisasi anggaran status, and edit function in desa
+
+-   Add view APBDes anggaran (done)
+
+-   Membuat fitur verifikasi sehingga dapat berfungsi dengan seharusnya
+
+-   Input data detail rekening to database dan menyesuaikan view anggaran
+
+#### [(2024-09-27)]
+
+-   Fix function desa and make view for profile desa
+
+-   make realisasi fitur hingga terimplemen tasikan dengan sempurna
+
+-   Membuat ulang fungsi sp2d ke kelola surat dan membuat crud untuk laporan
+
+-   Make CRUD in anggaran (on prosses)
+
+#### [(2024-09-30)]
+
+-   modify view for profile desa (on progress)
+
+#### [(2024-10-1)]
+
+-   Modify view for profile desa (finish) and editing function for update profile desa
+
+#### [(2024-10-2)]
+
+-   Editing function for update profile desa (finish), Make index for desa list and make function to create desa
+
+-   membuat tampilan edit anggaran ketika data sudah masuk dapat di update
+
+-   membuat fungsi surat crud 
+
+-   membuat file migration

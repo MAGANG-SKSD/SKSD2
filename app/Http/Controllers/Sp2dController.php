@@ -55,6 +55,7 @@ class Sp2dController extends AppBaseController
         app()->setLocale('en'); // Set locale to English for Sp2d
         $input = $request->all();
 
+        // Tambahkan field baru ke input
         $sp2d = $this->sp2dRepository->create($input);
 
         Flash::success(__('Sp2d saved successfully.'));
@@ -123,6 +124,7 @@ class Sp2dController extends AppBaseController
             return redirect(route('sp2ds.index'));
         }
 
+        // Tambahkan field baru ke input
         $sp2d = $this->sp2dRepository->update($request->all(), $id);
 
         Flash::success(__('Sp2d updated successfully.'));
@@ -153,5 +155,47 @@ class Sp2dController extends AppBaseController
         Flash::success(__('Sp2d deleted successfully.'));
 
         return redirect(route('sp2ds.index'));
+    }
+
+    
+    // Halaman Tambahan Sesuai Tombol
+    public function surat()
+    {
+        return view('sp2ds.surat');
+    }
+
+    public function beritaAcara()
+    {
+        return view('sp2ds.berita_acara');
+    }
+
+    public function beritaDesa()
+    {
+        return view('sp2ds.berita_desa');
+    }
+
+    public function laporan()
+    {
+        return view('sp2ds.laporan');
+    }
+
+    public function lembaranDesa()
+    {
+        return view('sp2ds.lembaran_desa');
+    }
+
+    public function notulen()
+    {
+        return view('sp2ds.notulen');
+    }
+
+    public function rekomendasi()
+    {
+        return view('sp2ds.rekomendasi');
+    }
+
+    public function suratPengantar()
+    {
+        return view('sp2ds.surat_pengantar');
     }
 }

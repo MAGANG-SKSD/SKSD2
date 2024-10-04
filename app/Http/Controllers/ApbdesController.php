@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Detail_Norekening;
 use App\Models\Jenis_Norekening;
 
-class ApbdesController extends Controller
+class APBDesController extends Controller
 {
     public function index(Request $request)
     {

@@ -1,5 +1,9 @@
 <!-- Nama Desa Field -->
 <div class="form-group col-sm-6">
+    {!! Form::label('desa_id', 'Desa id:') !!}
+    {!! Form::text('desa_id', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group col-sm-6">
     {!! Form::label('nama_desa', 'Nama Desa:') !!}
     {!! Form::text('nama_desa', null, ['class' => 'form-control']) !!}
 </div>

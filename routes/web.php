@@ -21,6 +21,8 @@ use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
 use App\Models\Anggaran;
+use App\Http\Controllers\LaporanController; 
+use App\Http\Controllers\SuratController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,14 @@ use App\Models\Anggaran;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// File: routes/web.php
 
+Route::get('/', function () {
+    return redirect('/home');
+});
+
+// Tampilan awal pengguna di /home
+Route::get('/home', [ViewController::class, 'index'])->name('home');
 
 Auth::routes();
 
@@ -262,7 +271,6 @@ Route::put('/anggaran/realisasi/{id}', [AnggaranController::class, 'updateRealis
 
 // Rute untuk toggle status realisasi
 Route::post('/realisasi/{id}/toggle', [AnggaranController::class, 'toggleStatus'])->name('status.toggle');
-// Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
 //         Route::get('danas', [DanaController::class, 'index'])->name('danas.index');
@@ -281,10 +289,12 @@ Route::group(
         Route::get('desas', [DesaController::class, 'index'])->name('desas.index');
         Route::get('desas/create', [DesaController::class, 'create'])->name('desas.create');
         Route::post('desas/store', [DesaController::class, 'store'])->name('desas.store');
-        Route::get('desas/{id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
-        Route::put('desas/{id}', [DesaController::class, 'update'])->name('desas.update');
-        Route::delete('desas/{id}', [DesaController::class, 'destroy'])->name('desas.destroy');
-        Route::get('desas/{id}', [DesaController::class, 'show'])->name('desas.show');
+        Route::get('desas/{desa_id}/edit', [DesaController::class, 'edit'])->name('desas.edit');
+        Route::put('desas/{desa_id}', [DesaController::class, 'update'])->name('desas.update');
+        Route::delete('desas/{desa_id}', [DesaController::class, 'destroy'])->name('desas.destroy');
+        Route::get('desas/{desa_id}', [DesaController::class, 'show'])->name('desas.show');
+
+        Route::get('desas/{desa_id}/profile', [DesaController::class, 'profile'])->name('desas.profile');
     }
 );
 
@@ -327,387 +337,6 @@ Route::group(
 //     }
 // );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('anggaranKas', App\Http\Controllers\AnggaranKasController::class);
 
 
@@ -746,3 +375,38 @@ Route::resource('sp2ds', App\Http\Controllers\Sp2dController::class);
 
 
 // Route::resource('detailNorekenings', App\Http\Controllers\detail_norekeningController::class);
+
+//Route::resource('sp2ds', SP2DSController::class);
+
+Route::get('/sp2d', [SP2DController::class, 'index'])->name('surat_perintah.index');
+Route::get('/sp2d/berita-acara', [SP2DController::class, 'beritaAcara'])->name('berita_acara.index');
+Route::get('/sp2d/berita-desa', [SP2DController::class, 'beritaDesa'])->name('berita_desa.index');
+Route::get('/sp2d/laporan', [SP2DController::class, 'laporan'])->name('laporan.index');
+Route::get('/sp2d/lembaran-desa', [SP2DController::class, 'lembaranDesa'])->name('lembaran_desa.index');
+Route::get('/sp2d/notulen', [SP2DController::class, 'notulen'])->name('notulen.index');
+Route::get('/sp2d/rekomendasi', [SP2DController::class, 'rekomendasi'])->name('rekomendasi.index');
+Route::get('/sp2d/surat-pengantar', [SP2DController::class, 'suratPengantar'])->name('surat_pengantar.index');
+Route::get('/sp2d/surat', [SP2DController::class, 'surat'])->name('surat.index');
+
+
+
+Route::prefix('laporan')->group(function () {
+    Route::get('/', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/create', [LaporanController::class, 'create'])->name('laporan.create');
+    Route::post('/', [LaporanController::class, 'store'])->name('laporan.store');
+    Route::get('/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+    Route::put('/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+    Route::delete('/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');  
+});
+
+Route::prefix('surat')->group(function () {
+    Route::get('/', [SuratController::class, 'index'])->name('surat.index');
+    Route::get('/create', [SuratController::class, 'create'])->name('surat.create');
+    Route::post('/', [SuratController::class, 'store'])->name('surat.store');
+    Route::get('/{surat}', [SuratController::class, 'show'])->name('surat.show');
+    Route::get('/{surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
+    Route::put('/{surat}', [SuratController::class, 'update'])->name('surat.update');
+    Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat.destroy');
+});
+Route::resource('pencairan_dana', PencairanDanaController::class);
