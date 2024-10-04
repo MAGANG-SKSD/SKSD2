@@ -15,16 +15,20 @@
     <table class="table table-bordered" id="suratTable">
         <thead>
             <tr>
-                <th>Judul</th>
-                <th>Tanggal</th>
+                <th>Nomor SP2D</th>
+                <th>Tanggal SP2D</th>
+                <th>Nama Kegiatan</th>
+                <th>Nilai SP2D</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach($surats as $surat)
                 <tr>
-                    <td>{{ $surat->judul }}</td>
-                    <td>{{ $surat->tanggal }}</td>
+                    <td>{{ $surat->nomor_sp2d }}</td>
+                    <td>{{ $surat->tanggal_sp2d }}</td>
+                    <td>{{ $surat->nama_kegiatan }}</td>
+                    <td>{{ number_format($surat->nilai_sp2d, 2, ',', '.') }}</td>
                     <td>
                         <a href="{{ route('surat.show', $surat->id) }}" class="btn btn-info btn-sm">
                             <i class="fa fa-eye"></i> Lihat

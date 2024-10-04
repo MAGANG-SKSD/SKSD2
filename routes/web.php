@@ -403,4 +403,3 @@ Route::prefix('surat')->group(function () {
     Route::put('/{surat}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat.destroy');
 });
-Route::resource('pencairan_dana', PencairanDanaController::class);
