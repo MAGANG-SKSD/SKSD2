@@ -78,6 +78,9 @@ Route::get('profile', [UserController::class, 'profile'])->name('profile')->midd
 
 Route::post('edit-profile', [UserController::class, 'editprofile'])->name('update.profile')->middleware(['auth', 'XSS']);
 
+Route::get('/user/profile-desa', [UserController::class, 'showProfile'])->name('user.profile.desa')->middleware(['auth', 'XSS']);
+
+
 Route::group(
     ['middleware' => ['auth', 'XSS']],
     function () {
