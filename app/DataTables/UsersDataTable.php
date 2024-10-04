@@ -24,6 +24,9 @@ class UsersDataTable extends DataTable
             ->editColumn('role', function (User $user) {
                 return (count($user->roles))?$user->roles->first()->name:'-';
             })
+            ->editColumn('desa', function (User $user) { // Mengambil nama desa
+            return $user->desa ? $user->desa->nama_desa : '-'; // Memeriksa apakah ada desa yang terkait
+            })
             ->addColumn('action', function (User $user) {
                 return view('users.action', compact('user'));
             });
@@ -32,8 +35,12 @@ class UsersDataTable extends DataTable
 
     public function query(User $model)
     {
-        return $model->newQuery()->where('id','!=',1)->orderBy('id', 'ASC');
+        return $model->with('desa') // Eager load desa
+            ->newQuery()
+            ->where('id', '!=', 1)
+            ->orderBy('id', 'ASC');
     }
+
 
 
     public function html()
@@ -119,6 +126,7 @@ class UsersDataTable extends DataTable
             Column::make('name'),
             Column::make('email'),
             Column::make('role')->searchable(false)->orderable(false),
+            Column::make('desa')->title('Desa')->searchable(true)->orderable(false),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

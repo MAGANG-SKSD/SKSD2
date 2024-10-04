@@ -35,6 +35,10 @@
                             {{ Form::label('role', __('Role'), ['class' => 'col-form-label']) }}
                             {!! Form::select('roles', $roles, $userRole, ['class' => 'form-control', 'id' => 'choices-single-default','data-trigger']) !!}
                         </div>
+                        <div class="form-group">
+                            {{ Form::label('desa_id', __('Desa'), ['class' => 'col-form-label']) }}
+                            {!! Form::select('desa_id', $desas, $user->desa_id, ['class' => 'form-control', 'id' => 'choices-single-default', 'data-trigger']) !!}
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="float-end">

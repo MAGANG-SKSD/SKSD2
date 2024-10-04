@@ -111,6 +111,14 @@
 
 -   membuat tampilan edit anggaran ketika data sudah masuk dapat di update
 
--   membuat fungsi surat crud 
+-   membuat fungsi surat crud
 
 -   membuat file migration
+
+#### [(2024-10-3)]
+
+-   Try to make user in profile desa with they own desa
+
+#### [(2024-10-4)]
+
+-   Make each user when they go to the village profile will be directed to their respective village

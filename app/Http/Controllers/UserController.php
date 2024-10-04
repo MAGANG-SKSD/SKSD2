@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use File;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
+use App\Models\Desa; // Pastikan ini ada di bagian atas file
+
 
 
 class UserController extends Controller
@@ -33,13 +35,14 @@ class UserController extends Controller
     public function create()
     {
         if (\Auth::user()->can('create-user')) {
+            $roles = Role::pluck('name', 'name')->all();
+            $desas = Desa::pluck('nama_desa', 'desa_id')->all(); // Ambil data desa
+            return view('users.create', compact('roles', 'desas')); // Kirimkan ke view
+        } else {
+            return redirect()->back()->with('error', 'Permission denied.');
+        }
+    }
 
-        $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
-    } else {
-        return redirect()->back()->with('error', 'Permission denied.');
-    }
-    }
 
 
     public function store(Request $request)
@@ -48,7 +51,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'desa_id' => 'nullable|exists:desas,id',
         ]);
         $role_r = Role::findByName($request->roles);
 
@@ -60,6 +64,7 @@ class UserController extends Controller
                 'confirm_password' => 'required|same:password',
                 'type' => $role_r->name,
                 'created_by' => Auth::user()->id,
+                'desa_id' => $request->desa_id,
             ]
         );
 
@@ -92,7 +97,9 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        $desas = Desa::pluck('nama_desa', 'id')->all();
+
+        return view('users.edit', compact('user', 'roles', 'userRole', 'desas'));
     } else {
         return redirect()->back()->with('error', 'Permission denied.');
     }
@@ -105,8 +112,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-
-            'roles' => 'required'
+            'roles' => 'required',
+            'desa_id' => 'nullable|exists:desas,id',
         ]);
 
         $input = $request->all();
@@ -232,4 +239,17 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', __('Profile successfully updated.'));
     }
+
+    public function showProfile()
+    {
+        $desa = auth()->user()->desa;
+
+        if ($desa) {
+            return redirect()->route('desas.show', ['desa_id' => $desa->desa_id]);
+        } else {
+            return redirect()->back()->with('error', 'Desa tidak ditemukan.');
+        }
+    }
+
+
 }

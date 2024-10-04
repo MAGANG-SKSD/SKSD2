@@ -17,7 +17,7 @@
                     <div class="col-md-4 m-auto">
                         <div class="card ">
                             <div class="card-header">
-                                <h5> {{ __('Create User') }}</h5>
+                                <h5>{{ __('Create User') }}</h5>
                             </div>
                             {!! Form::open(['route' => 'users.store', 'method' => 'POST']) !!}
                             <div class="card-body">
@@ -40,6 +40,10 @@
                                 <div class="form-group ">
                                     {{ Form::label('role', __('Role'),['class' => 'col-form-label']) }}
                                     {!! Form::select('roles', $roles, null, ['class' => 'form-control', 'data-trigger']) !!}
+                                </div>
+                                <div class="form-group ">
+                                    {{ Form::label('desa_id', __('Desa'),['class' => 'col-form-label']) }}
+                                    {!! Form::select('desa_id', $desas, null, ['class' => 'form-control', 'data-trigger']) !!}
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -77,4 +81,3 @@
         });
     </script>
 @endpush
-
