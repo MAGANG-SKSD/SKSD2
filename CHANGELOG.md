@@ -119,6 +119,16 @@
 
 -   Try to make user in profile desa with they own desa
 
+-   edit CRUD manage mail
+
+-   Continuing the function of letters and reports, adjusting the appearance for the view displayed
+
 #### [(2024-10-4)]
 
 -   Make each user when they go to the village profile will be directed to their respective village
+
+-   change the app.scss file for responsive display
+
+-   edit reports and view reports
+
+-   Create edit function and update budget value
