@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h2 class="text-center">Daftar Anggaran untuk Verifikasi</h2>
                     <div class="text-center mb-5">
-                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
+                        <a href="{{ route('anggaran.index') }}" class="btn btn-primary">Anggaran</a>
                         <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
                         <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                     </div>
@@ -29,7 +29,7 @@
                                 <tr>
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('No Rekening') }}</th>
-                                    <th>{{ __('Nama Rekening') }}</th>
+                                    <th>{{ __('Nama Anggaran') }}</th>
                                     <th>{{ __('Keterangan Lainnya') }}</th>
                                     <th>{{ __('Nilai Anggaran') }}</th>
                                     <th>{{ __('Verifikasi') }}</th>

@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h2 class="text-center">{{ __('Daftar Anggaran APBDes Tahun ') . ($tahun_dipilih === 'semua' ? 'Semua' : $tahun_dipilih) }}</h2>
                     <div class="text-center mb-5">
-                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
+                        <a href="{{ route('anggaran.index') }}" class="btn btn-primary">Anggaran</a>
                         <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
                         <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                     </div>
@@ -45,12 +45,13 @@
                                 <tr>
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('Tahun') }}</th>
-                                    <th>{{ __('Nama Rekening') }}</th>
+                                    <th>{{ __('Nama Anggaran') }}</th>
                                     <th>{{ __('Nilai Anggaran') }}</th>
                                     <th>{{ __('Keterangan Lainnya') }}</th>
                                     <th>{{ __('Verifikasi') }}</th>
                                     <th>{{ __('Status') }}</th>
                                     <th>{{ __('Aksi') }}</th>
+                                    <th>{{ __('Edit Nilai Anggaran') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,11 +77,22 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('apbdes.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                             <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <!-- Form untuk update nilai anggaran -->
+                                            <form action="{{ route('anggaran.updateNilai', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="input-group">
+                                                    <input type="number" name="nilai_anggaran" required class="form-control" style="width: 120px;" value="{{ $item->nilai_anggaran }}">
+                                                    <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
