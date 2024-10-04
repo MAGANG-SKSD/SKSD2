@@ -242,12 +242,12 @@ Route::resource('sp2ds', Sp2dController::class);
 // });
 // Route untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
-Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
+
 
 
 Route::resource('anggaran', AnggaranController::class);
-
+Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
+Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
 Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');

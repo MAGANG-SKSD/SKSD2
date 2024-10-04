@@ -142,11 +142,13 @@ class AnggaranController extends Controller
     }
 
     // Fungsi untuk mengedit anggaran
-    public function edit(Anggaran $anggaran)
-    {
-        $detailNorekening = Detail_Norekening::with(['jenis_norekening', 'jenis_norekening.kelompok_norekening'])->get();
-        return view('apbdes.edit', compact('anggaran', 'detailNorekening'));
-    }
+    public function edit($id)
+{
+    $anggaran = Anggaran::findOrFail($id); // Mengambil data anggaran berdasarkan ID
+    $jenis_norekening = JenisNorekening::all(); // Mengambil semua jenis norekening
+    return view('anggaran.edit', compact('anggaran', 'jenis_norekening')); // Menampilkan view edit
+}
+
 
     // Fungsi untuk memperbarui anggaran
     public function update(Request $request, Anggaran $anggaran)
