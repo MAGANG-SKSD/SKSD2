@@ -11,9 +11,20 @@ class APBDesController extends Controller
 {
     public function index(Request $request)
     {
-        $tahun = $request->tahun ?? date('Y');
-        $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
-        return view('apbdes.index', compact('anggaran'));
+        // Mengambil daftar tahun anggaran yang tersedia (distinct)
+    $tahun_anggaran = Anggaran::select('tahun')->distinct()->pluck('tahun');
+
+    // Mendapatkan anggaran sesuai dengan tahun yang dipilih, atau tampilkan semua jika tidak ada tahun yang dipilih
+    $tahun_dipilih = $request->tahun ?? 'semua';
+    
+    if ($tahun_dipilih !== 'semua') {
+        $anggaran = Anggaran::where('tahun', $tahun_dipilih)->paginate(10);
+    } else {
+        $anggaran = Anggaran::paginate(10); // Menampilkan semua anggaran tanpa filter tahun
+    }
+
+    // Mengirimkan data anggaran dan tahun anggaran ke view
+    return view('apbdes.index', compact('anggaran', 'tahun_anggaran', 'tahun_dipilih'));;
     }
     public function create()
     {

@@ -20,7 +20,8 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
-use App\Http\Controllers\LaporanController; // Pastikan untuk mengimpor controller yang sesuai
+use App\Models\Anggaran;
+use App\Http\Controllers\LaporanController; 
 use App\Http\Controllers\SuratController;
 
 /*
@@ -242,15 +243,20 @@ Route::resource('sp2ds', Sp2dController::class);
 // });
 // Route untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
-Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
+// Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
+// Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
 
 Route::resource('anggaran', AnggaranController::class);
+Route::get('anggaran', [AnggaranController::class, 'index'])->name('anggaran.index');
+Route::get('anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('anggaran.edit');
+Route::put('anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
 Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
 Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');
+Route::put('/anggaran/update-nilai/{id}', [AnggaranController::class, 'updateNilai'])->name('anggaran.updateNilai');
+
 
 // Route::get('/anggaran/detail_norekening', [AnggaranController::class, 'getDetailNorekening'])->name('anggaran.detail_norekening');
 // Route::get('/create', [AnggaranController::class, 'create'])->name('anggaran.create');

@@ -16,12 +16,12 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="text-center">Daftar Anggaran untuk Realisasi</h2>
-                    <div class="text-center mb-5"> <!-- Tambahkan margin bottom -->
-                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
+                    <div class="text-center mb-5">
+                        <a href="{{ route('anggaran.index') }}" class="btn btn-primary">Anggaran</a>
                         <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
                         <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                     </div>
-                    <div class="mb-5"> <!-- Tambahkan margin bottom -->
+                    <div class="mb-5">
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm">
                                 <thead>
@@ -88,24 +88,21 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
     <style>
-        /* Menyesuaikan tampilan font */
         table {
-            font-family: Arial, sans-serif; /* Mengubah font tabel */
-            font-size: 14px; /* Ukuran font untuk tabel */
+            font-family: Arial, sans-serif;
+            font-size: 14px;
         }
 
         .table th, .table td {
-            padding: 10px; /* Menyesuaikan padding untuk sel tabel */
+            padding: 10px;
         }
 
-        /* Responsif untuk input dan tombol */
         .table-responsive {
-            overflow-x: auto; /* Mengizinkan scroll horizontal jika diperlukan */
+            overflow-x: auto;
         }
 
-        /* Menambahkan jarak lebih banyak antara tombol dan tabel */
         .mb-5 {
-            margin-bottom: 60px; /* Meningkatkan jarak bawah */
+            margin-bottom: 60px;
         }
     </style>
 @endpush
