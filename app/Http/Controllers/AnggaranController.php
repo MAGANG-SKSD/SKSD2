@@ -48,25 +48,22 @@ class AnggaranController extends Controller
     // Fungsi untuk menampilkan anggaran berdasarkan tahun dan jenis
     public function index(Request $request)
     {
-        // Mengambil tahun dan jenis dari request, jika tidak ada, atur default
-        $tahun = $request->tahun ?? date('Y');
-        $jenis = $request->jenis ?? 'pendapatan'; // Default jenis jika tidak ada
+        // Mengambil daftar tahun anggaran yang tersedia (distinct)
+    $tahun_anggaran = Anggaran::select('tahun')->distinct()->pluck('tahun');
+
+    // Mendapatkan anggaran sesuai dengan tahun yang dipilih, atau tampilkan semua jika tidak ada tahun yang dipilih
+    $tahun_dipilih = $request->tahun ?? 'semua';
     
-        // Ambil data anggaran berdasarkan tahun
-        $anggaran = Anggaran::where('tahun', $tahun)->paginate(10);
-    
-        // Jika Anda ingin memfilter berdasarkan jenis
-        if ($jenis === 'pendapatan') {
-            // Logika untuk mengambil data pendapatan
-        } elseif ($jenis === 'belanja') {
-            // Logika untuk mengambil data belanja
-        } elseif ($jenis === 'pembiayaan') {
-            // Logika untuk mengambil data pembiayaan
-        }
-    
-        // Kembalikan tampilan dengan data anggaran
-        return view('apbdes.index', compact('anggaran'));
+    if ($tahun_dipilih !== 'semua') {
+        $anggaran = Anggaran::where('tahun', $tahun_dipilih)->paginate(10);
+    } else {
+        $anggaran = Anggaran::paginate(10); // Menampilkan semua anggaran tanpa filter tahun
     }
+
+    // Mengirimkan data anggaran dan tahun anggaran ke view
+    return view('apbdes.anggaran', compact('anggaran', 'tahun_anggaran', 'tahun_dipilih'));;
+    }
+
 
     // Fungsi untuk mengelola rincian anggaran
     public function cart(Request $request)
@@ -135,6 +132,16 @@ class AnggaranController extends Controller
         return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil dibuat.');
     }
 
+    public function updateNilai(Request $request, $id)
+    {
+        $anggaran = Anggaran::findOrFail($id);
+        $anggaran->nilai_anggaran = $request->input('nilai_anggaran');
+        $anggaran->save();
+
+        return redirect()->route('apbdes.index')->with('success', 'Nilai anggaran berhasil diperbarui.');
+    }
+
+
     // Fungsi untuk menampilkan detail anggaran berdasarkan id
     public function show($id)
     {
@@ -143,27 +150,42 @@ class AnggaranController extends Controller
 
     // Fungsi untuk mengedit anggaran
     public function edit($id)
-{
-    $anggaran = Anggaran::findOrFail($id); // Mengambil data anggaran berdasarkan ID
-    $jenis_norekening = JenisNorekening::all(); // Mengambil semua jenis norekening
-    return view('anggaran.edit', compact('anggaran', 'jenis_norekening')); // Menampilkan view edit
-}
+    
+    {
+        // Ambil data anggaran berdasarkan ID
+        $anggaran = Anggaran::findOrFail($id);
+
+        // Ambil data yang dibutuhkan seperti jenis norekening dan detail norekening
+        $jenis_norekening = Jenis_Norekening::all();
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)->get();
+
+        // Arahkan ke view 'edit' dengan data yang diperlukan
+        return view('apbdes.edit', compact('anggaran', 'jenis_norekening', 'detail_norekening'));
+    }
 
 
     // Fungsi untuk memperbarui anggaran
-    public function update(Request $request, Anggaran $anggaran)
+    public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'tahun' => ['required', 'numeric', 'min:1900'],
-            'detail_norekening_id' => ['required', 'exists:detail_norekening,id'], // Validasi untuk detail_norekening
-            'nilai_anggaran' => ['required', 'numeric', 'min:0'],
-            'keterangan_lainnya' => ['nullable']
+        $request->validate([
+            'tahun' => 'required|integer',
+            'jenis_norekening_id' => 'required|integer',
+            'detail_norekening_id' => 'required|integer',
+            'nilai_anggaran' => 'required|numeric',
         ]);
-
-        // Update nilai anggaran dan detail_norekening
-        $anggaran->update($data);
-
-        return redirect()->route('apbdes.index')->with('success', 'Anggaran APBDes berhasil diperbarui.');
+    
+        // Cari anggaran berdasarkan ID
+        $anggaran = Anggaran::findOrFail($id);
+    
+        // Update data anggaran
+        $anggaran->update([
+            'tahun' => $request->tahun,
+            'detail_norekening_id' => $request->detail_norekening_id,
+            'keterangan_lainnya' => $request->keterangan_lainnya,
+            'nilai_anggaran' => $request->nilai_anggaran,
+        ]);
+    
+        return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil diupdate');
     }
 
     // Fungsi untuk menghapus anggaran

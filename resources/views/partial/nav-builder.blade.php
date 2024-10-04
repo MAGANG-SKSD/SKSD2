@@ -114,13 +114,35 @@ $settings = Utility::settings();
                             <span class="dash-mtext custom-weight">{{ __('Dana') }}</span>
                         </a>
                     </li>
-                    <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
-                        <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => 1]) }}">
-                            <span class="dash-micon"><i class="ti ti-crown"></i></span>
-                            <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
-                        </a>
-                    </li>
-                    <li class="dash-item dash-hasmenu {{ request()->is('dokumens*') ? 'active' : '' }}">
+                <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
+                    <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => auth()->user()->desa->desa_id]) }}">
+                        <span class="dash-micon"><i class="ti ti-crown"></i></span>
+                        <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
+                    </a>
+                </li>
+
+
+                <!--  -->
+                {{-- @if($desas->isNotEmpty())
+                    @foreach($desas as $desa)
+                        <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
+                            <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => $desa->desa_id]) }}">
+                                <span class="dash-micon"><i class="ti ti-bell"></i></span>
+                                <span class="dash-mtext custom-weight">{{ __('Desa: '.$desa->nama_desa) }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                @else
+                    <p>No data available</p>
+                @endif --}}
+
+
+
+
+
+
+                <!--  -->
+                <li class="dash-item dash-hasmenu {{ request()->is('dokumens*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('dokumens.index') }}">
                             <span class="dash-micon"><i class="ti ti-file"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('Dokumen') }}</span>

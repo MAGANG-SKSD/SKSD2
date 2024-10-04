@@ -20,8 +20,10 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
-use App\Http\Controllers\LaporanController; // Pastikan untuk mengimpor controller yang sesuai
+use App\Models\Anggaran;
+use App\Http\Controllers\LaporanController; 
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +86,9 @@ Route::group(
 Route::get('profile', [UserController::class, 'profile'])->name('profile')->middleware(['auth', 'XSS']);
 
 Route::post('edit-profile', [UserController::class, 'editprofile'])->name('update.profile')->middleware(['auth', 'XSS']);
+
+Route::get('/user/profile-desa', [UserController::class, 'showProfile'])->name('user.profile.desa')->middleware(['auth', 'XSS']);
+
 
 Route::group(
     ['middleware' => ['auth', 'XSS']],
@@ -251,6 +256,8 @@ Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('angga
 Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
 Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');
+Route::put('/anggaran/update-nilai/{id}', [AnggaranController::class, 'updateNilai'])->name('anggaran.updateNilai');
+
 
 // Route::get('/anggaran/detail_norekening', [AnggaranController::class, 'getDetailNorekening'])->name('anggaran.detail_norekening');
 // Route::get('/create', [AnggaranController::class, 'create'])->name('anggaran.create');
@@ -403,4 +410,3 @@ Route::prefix('surat')->group(function () {
     Route::put('/{surat}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat.destroy');
 });
-Route::resource('pencairan_dana', PencairanDanaController::class);

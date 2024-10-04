@@ -29,55 +29,68 @@
                             <a href="{{ route('apbdes.create') }}" class="btn btn-success">Tambah Anggaran</a>
                         </div>
 
-                        <div class="table-responsive"> <!-- Membuat tabel responsif -->
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
+                    <!-- Tabel anggaran -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Tahun') }}</th>
+                                    <th>{{ __('Nama Anggaran') }}</th>
+                                    <th>{{ __('Nilai Anggaran') }}</th>
+                                    <th>{{ __('Keterangan Lainnya') }}</th>
+                                    <th>{{ __('Verifikasi') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Aksi') }}</th>
+                                    <th>{{ __('Edit Nilai Anggaran') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($anggaran as $item)
                                     <tr>
-                                        <th>{{ __('ID') }}</th>
-                                        <th>{{ __('Jenis Rekening') }}</th>
-                                        <th>{{ __('Kelompok Rekening') }}</th>
-                                        <th>{{ __('Nama Rekening') }}</th>
-                                        <th>{{ __('Nilai Anggaran') }}</th>
-                                        <th>{{ __('Verifikasi') }}</th>
-                                        <th>{{ __('Status') }}</th>
-                                        <th>{{ __('Aksi') }}</th>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->tahun }}</td>
+                                        <td>{{ $item->detail_norekening->nama }}</td>
+                                        <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
+                                        <td>{{ $item->keterangan_lainnya }}</td>
+                                        <td>
+                                            @if($item->verifikasi)
+                                                <span class="badge bg-success">Terverifikasi</span>
+                                            @else
+                                                <span class="badge bg-warning">Belum Terverifikasi</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($item->status)
+                                                <span class="badge bg-success">Terealisasi</span>
+                                            @else
+                                                <span class="badge bg-warning">Belum Terealisasi</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <!-- Form untuk update nilai anggaran -->
+                                            <form action="{{ route('anggaran.updateNilai', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="input-group">
+                                                    <input type="number" name="nilai_anggaran" required class="form-control" style="width: 120px;" value="{{ $item->nilai_anggaran }}">
+                                                    <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                                </div>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($anggaran as $item)
-                                        <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>{{ $item->detail_norekening->jenis_norekening->nama }}</td>
-                                            <td>{{ $item->detail_norekening->kelompok_norekening->nama }}</td>
-                                            <td>{{ $item->detail_norekening->nama }}</td>
-                                            <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
-                                            <td>
-                                                @if($item->verifikasi)
-                                                    <span class="badge bg-success">Terverifikasi</span>
-                                                @else
-                                                    <span class="badge bg-warning">Belum Terverifikasi</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($item->status)
-                                                    <span class="badge bg-success">TerRealisasi</span>
-                                                @else
-                                                    <span class="badge bg-warning">Belum TerRealisasi</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('apbdes.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                         <div class="mt-3">
                             {{ $anggaran->links() }} <!-- Untuk paginasi -->
@@ -91,6 +104,24 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .mb-5 {
+            margin-bottom: 60px;
+        }
+    </style>
 @endpush
 
 @push('scripts')

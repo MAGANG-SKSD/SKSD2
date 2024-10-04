@@ -8,7 +8,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -20,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','type'
+        'name', 'email', 'password', 'type', 'desa_id' // Tambahkan desa_id ke fillable
     ];
 
     /**
@@ -39,18 +38,23 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'name'=>'string'
+        'name' => 'string',
     ];
+
+    /**
+     * Relation to the Desa model
+     */
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class, 'desa_id');
+    }
+
 
     public function creatorId()
     {
-
-        if($this->type == 'company' || $this->type == 'admin')
-        {
+        if ($this->type == 'company' || $this->type == 'admin') {
             return $this->id;
-        }
-        else
-        {
+        } else {
             return $this->created_by;
         }
     }
