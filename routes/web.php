@@ -20,8 +20,10 @@ use App\Http\Controllers\NoRekeningsController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
-use App\Http\Controllers\LaporanController; // Pastikan untuk mengimpor controller yang sesuai
+use App\Models\Anggaran;
+use App\Http\Controllers\LaporanController; 
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,14 @@ use App\Http\Controllers\SuratController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// File: routes/web.php
 
+Route::get('/', function () {
+    return redirect('/home');
+});
+
+// Tampilan awal pengguna di /home
+Route::get('/home', [ViewController::class, 'index'])->name('home');
 
 Auth::routes();
 
@@ -238,15 +247,20 @@ Route::resource('sp2ds', Sp2dController::class);
 // });
 // Route untuk APBDes
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
-Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
-Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
+// Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
+// Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
 
 Route::resource('anggaran', AnggaranController::class);
+Route::get('anggaran', [AnggaranController::class, 'index'])->name('anggaran.index');
+Route::get('anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('anggaran.edit');
+Route::put('anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
 Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
 Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');
+Route::put('/anggaran/update-nilai/{id}', [AnggaranController::class, 'updateNilai'])->name('anggaran.updateNilai');
+
 
 // Route::get('/anggaran/detail_norekening', [AnggaranController::class, 'getDetailNorekening'])->name('anggaran.detail_norekening');
 // Route::get('/create', [AnggaranController::class, 'create'])->name('anggaran.create');
@@ -261,7 +275,6 @@ Route::put('/anggaran/realisasi/{id}', [AnggaranController::class, 'updateRealis
 
 // Rute untuk toggle status realisasi
 Route::post('/realisasi/{id}/toggle', [AnggaranController::class, 'toggleStatus'])->name('status.toggle');
-// Route::group(
 //     ['middleware' => ['auth', 'XSS']],
 //     function () {
 //         Route::get('danas', [DanaController::class, 'index'])->name('danas.index');
@@ -327,387 +340,6 @@ Route::group(
 //         Route::get('sp2ds/{id}', [Sp2dController::class, 'show'])->name('sp2ds.show');
 //     }
 // );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Route::resource('anggaranKas', App\Http\Controllers\AnggaranKasController::class);
 
@@ -781,4 +413,3 @@ Route::prefix('surat')->group(function () {
     Route::put('/{surat}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat.destroy');
 });
-Route::resource('pencairan_dana', PencairanDanaController::class);

@@ -25,4 +25,18 @@ class AppBaseController extends Controller
             'message' => $message
         ], 200);
     }
+    public function show($id)
+{
+    // Ambil data anggaran berdasarkan ID
+    $anggaran = Anggaran::find($id);
+
+    // Cek jika data ditemukan
+    if (!$anggaran) {
+        abort(404, 'Anggaran tidak ditemukan');
+    }
+
+    // Tampilkan view dengan data anggaran
+    return view('apbdes.anggaran', compact('anggaran'));
+}
+
 }
