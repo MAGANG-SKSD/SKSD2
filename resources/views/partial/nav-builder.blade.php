@@ -4,14 +4,14 @@ $currantLang = $users->currentLanguage();
 $logo = asset(Storage::url('uploads/logo/'));
 $settings = Utility::settings();
 @endphp
-
+ 
 <!-- [ navigation menu ] start -->
 <nav class="dash-sidebar light-sidebar transprent-bg responsive-nav">
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('home') }}" class="b-brand">
                 @if (isset($settings['dark_mode']))
-                    @if ($settings['dark_mode'] == 'on')
+                    @if ($settings['dark_mode'] == 'on') 
                         <img class="c-sidebar-brand-full pt-3 mt-2 mb-1"
                             src="{{ $logo . (isset($company_logo) && !empty($company_logo) ? $company_logo : 'light_logo.png') }} "
                             height="46" class="navbar-brand-img">

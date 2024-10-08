@@ -87,7 +87,7 @@
                         $.each(data, function(key, value) {
                             $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
                         });
-                    }
+                    } 
                 });
             } else {
                 $('#detail_norekening_id').empty();

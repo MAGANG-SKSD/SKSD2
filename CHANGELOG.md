@@ -132,3 +132,23 @@
 -   edit reports and view reports
 
 -   Create edit function and update budget value
+
+#### [(2024-10-7)]
+
+-   menyesuaikan kelola surat controller agar tampilan halaman bisa muncul dan memberi aksen dinamis
+
+-   menyesuaikan fungsi update nilai anggaran dan mencoba membuat tampilan responsive
+
+-   membuat index blade pada apbdes agar sesuai dengan permissions yang lenih responsive dengan menyesuaikan tabel dapat sesuai dengan containernya
+
+-   menyesuaikan database yang baru agar front end dapat lebih mudah menarik db di migrations
+
+#### [(2024-20-8)]
+
+-   mencoba membuat tampilan _variable.scss dengan code yang lebih efesien
+
+-   mencoba mengganti dengan tailwind tidak dengan bootsrap untuk lebih efesien dalam menampilkan front end
+
+-   membuat tampilan yang responsive dengan menambahkan pada index blade 
+
+-   membuat sp2d tombol laporan dan memperbaiki fungsi models

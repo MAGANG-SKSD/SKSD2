@@ -249,7 +249,6 @@ Route::resource('sp2ds', Sp2dController::class);
 Route::get('/apbdes', [ApbdesController::class, 'index'])->name('apbdes.index');
 
 
-
 Route::resource('anggaran', AnggaranController::class);
 Route::get('/anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('.edit');
 Route::put('/anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
