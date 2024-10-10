@@ -152,3 +152,19 @@
 -   membuat tampilan yang responsive dengan menambahkan pada index blade 
 
 -   membuat sp2d tombol laporan dan memperbaiki fungsi models
+
+#### [(2024-10-9)]
+
+-   melanjutkan membuat tampilan responsive dengan menggunakan layout dengan bantuan AI
+
+-   Create datatable, controller, model to make view for Rekening (On Progress)
+
+-   Pembuatan CRUD untuk fungsi laporan.blade
+
+#### [(2024-10-10)]
+
+-   menyesuaikan index blade untuk kelola surat, membuat fungsi tombol sp2d agar dapat menarik data dari anggaran
+
+-   mengubah db seed dan membuat tampilan front end desa kurang responsive
+
+-   Still trying to make the _variable.scss display with code that is more efficient
