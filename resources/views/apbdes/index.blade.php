@@ -18,65 +18,91 @@
                     <i class="fa fa-align-justify"></i> {{ __('APBDes') }}
                 </div>
                 <div class="card-body">
-                    <h2 class="text-center">{{ __('Daftar Anggaran APBDes ') . request()->tahun }}</h2>
-                    <div class="text-center">
-                        <div class="mb-3">
-                            <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
-                            <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
-                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
+                    <h2 class="text-center">{{ __('Daftar Anggaran APBDes Tahun ') . ($tahun_dipilih === 'semua' ? 'Semua' : $tahun_dipilih) }}</h2>
+                    <div class="text-center mb-5">
+                        <a href="{{ route('anggaran.index') }}" class="btn btn-primary">Anggaran</a>
+                        <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
+                        <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
+                    </div>
+                    <div class="d-flex justify-content-between mb-5">
+                        <a href="{{ route('apbdes.create') }}" class="btn btn-success">Tambah Anggaran</a>
+
+                        <!-- Dropdown untuk memilih tahun -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTahun" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pilih Tahun
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownTahun">
+                                <li><a class="dropdown-item" href="{{ route('apbdes.index', ['tahun' => 'semua']) }}">Tampilkan Semua</a></li>
+                                @foreach ($tahun_anggaran as $tahun)
+                                    <li><a class="dropdown-item" href="{{ route('apbdes.index', ['tahun' => $tahun]) }}">{{ $tahun }}</a></li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <a href="{{ route('apbdes.create') }}" class="btn btn-success">Tambah Anggaran</a>
-                    </div>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>{{ __('ID') }}</th>
-                                <th>{{ __('Jenis Rekening') }}</th>
-                                <th>{{ __('Kelompok Rekening') }}</th>
-                                <th>{{ __('Nama Rekening') }}</th>
-                                <th>{{ __('Nilai Anggaran') }}</th>
-                                <th>{{ __('Verifikasi') }}</th>
-                                <th>{{ __('Status') }}</th>
-                                <th>{{ __('Aksi') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($anggaran as $item)
+                    <!-- Tabel anggaran -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead>
                                 <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->detail_norekening->jenis_norekening->nama }}</td>
-                                    <td>{{ $item->detail_norekening->kelompok_norekening->nama }}</td>
-                                    <td>{{ $item->detail_norekening->nama }}</td>
-                                    <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
-                                    <td>
-                                        @if($item->verifikasi)
-                                            <span class="badge bg-success">Terverifikasi</span>
-                                        @else
-                                            <span class="badge bg-warning">Belum Terverifikasi</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($item->status)
-                                            <span class="badge bg-success">TerRealisasi</span>
-                                        @else
-                                            <span class="badge bg-warning">Belum TerRealisasi</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('apbdes.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
-                                        </form>
-                                    </td>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Tahun') }}</th>
+                                    <th>{{ __('Nama Anggaran') }}</th>
+                                    <th>{{ __('Nilai Anggaran') }}</th>
+                                    <th>{{ __('Keterangan Lainnya') }}</th>
+                                    <th>{{ __('Verifikasi') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Aksi') }}</th>
+                                    <th>{{ __('Edit Nilai Anggaran') }}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($anggaran as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->tahun }}</td>
+                                        <td>{{ $item->detail_norekening->nama }}</td>
+                                        <td>{{ number_format($item->nilai_anggaran, 2, ',', '.') }}</td>
+                                        <td>{{ $item->keterangan_lainnya }}</td>
+                                        <td>
+                                            @if($item->verifikasi)
+                                                <span class="badge bg-success">Terverifikasi</span>
+                                            @else
+                                                <span class="badge bg-warning">Belum Terverifikasi</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($item->status)
+                                                <span class="badge bg-success">Terealisasi</span>
+                                            @else
+                                                <span class="badge bg-warning">Belum Terealisasi</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('anggaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <!-- Form untuk update nilai anggaran -->
+                                            <form action="{{ route('anggaran.updateNilai', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="input-group">
+                                                    <input type="number" name="nilai_anggaran" required class="form-control" style="width: 120px;" value="{{ $item->nilai_anggaran }}">
+                                                    <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="mt-3">
                         {{ $anggaran->links() }} <!-- Untuk paginasi -->
@@ -89,6 +115,24 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .mb-5 {
+            margin-bottom: 60px;
+        }
+    </style>
 @endpush
 
 @push('scripts')

@@ -125,11 +125,12 @@ $settings = Utility::settings();
                         </a>
                     </li>
                 <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
-                    <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => 1]) }}">
+                    <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => auth()->user()->desa->desa_id]) }}">
                         <span class="dash-micon"><i class="ti ti-crown"></i></span>
                         <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
                     </a>
                 </li>
+
 
                 <!--  -->
                 {{-- @if($desas->isNotEmpty())
