@@ -124,12 +124,15 @@ $settings = Utility::settings();
                             <span class="dash-mtext custom-weight">{{ __('Dana') }}</span>
                         </a>
                     </li>
-                <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
+                    @if(isset(auth()->user()->desa))
                     <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => auth()->user()->desa->desa_id]) }}">
                         <span class="dash-micon"><i class="ti ti-crown"></i></span>
                         <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
                     </a>
-                </li>
+                @else
+                    <p>{{ __('No Desa data available') }}</p>
+                @endif
+                
 
 
                 <!--  -->
