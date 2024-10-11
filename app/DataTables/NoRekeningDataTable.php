@@ -3,8 +3,8 @@
 namespace App\DataTables;
 
 use App\Models\NoRekening;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
 
 class NoRekeningDataTable extends DataTable
 {
@@ -16,9 +16,11 @@ class NoRekeningDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'no_rekenings.datatables_actions');
+        return datatables()
+            ->eloquent($query)
+            ->addColumn('action', function (NoRekening $noRekening) {
+                return view('no_rekenings.action', compact('noRekening'));
+            });
     }
 
     /**
@@ -29,7 +31,7 @@ class NoRekeningDataTable extends DataTable
      */
     public function query(NoRekening $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id', 'ASC');
     }
 
     /**
@@ -40,20 +42,42 @@ class NoRekeningDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+            ->setTableId('norekening-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->orderBy(1)
+            ->language([
+                "paginate" => [
+                    "next" => '<i class="fas fa-angle-right"></i>',
+                    "previous" => '<i class="fas fa-angle-left"></i>'
+                ]
+            ])
             ->parameters([
-                'dom'       => 'Bfrtip',
-                'stateSave' => true,
-                'order'     => [[0, 'desc']],
-                'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                "dom" =>  "
+                    <'row'<'col-sm-12'><'col-sm-9'B><'col-sm-3'f>>
+                    <'row'<'col-sm-12'tr>>
+                    <'row mt-3 container-fluid'<'col-sm-5'i><'col-sm-7'p>>
+                ",
+                'buttons' => [
+                    ['extend' => 'create', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'export', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reset', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'reload', 'className' => 'btn btn-primary btn-sm no-corner'],
+                    ['extend' => 'pageLength', 'className' => 'btn btn-primary btn-sm no-corner'],
                 ],
+                "scrollX" => true
+            ])
+            ->language([
+                'buttons' => [
+                    'create' => __('Create'),
+                    'export' => __('Export'),
+                    'print' => __('Print'),
+                    'reset' => __('Reset'),
+                    'reload' => __('Reload'),
+                    'excel' => __('Excel'),
+                    'csv' => __('CSV'),
+                    'pageLength' => __('Show %d rows'),
+                ]
             ]);
     }
 
@@ -65,9 +89,12 @@ class NoRekeningDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'desa_id',
-            'kode_rekening',
-            'uraian'
+            Column::make('id'),
+            Column::make('nama'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center'),
         ];
     }
 
@@ -78,6 +105,6 @@ class NoRekeningDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'no_rekenings_datatable_' . time();
+        return 'NoRekening_' . date('YmdHis');
     }
 }
