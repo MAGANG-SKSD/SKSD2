@@ -1,11 +1,10 @@
 @extends('layouts.admin')
-@section('title', __('Edit Rekening '))
+@section('title', __('Edit No Rekening'))
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('no_rekenings.index') }}">{{ __('Rekening') }}</a></li>
-        <li class="breadcrumb-item">{{ __('Edit') }}
-        </li>
+        <li class="breadcrumb-item"><a href="{{ route('no_rekenings.index') }}">{{ __('No Rekening') }}</a></li>
+        <li class="breadcrumb-item">{{ __('Edit') }}</li>
     </ul>
 @endsection
 
@@ -16,18 +15,18 @@
     <div class="row">
         <div class="section-body">
             <div class="col-md-4 m-auto">
-                <div class="card ">
+                <div class="card">
                     <div class="card-header">
-                        <h5> {{ __('Edit Rekening') }}</h5>
+                        <h5>{{ __('Edit No Rekening') }}</h5>
                     </div>
                     {{ Form::model($noRekening, ['route' => ['no_rekenings.update', $noRekening->id], 'method' => 'PUT']) }}
 
                     <div class="card-body">
                         <div class="form-group">
-                            <strong> {{ Form::label('name', __('Name'), ['class' => 'form-label']) }} </strong>
-                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('Enter Rekening Name')]) }}
-                            @error('name')
-                                <span class="invalid-name" role="alert">
+                            <strong>{{ Form::label('nama', __('Nama Rekening'), ['class' => 'form-label']) }}</strong>
+                            {{ Form::text('nama', null, ['class' => 'form-control', 'placeholder' => __('Masukkan Nama Rekening')]) }}
+                            @error('nama')
+                                <span class="invalid-nama" role="alert">
                                     <strong class="text-danger">{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -45,10 +44,5 @@
         </div>
     </div>
 
-    <!-- [ sample-page ] end -->
-    </div>
     <!-- [ Main Content ] end -->
-    </div>
-    </div>
 @endsection
-

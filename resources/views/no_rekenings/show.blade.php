@@ -1,28 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Show No Rekening')
 
 @section('content')
-     <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('noRekenings.index') }}">No Rekening</a>
-            </li>
-            <li class="breadcrumb-item active">Detail</li>
-     </ol>
-     <div class="container-fluid">
-          <div class="animated fadeIn">
-                 @include('coreui-templates::common.errors')
-                 <div class="row">
-                     <div class="col-lg-12">
-                         <div class="card">
-                             <div class="card-header">
-                                 <strong>Details</strong>
-                                  <a href="{{ route('noRekenings.index') }}" class="btn btn-light">Back</a>
-                             </div>
-                             <div class="card-body">
-                                 @include('no_rekenings.show_fields')
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-          </div>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Show No Rekening</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('no_rekenings.index') }}"> Back</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nama Rekening:</strong>
+                {{ $norekening->nama }}
+            </div>
+        </div>
     </div>
 @endsection
