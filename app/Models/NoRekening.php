@@ -1,66 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use App\Models\NoRekening;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class NoRekeningsController extends Controller
+class NoRekening extends Model
 {
-    public function index()
-    {
-        $noRekenings = NoRekening::all();
-        return view('no_rekenings.index', compact('noRekenings'));
-    }
+    use HasFactory;
 
-    public function create()
-    {
-        return view('no_rekenings.create');
-    }
-
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        NoRekening::create($input);
-
-        return redirect(route('noRekenings.index'));
-    }
-
-    public function show($id)
-    {
-        $noRekening = NoRekening::find($id);
-
-        if (empty($noRekening)) {
-            return redirect(route('noRekenings.index'));
-        }
-
-        return view('no_rekenings.show', compact('noRekening'));
-    }
-
-    public function edit($id)
-    {
-        $noRekening = NoRekening::find($id);
-
-        if (empty($noRekening)) {
-            return redirect(route('noRekenings.index'));
-        }
-
-        return view('no_rekenings.edit', compact('noRekening'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $noRekening = NoRekening::find($id);
-        $noRekening->update($request->all());
-
-        return redirect(route('noRekenings.index'));
-    }
-
-    public function destroy($id)
-    {
-        $noRekening = NoRekening::find($id);
-        $noRekening->delete();
-
-        return redirect(route('noRekenings.index'));
-    }
+    protected $table = 'jenis_norekening';
+    protected $fillable = [
+        'id', // atau bisa dihapus jika kolom auto-increment
+        'nama', // dan kolom lainnya sesuai dengan tabel Anda
+    ];
 }
