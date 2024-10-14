@@ -86,25 +86,8 @@
 @endsection
 
 @push('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
-    <style>
-        table {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .table th, .table td {
-            padding: 10px;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .mb-5 {
-            margin-bottom: 60px;
-        }
-    </style>
 @endpush
 
 @push('scripts')

@@ -6,6 +6,7 @@ use App\Models\Anggaran;
 use Illuminate\Http\Request;
 use App\Models\Detail_Norekening;
 use App\Models\Jenis_Norekening;
+use App\Models\Kelompok_Norekening;
 
 class APBDesController extends Controller
 {
@@ -28,11 +29,13 @@ class APBDesController extends Controller
     }
     public function create()
     {
-        // Mengambil semua data jenis norekening dan detail norekening
+        // Mengambil semua data jenis norekening saja, detail norekening akan diambil secara dinamis
         $jenis_norekening = Jenis_Norekening::all();
         $detail_norekening = Detail_Norekening::all();
+        $kelompok_norekening = Kelompok_Norekening::all();
 
-        return view('apbdes.create', compact('jenis_norekening', 'detail_norekening'));
+
+        return view('apbdes.create', compact('jenis_norekening','detail_norekening','kelompok_norekening'));
     }
 
     public function show($id)
