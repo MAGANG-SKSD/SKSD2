@@ -257,6 +257,8 @@ Route::get('anggaran/{id}/edit', [AnggaranController::class, 'edit'])->name('ang
 Route::put('anggaran/{id}', [AnggaranController::class, 'update'])->name('anggaran.update');
 
 Route::get('/create', [AnggaranController::class, 'create'])->name('apbdes.create');
+Route::get('/get-kelompok-norekening', [AnggaranController::class, 'getKelompokNorekening'])->name('apbdes.getKelompokNorekening');
+Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::get('/get-detail-norekening', [AnggaranController::class, 'getDetailNorekening'])->name('apbdes.getDetailNorekening');
 Route::post('/anggaran/store', [AnggaranController::class, 'store'])->name('anggaran.store');
 Route::put('/anggaran/update-nilai/{id}', [AnggaranController::class, 'updateNilai'])->name('anggaran.updateNilai');

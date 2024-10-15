@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SuratCreateRequest;
 use App\Http\Requests\SuratUpdateRequest;
 use App\Models\Surat;
+use App\Models\Anggaran; // Pastikan model Anggaran diimpor
 use Illuminate\Http\Request;
 
 class SuratController extends Controller
@@ -14,8 +15,11 @@ class SuratController extends Controller
         // Ambil semua data surat
         $surats = Surat::all();
         
+        // Ambil semua data anggaran
+        $anggaran = Anggaran::all();
+        
         // Kirim data ke tampilan
-        return view('sp2ds.surat', compact('surats'));
+        return view('sp2ds.surat', compact('surats', 'anggaran'));
     }
 
     public function create()
