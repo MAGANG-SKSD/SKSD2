@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -12,7 +11,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -35,6 +33,12 @@
                         <label class="badge badge-success">{{ $v }}</label>
                     @endforeach
                 @endif
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Desa:</strong>
+                {{ $user->desa ? $user->desa->nama_desa : 'No Desa Assigned' }} <!-- Menampilkan nama desa -->
             </div>
         </div>
     </div>

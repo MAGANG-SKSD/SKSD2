@@ -22,3 +22,8 @@
     <p>{{ $user->updated_at }}</p>
 </div>
 
+<!-- Desa Field -->
+<div class="form-group">
+    {!! Form::label('desa', 'Desa:') !!}
+    <p>{{ $user->desa ? $user->desa->nama_desa : 'Tidak ada desa' }}</p>
+</div>

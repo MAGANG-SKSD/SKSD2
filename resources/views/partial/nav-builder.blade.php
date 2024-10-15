@@ -124,12 +124,16 @@ $settings = Utility::settings();
                             <span class="dash-mtext custom-weight">{{ __('Dana') }}</span>
                         </a>
                     </li>
-                <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
-                    <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => 1]) }}">
+                    @if(isset(auth()->user()->desa))
+                    <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => auth()->user()->desa->desa_id]) }}">
                         <span class="dash-micon"><i class="ti ti-crown"></i></span>
                         <span class="dash-mtext custom-weight">{{ __('Profile Desa') }}</span>
                     </a>
-                </li>
+                @else
+                    <p>{{ __('No Desa data available') }}</p>
+                @endif
+                
+
 
                 <!--  -->
                 {{-- @if($desas->isNotEmpty())
@@ -158,8 +162,8 @@ $settings = Utility::settings();
                         </a>
                     </li>
                 <!--  -->
-                <li class="dash-item dash-hasmenu {{ request()->is('noRekenings*') ? 'active' : '' }}">
-                        <a class="dash-link" href="{{ route('noRekenings.index') }}">
+                <li class="dash-item dash-hasmenu {{ request()->is('no_rekenings*') ? 'active' : '' }}">
+                        <a class="dash-link" href="{{ route('no_rekenings.index') }}">
                             <span class="dash-micon"><i class="ti ti-lock"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('No Rekening') }}</span>
                         </a>

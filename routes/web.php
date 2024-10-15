@@ -16,14 +16,14 @@ use App\Http\Controllers\ApbdesController;
 use App\Http\Controllers\DanaController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\DokumenController;
-use App\Http\Controllers\NoRekeningsController;
+use App\Http\Controllers\NoRekeningController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\Sp2dController;
 use App\Http\Controllers\AnggaranController;
-use App\Models\Anggaran;
 use App\Http\Controllers\LaporanController; 
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\ViewController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +86,9 @@ Route::group(
 Route::get('profile', [UserController::class, 'profile'])->name('profile')->middleware(['auth', 'XSS']);
 
 Route::post('edit-profile', [UserController::class, 'editprofile'])->name('update.profile')->middleware(['auth', 'XSS']);
+
+Route::get('/user/profile-desa', [UserController::class, 'showProfile'])->name('user.profile.desa')->middleware(['auth', 'XSS']);
+
 
 Route::group(
     ['middleware' => ['auth', 'XSS']],
@@ -161,7 +164,7 @@ Route::group(
 // );
 
 
-Route::resource('noRekenings', NoRekeningsController::class);
+Route::resource('noRekenings', NoRekeningController::class);
 
 
 
@@ -205,7 +208,7 @@ Route::middleware(['auth', 'XSS'])->group(function () {
 Route::resource('dokumens', DokumenController::class);
 
 // No Rekenings Routes
-Route::resource('no_rekenings', NoRekeningsController::class);
+Route::resource('no_rekenings', NoRekeningController::class);
 
 // Realisasi Anggarans Routes
 // Route::resource('realisasi_anggarans', RealisasiAnggaransController::class);
@@ -314,18 +317,18 @@ Route::group(
 //     }
 // );
 
-// Route::group(
-//     ['middleware' => ['auth', 'XSS']],
-//     function () {
-//         Route::get('noRekenings', [NoRekeningController::class, 'index'])->name('noRekenings.index');
-//         Route::get('noRekenings/create', [NoRekeningController::class, 'create'])->name('noRekenings.create');
-//         Route::post('noRekenings/store', [NoRekeningController::class, 'store'])->name('noRekenings.store');
-//         Route::get('noRekenings/{id}/edit', [NoRekeningController::class, 'edit'])->name('noRekenings.edit');
-//         Route::put('noRekenings/{id}', [NoRekeningController::class, 'update'])->name('noRekenings.update');
-//         Route::delete('noRekenings/{id}', [NoRekeningController::class, 'destroy'])->name('noRekenings.destroy');
-//         Route::get('noRekenings/{id}', [NoRekeningController::class, 'show'])->name('noRekenings.show');
-//     }
-// );
+Route::group(
+    ['middleware' => ['auth', 'XSS']],
+    function () {
+        Route::get('no_rekenings', [NoRekeningController::class, 'index'])->name('no_rekenings.index');
+        Route::get('no_rekenings/create', [NoRekeningController::class, 'create'])->name('no_rekenings.create');
+        Route::post('no_rekenings/store', [NoRekeningController::class, 'store'])->name('no_rekenings.store');
+        Route::get('no_rekenings/{id}/edit', [NoRekeningController::class, 'edit'])->name('no_rekenings.edit');
+        Route::put('no_rekenings/{id}', [NoRekeningController::class, 'update'])->name('no_rekenings.update');
+        Route::delete('no_rekenings/{id}', [NoRekeningController::class, 'destroy'])->name('no_rekenings.destroy');
+        Route::get('no_rekenings/{id}', [NoRekeningController::class, 'show'])->name('no_rekenings.show');
+    }
+);
 
 // Route::group(
 //     ['middleware' => ['auth', 'XSS']],
