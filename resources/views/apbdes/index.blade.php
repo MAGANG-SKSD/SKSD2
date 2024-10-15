@@ -104,71 +104,8 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
-    <style>
-        table {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .table th, .table td {
-            padding: 10px;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        @media (max-width: 768px) {
-            table {
-                font-size: 12px; /* Ukuran font lebih kecil untuk perangkat lebih kecil */
-            }
-
-            .breadcrumb {
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 5px 10px;
-            }
-        }
-    </style>
-@endpush
-
-@push('scripts') 
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.table').DataTable({
-                responsive: true,
-                paging: true,
-                searching: true,
-                ordering: true,
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Cari di sini...",
-                    paginate: {
-                        next: 'Selanjutnya',
-                        previous: 'Sebelumnya'
-                    }
-                },
-                initComplete: function() {
-                    $('.table').fadeIn(500); // Animasi muncul tabel secara halus
-                    
-                    // Modifikasi untuk input search dan dropdown show entries
-                    $('.dataTables_filter input').addClass('form-control search-input');
-                    $('.dataTables_length select').addClass('form-select show-entries');
-                }
-            });
-        });
-    </script>
-@endpush
-
-
-
-
-@push('style')
-    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <style>
         table {
             font-family: Arial, sans-serif;
@@ -181,6 +118,7 @@
             white-space: normal; /* Mengizinkan teks untuk wrap (berpindah baris) */
             word-wrap: break-word; /* Memaksa kata yang panjang untuk dipotong */
             overflow: hidden; /* Menghindari overflow */
+            
         }
 
         .table-responsive {
@@ -224,4 +162,27 @@
             }
         }
     </style>
+@endpush
+
+@push('scripts')
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.table').DataTable({
+            responsive: true,
+            paging: true,
+            searching: true,
+            ordering: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Cari di sini...",
+                paginate: {
+                    next: 'Selanjutnya',
+                    previous: 'Sebelumnya'
+                }
+            },
+        });
+    });
+</script>
 @endpush

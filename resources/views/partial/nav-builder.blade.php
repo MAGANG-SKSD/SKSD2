@@ -4,14 +4,14 @@ $currantLang = $users->currentLanguage();
 $logo = asset(Storage::url('uploads/logo/'));
 $settings = Utility::settings();
 @endphp
- 
+
 <!-- [ navigation menu ] start -->
 <nav class="dash-sidebar light-sidebar transprent-bg responsive-nav">
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('home') }}" class="b-brand">
                 @if (isset($settings['dark_mode']))
-                    @if ($settings['dark_mode'] == 'on') 
+                    @if ($settings['dark_mode'] == 'on')
                         <img class="c-sidebar-brand-full pt-3 mt-2 mb-1"
                             src="{{ $logo . (isset($company_logo) && !empty($company_logo) ? $company_logo : 'light_logo.png') }} "
                             height="46" class="navbar-brand-img">
@@ -186,6 +186,11 @@ $settings = Utility::settings();
         width: 250px;
     }
 
+    /* Tombol toggle hanya muncul di layar kecil */
+    .navbar-toggler {
+        display: none;
+    }
+
     /* Sidebar collapse untuk tampilan kecil */
     @media (max-width: 768px) {
         .dash-sidebar {
@@ -208,7 +213,7 @@ $settings = Utility::settings();
         }
 
         .navbar-toggler {
-            display: block; /* Tombol toggle hanya muncul di layar kecil */
+            display: block; /* Tombol toggle muncul di layar kecil */
         }
     }
 
@@ -220,6 +225,17 @@ $settings = Utility::settings();
 
         .dash-item {
             padding: 10px;
+        }
+    }
+
+    /* Menangani perubahan pada layar sedang */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .dash-sidebar {
+            width: 250px; /* Sidebar dengan lebar tetap */
+        }
+
+        .dash-navbar {
+            padding: 15px;
         }
     }
 </style>
