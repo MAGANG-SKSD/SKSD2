@@ -20,7 +20,6 @@ class CreateSuratsTable extends Migration
             $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -8,17 +8,22 @@
 @endsection
 
 @section('content')
-    {{-- @include('partial.nav-builder', ['desas' => $desas]) --}}
-    <div class="row">
-        <div class="col-lg-12 mb-3"> <!-- Tambahkan margin bawah -->
-            <a href="{{ route('desas.profile', ['desa_id' => 1]) }}" class="btn btn-primary">Kembali ke Profil Desa</a> <!-- Ganti 1 dengan ID desa yang sesuai -->
+    <div class="container-fluid">
+        <!-- Tombol Kembali ke Profil Desa -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <a href="{{ route('desas.profile', ['desa_id' => 1]) }}" class="btn btn-primary btn-block btn-sm">Kembali ke Profil Desa</a>
+            </div>
         </div>
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive py-5 pb-4 dropdown_2">
-                        <div class="container-fluid">
-                            {{ $dataTable->table(['width' => '100%']) }}
+
+        <!-- Card untuk Tabel -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Menambahkan Class 'table-responsive' untuk Tabel agar responsif -->
+                        <div class="table-responsive py-5 pb-4">
+                            {{ $dataTable->table(['class' => 'table table-striped table-bordered', 'width' => '100%']) }}
                         </div>
                     </div>
                 </div>
