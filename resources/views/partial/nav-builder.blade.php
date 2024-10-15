@@ -152,8 +152,9 @@ $settings = Utility::settings();
                             <span class="dash-mtext custom-weight">{{ __('Dokumen') }}</span>
                         </a>
                     </li>
-                    <li class="dash-item dash-hasmenu {{ request()->is('noRekenings*') ? 'active' : '' }}">
-                        <a class="dash-link" href="{{ route('noRekenings.index') }}">
+                <!--  -->
+                <li class="dash-item dash-hasmenu {{ request()->is('no_rekenings*') ? 'active' : '' }}">
+                        <a class="dash-link" href="{{ route('no_rekenings.index') }}">
                             <span class="dash-micon"><i class="ti ti-lock"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('No Rekening') }}</span>
                         </a>

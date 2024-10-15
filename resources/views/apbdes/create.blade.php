@@ -36,9 +36,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="jenis_norekening_id">Jenis Norekening</label>
+                        <label for="jenis_norekening_id">Jenis Anggaran</label>
                         <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
-                            <option value="">Pilih Jenis Norekening</option>
+                            <option value="">Pilih Jenis Anggaran</option>
                             @foreach ($jenis_norekening as $jenis)
                                 <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
                             @endforeach
@@ -46,9 +46,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="detail_norekening_id">Detail Norekening</label>
+                        <label for="kelompok_norekening_id">Kelompok Anggaran</label>
+                        <select id="kelompok_norekening_id" class="form-control" required>
+                            <option value="">Pilih Kelompok Anggaran</option>
+                            @foreach ($kelompok_norekening as $kelompok)
+                                <option value="{{ $kelompok->id }}">{{ $kelompok->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detail_norekening_id">Detail Anggaran</label>
                         <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
-                            <option value="">Pilih Detail Norekening</option>
+                            <option value="">Pilih Detail Anggaran</option>
                             <!-- Data akan diisi dengan AJAX -->
                         </select>
                     </div>
@@ -78,16 +88,44 @@
             var jenis_id = $(this).val();
             if (jenis_id) {
                 $.ajax({
-                    url: "{{ route('apbdes.getDetailNorekening') }}",
+                    url: "{{ route('apbdes.getKelompokNorekening') }}",
                     type: "GET",
                     data: { jenis_id: jenis_id },
+                    success: function(data) {
+                        $('#kelompok_norekening_id').empty();
+                        $('#kelompok_norekening_id').append('<option value="">Pilih Kelompok Norekening</option>');
+                        $.each(data, function(key, value) {
+                            $('#kelompok_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText); // Cek pesan error di konsol
+                    }
+                });
+            } else {
+                $('#kelompok_norekening_id').empty();
+                $('#kelompok_norekening_id').append('<option value="">Pilih Kelompok Norekening</option>');
+            }
+        });
+
+        $('#kelompok_norekening_id').change(function() {
+            var kelompok_id = $(this).val(); // Ambil ID kelompok
+            var jenis_id = $('#jenis_norekening_id').val(); // Ambil ID jenis
+            if (kelompok_id && jenis_id) {
+                $.ajax({
+                    url: "{{ route('apbdes.getDetailNorekening') }}",
+                    type: "GET",
+                    data: { jenis_id: jenis_id, kelompok_id: kelompok_id }, // Kirim ID
                     success: function(data) {
                         $('#detail_norekening_id').empty();
                         $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
                         $.each(data, function(key, value) {
-                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
+                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>'); // Menggunakan value.id dan value.nama
                         });
-                    } 
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText); // Cek pesan error di konsol
+                    }
                 });
             } else {
                 $('#detail_norekening_id').empty();
@@ -96,7 +134,6 @@
         });
     });
 </script>
-@endsection
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
@@ -105,3 +142,5 @@
 @push('scripts')
     {{-- Script tambahan jika diperlukan --}}
 @endpush
+
+@endsection

@@ -1,24 +1,11 @@
 <!-- No Rekening Id Field -->
 <div class="form-group">
-    {!! Form::label('no_rekening_id', 'No Rekening Id:') !!}
-    <p>{{ $noRekening->no_rekening_id }}</p>
+    {!! Form::label('id', 'ID:') !!}
+    <p>{{ $noRekening->id }}</p> <!-- Menampilkan field ID -->
 </div>
 
-<!-- Desa Id Field -->
+<!-- Nama Field -->
 <div class="form-group">
-    {!! Form::label('desa_id', 'Desa Id:') !!}
-    <p>{{ $noRekening->desa_id }}</p>
+    {!! Form::label('nama', 'Nama:') !!}
+    <p>{{ $noRekening->nama }}</p> <!-- Menampilkan field Nama -->
 </div>
-
-<!-- Kode Rekening Field -->
-<div class="form-group">
-    {!! Form::label('kode_rekening', 'Kode Rekening:') !!}
-    <p>{{ $noRekening->kode_rekening }}</p>
-</div>
-
-<!-- Uraian Field -->
-<div class="form-group">
-    {!! Form::label('uraian', 'Uraian:') !!}
-    <p>{{ $noRekening->uraian }}</p>
-</div>
-

@@ -127,44 +127,22 @@
 
 -   Make each user when they go to the village profile will be directed to their respective village
 
--   change the app.scss file for responsive display
-
--   edit reports and view reports
-
--   Create edit function and update budget value
-
 #### [(2024-10-7)]
 
--   menyesuaikan kelola surat controller agar tampilan halaman bisa muncul dan memberi aksen dinamis
+-   Adjusted the new database so that the front end can more easily pull the database in migrations
 
--   menyesuaikan fungsi update nilai anggaran dan mencoba membuat tampilan responsive
+#### [(2024-10-8)]
 
--   membuat index blade pada apbdes agar sesuai dengan permissions yang lenih responsive dengan menyesuaikan tabel dapat sesuai dengan containernya
-
--   menyesuaikan database yang baru agar front end dapat lebih mudah menarik db di migrations
-
-#### [(2024-20-8)]
-
--   mencoba membuat tampilan _variable.scss dengan code yang lebih efesien
-
--   mencoba mengganti dengan tailwind tidak dengan bootsrap untuk lebih efesien dalam menampilkan front end
-
--   membuat tampilan yang responsive dengan menambahkan pada index blade 
-
--   membuat sp2d tombol laporan dan memperbaiki fungsi models
+-   Trying to make the \_variable.scss display with code that is more efficient
 
 #### [(2024-10-9)]
 
--   melanjutkan membuat tampilan responsive dengan menggunakan layout dengan bantuan AI
-
--   Create datatable, controller, model to make view for Rekening (On Progress)
-
--   Pembuatan CRUD untuk fungsi laporan.blade
+-   Still trying to make the \_variable.scss display with code that is more efficient
 
 #### [(2024-10-10)]
 
--   menyesuaikan index blade untuk kelola surat, membuat fungsi tombol sp2d agar dapat menarik data dari anggaran
+-   Create datatable, controller, model to make view for Rekening (On Progress)
 
--   mengubah db seed dan membuat tampilan front end desa kurang responsive
+#### [(2024-10-11)]
 
--   Still trying to make the _variable.scss display with code that is more efficient
+-   Create datatable, controller, model to make view for Rekening (On Progress) waiting fix database rekening

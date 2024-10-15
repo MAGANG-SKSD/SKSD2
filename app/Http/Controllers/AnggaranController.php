@@ -95,19 +95,60 @@ class AnggaranController extends Controller
     // Fungsi untuk membuat anggaran baru
     public function create()
     {
-        // Mengambil semua data jenis norekening dan detail norekening
-        $jenis_norekening = Jenis_Norekening::all();
-        $detail_norekening = Detail_Norekening::all();
-
-        return view('apbdes.create', compact('jenis_norekening', 'detail_norekening'));
+        $jenis_norekening = Jenis_Norekening::all(); // Pastikan ini mengembalikan koleksi objek
+        $kelompok_norekening = Kelompok_Norekening::all(); // Pastikan ini mengembalikan koleksi objek
+    
+        return view('apbdes.create', compact('jenis_norekening', 'kelompok_norekening'));
     }
+
+    public function getKelompokNorekening(Request $request)
+    {
+        // Cek apakah jenis_id ada di request
+        if (!$request->has('jenis_id')) {
+            return response()->json(['error' => 'Jenis ID tidak ditemukan'], 400);
+        }
+
+        // Ambil detail norekening berdasarkan jenis_norekening_id
+        $kelompok_norekening = Detail_Norekening::where('jenis_norekening_id', $request->jenis_id)
+            ->with('kelompok_norekening') // Pastikan relasi diambil
+            ->get()
+            ->map(function ($detail) {
+                return [
+                    'id' => $detail->kelompok_norekening->id,
+                    'nama' => $detail->kelompok_norekening->nama
+                ];
+            })
+            ->unique('nama') // Menghindari duplikasi nama
+            ->values(); // Memastikan indeksnya terurut ulang
+
+        return response()->json($kelompok_norekening);
+    }
+
+
 
     // Method untuk mengambil detail norekening berdasarkan jenis norekening
     public function getDetailNorekening(Request $request)
     {
-        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $request->jenis_id)->get();
+        if (!$request->has('jenis_id') || !$request->has('kelompok_id')) {
+            return response()->json([], 400);
+        }
+
+        $jenis_id = $request->input('jenis_id');
+        $kelompok_id = $request->input('kelompok_id'); // Ini akan menjadi ID sekarang
+
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $jenis_id)
+            ->where('kelompok_norekening_id', $kelompok_id)
+            ->get(['id', 'nama']);
+
+        if ($detail_norekening->isEmpty()) {
+            return response()->json([], 404);
+        }
+
         return response()->json($detail_norekening);
     }
+
+
+    
 
     // Menyimpan data anggaran
     public function store(Request $request)
