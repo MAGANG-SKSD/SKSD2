@@ -1,10 +1,80 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
+// Import variabel
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
-@import "~datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
+// Gaya untuk sidebar
+.dash-sidebar {
+    width: 250px;
+    background-color: $primary-color; // Menggunakan variabel untuk warna
+
+    // Responsif
+    @media (max-width: 768px) {
+        width: 100%; // Sidebar lebar penuh pada layar kecil
+        position: relative;
+    }
+}
+
+// Gaya untuk navbar content
+.navbar-content {
+    @include flex-center; // Menggunakan mixin jika ada
+    padding: 0;
+
+    // Responsif
+    @media (max-width: 768px) {
+        flex-direction: column; // Mengubah menjadi kolom pada layar kecil
+    }
+}
+
+// Gaya untuk item navbar
+.dash-navbar {
+    display: flex;
+    flex-direction: column;
+
+    .dash-item {
+        width: 100%; // Memastikan item mengambil lebar penuh
+        text-align: center;
+        padding: $padding; // Menggunakan variabel untuk padding
+
+        a {
+            color: $link-color; // Menggunakan variabel untuk warna link
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block; // Mengubah link menjadi block untuk memudahkan klik
+        }
+
+        &.active a {
+            background-color: $active-bg; // Menggunakan variabel untuk latar belakang aktif
+        }
+    }
+}
+
+// Gaya untuk tombol toggler
+.navbar-toggler {
+    display: block; // Hanya tampil di layar kecil
+    background-color: $toggler-bg; // Menggunakan variabel untuk warna
+    border: none; // Menghilangkan border
+}
+
+/* Mengatur lebar kolom tabel agar lebih responsif */
+.table td, .table th {
+    white-space: nowrap; // Mencegah teks membungkus
+}
+
+.table-responsive {
+    overflow-x: auto; // Membuat tabel scrollable pada perangkat kecil
+}
+
+/* Mengatur tombol agar lebih responsif */
+.btn {
+    margin-bottom: 10px; // Memberikan jarak antar tombol
+    width: 100%; // Mengatur lebar tombol agar penuh pada perangkat kecil
+}
+
+/* Aturan untuk tampilan mobile */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.8rem; // Mengurangi ukuran font di perangkat kecil
+    }
+    .breadcrumb {
+        flex-direction: column; // Menyusun breadcrumb secara vertikal
+    }
+}

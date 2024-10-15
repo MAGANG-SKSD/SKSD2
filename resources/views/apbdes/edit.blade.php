@@ -75,6 +75,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Fetch Detail Norekening on Jenis Norekening change
+        $('#jenis_norekening_id').change(function() {
+            var jenis_id = $(this).val();
+            if (jenis_id) {
+                $.ajax({
+                    url: "{{ route('apbdes.getDetailNorekening') }}",
+                    type: "GET",
+                    data: { jenis_id: jenis_id },
+                    success: function(data) {
+                        $('#detail_norekening_id').empty();
+                        $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
+                        $.each(data, function(key, value) {
+                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#detail_norekening_id').empty();
+                $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
+            }
+        });
+
+        // If editing, trigger the change event to load current Detail Norekening
+        @if (isset($anggaran))
+            $('#jenis_norekening_id').trigger('change');
+        @endif
+    });
+</script>
 @endsection
 
 @push('scripts')

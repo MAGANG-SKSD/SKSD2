@@ -16,7 +16,6 @@ class AnggaranController extends Controller
         $anggaran = Anggaran::paginate(10);
         return view('apbdes.verifikasi', compact('anggaran'));
     }
-
     // Fungsi untuk toggle status verifikasi
     public function toggleVerifikasi($id)
     {

@@ -55,6 +55,10 @@ else{
     <!-- vendor css -->
     <link rel="stylesheet" href="{{ asset('assets/css/customizer.css') }}">
 
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
     {{-- Notification --}}
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/notifier.css') }}">
 
