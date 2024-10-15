@@ -189,21 +189,33 @@ class AnggaranController extends Controller
         return response()->json(Detail_Norekening::where('jenis_norekening_id', $id)->get());
     }
 
-    // Fungsi untuk mengedit anggaran
     public function edit($id)
-    
     {
         // Ambil data anggaran berdasarkan ID
         $anggaran = Anggaran::findOrFail($id);
-
-        // Ambil data yang dibutuhkan seperti jenis norekening dan detail norekening
+    
+        // Ambil semua data jenis norekening
         $jenis_norekening = Jenis_Norekening::all();
-        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)->get();
-
-        // Arahkan ke view 'edit' dengan data yang diperlukan
-        return view('apbdes.edit', compact('anggaran', 'jenis_norekening', 'detail_norekening'));
+    
+        // Ambil kelompok norekening berdasarkan relasi dengan detail norekening
+        $kelompok_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)
+            ->with('kelompok_norekening')
+            ->get()
+            ->map(function ($detail) {
+                return $detail->kelompok_norekening;  // Pastikan ini mengembalikan objek, bukan array
+            })
+            ->unique('id')  // Menghindari duplikasi id
+            ->values();  // Memastikan indeksnya terurut ulang
+    
+        // Ambil detail norekening berdasarkan jenis_norekening dan kelompok_norekening
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)
+            ->where('kelompok_norekening_id', $anggaran->detail_norekening->kelompok_norekening_id)
+            ->get();
+    
+        // Kirim data ke view
+        return view('apbdes.edit', compact('anggaran', 'jenis_norekening', 'kelompok_norekening', 'detail_norekening'));
     }
-
+    
 
     // Fungsi untuk memperbarui anggaran
     public function update(Request $request, $id)
@@ -211,13 +223,14 @@ class AnggaranController extends Controller
         $request->validate([
             'tahun' => 'required|integer',
             'jenis_norekening_id' => 'required|integer',
+            'kelompok_norekening_id' => 'required|integer',
             'detail_norekening_id' => 'required|integer',
             'nilai_anggaran' => 'required|numeric',
         ]);
-    
+
         // Cari anggaran berdasarkan ID
         $anggaran = Anggaran::findOrFail($id);
-    
+
         // Update data anggaran
         $anggaran->update([
             'tahun' => $request->tahun,
@@ -225,9 +238,10 @@ class AnggaranController extends Controller
             'keterangan_lainnya' => $request->keterangan_lainnya,
             'nilai_anggaran' => $request->nilai_anggaran,
         ]);
-    
+
         return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil diupdate');
     }
+
 
     // Fungsi untuk menghapus anggaran
     public function destroy(Anggaran $anggaran)
