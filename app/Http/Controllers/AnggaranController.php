@@ -222,9 +222,9 @@ class AnggaranController extends Controller
     {
         $request->validate([
             'tahun' => 'required|integer',
-            'jenis_norekening_id' => 'required|integer',
-            'kelompok_norekening_id' => 'required|integer',
-            'detail_norekening_id' => 'required|integer',
+            'jenis_norekening_id' => 'required|exists:jenis_norekening,id',
+            'kelompok_norekening_id' => 'required|exists:kelompok_norekening,id', // Validasi kelompok norekening
+            'detail_norekening_id' => 'required|exists:detail_norekening,id',
             'nilai_anggaran' => 'required|numeric',
         ]);
 
@@ -235,12 +235,14 @@ class AnggaranController extends Controller
         $anggaran->update([
             'tahun' => $request->tahun,
             'detail_norekening_id' => $request->detail_norekening_id,
+            'kelompok_norekening_id' => $request->kelompok_norekening_id, // Pastikan ini ikut diperbarui
             'keterangan_lainnya' => $request->keterangan_lainnya,
             'nilai_anggaran' => $request->nilai_anggaran,
         ]);
 
         return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil diupdate');
     }
+
 
 
     // Fungsi untuk menghapus anggaran

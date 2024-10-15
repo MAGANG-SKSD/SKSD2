@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         <label for="kelompok_norekening_id">Kelompok Anggaran</label>
-                        <select id="kelompok_norekening_id" class="form-control" required>
+                        <select name="kelompok_norekening_id" id="kelompok_norekening_id" class="form-control" required>
                             <option value="">Pilih Kelompok Anggaran</option>
                             @foreach ($kelompok_norekening as $kelompok)
                                 <option value="{{ $kelompok->id }}" {{ $anggaran->kelompok_norekening_id == $kelompok->id ? 'selected' : '' }}>
@@ -93,6 +93,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Mengambil kelompok norekening ketika jenis norekening dipilih
         $('#jenis_norekening_id').change(function() {
             var jenis_id = $(this).val();
             if (jenis_id) {
@@ -108,7 +109,7 @@
                         });
                     },
                     error: function(xhr) {
-                        console.error(xhr.responseText); 
+                        console.error(xhr.responseText);
                     }
                 });
             } else {
@@ -117,6 +118,7 @@
             }
         });
 
+        // Mengambil detail norekening ketika kelompok norekening dipilih
         $('#kelompok_norekening_id').change(function() {
             var kelompok_id = $(this).val();
             var jenis_id = $('#jenis_norekening_id').val();
