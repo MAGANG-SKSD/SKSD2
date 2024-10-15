@@ -37,10 +37,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="jenis_norekening_id">Jenis Norekening</label>
+                        <label for="jenis_norekening_id">Jenis Anggaran</label>
                         <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
+                            <option value="">Pilih Jenis Anggaran</option>
                             @foreach ($jenis_norekening as $jenis)
-                                <option value="{{ $jenis->id }}" {{ $anggaran->detail_norekening->jenis_norekening_id == $jenis->id ? 'selected' : '' }}>
+                                <option value="{{ $jenis->id }}" {{ $anggaran->jenis_norekening_id == $jenis->id ? 'selected' : '' }}>
                                     {{ $jenis->nama }}
                                 </option>
                             @endforeach
@@ -48,8 +49,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="detail_norekening_id">Detail Norekening</label>
+                        <label for="kelompok_norekening_id">Kelompok Anggaran</label>
+                        <select name="kelompok_norekening_id" id="kelompok_norekening_id" class="form-control" required>
+                            <option value="">Pilih Kelompok Anggaran</option>
+                            @foreach ($kelompok_norekening as $kelompok)
+                                <option value="{{ $kelompok->id }}" {{ $anggaran->kelompok_norekening_id == $kelompok->id ? 'selected' : '' }}>
+                                    {{ $kelompok->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detail_norekening_id">Detail Anggaran</label>
                         <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
+                            <option value="">Pilih Detail Anggaran</option>
                             @foreach ($detail_norekening as $detail)
                                 <option value="{{ $detail->id }}" {{ $anggaran->detail_norekening_id == $detail->id ? 'selected' : '' }}>
                                     {{ $detail->nama }}
@@ -68,30 +82,59 @@
                         <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" value="{{ $anggaran->nilai_anggaran }}" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary">Update Anggaran</button>
                     <a href="{{ route('apbdes.index') }}" class="btn btn-secondary">Kembali</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Fetch Detail Norekening on Jenis Norekening change
+        // Mengambil kelompok norekening ketika jenis norekening dipilih
         $('#jenis_norekening_id').change(function() {
             var jenis_id = $(this).val();
             if (jenis_id) {
                 $.ajax({
-                    url: "{{ route('apbdes.getDetailNorekening') }}",
+                    url: "{{ route('apbdes.getKelompokNorekening') }}",
                     type: "GET",
                     data: { jenis_id: jenis_id },
+                    success: function(data) {
+                        $('#kelompok_norekening_id').empty();
+                        $('#kelompok_norekening_id').append('<option value="">Pilih Kelompok Norekening</option>');
+                        $.each(data, function(key, value) {
+                            $('#kelompok_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kelompok_norekening_id').empty();
+                $('#kelompok_norekening_id').append('<option value="">Pilih Kelompok Norekening</option>');
+            }
+        });
+
+        // Mengambil detail norekening ketika kelompok norekening dipilih
+        $('#kelompok_norekening_id').change(function() {
+            var kelompok_id = $(this).val();
+            var jenis_id = $('#jenis_norekening_id').val();
+            if (kelompok_id && jenis_id) {
+                $.ajax({
+                    url: "{{ route('apbdes.getDetailNorekening') }}",
+                    type: "GET",
+                    data: { jenis_id: jenis_id, kelompok_id: kelompok_id },
                     success: function(data) {
                         $('#detail_norekening_id').empty();
                         $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
                         $.each(data, function(key, value) {
                             $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
                         });
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
                     }
                 });
             } else {
@@ -99,38 +142,15 @@
                 $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
             }
         });
-
-        // If editing, trigger the change event to load current Detail Norekening
-        @if (isset($anggaran))
-            $('#jenis_norekening_id').trigger('change');
-        @endif
     });
 </script>
-@endsection
+
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+@endpush
 
 @push('scripts')
-<script>
-    $(document).ready(function() {
-        $('#jenis_norekening_id').change(function() {
-            var jenis_id = $(this).val();
-            if (jenis_id) {
-                $.ajax({
-                    url: "{{ route('apbdes.getDetailNorekening') }}",
-                    type: "GET",
-                    data: { jenis_id: jenis_id },
-                    success: function(data) {
-                        $('#detail_norekening_id').empty();
-                        $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
-                        $.each(data, function(key, value) {
-                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('#detail_norekening_id').empty();
-                $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
-            }
-        });
-    });
-</script>
+    {{-- Script tambahan jika diperlukan --}}
 @endpush
+
+@endsection

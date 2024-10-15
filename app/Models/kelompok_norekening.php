@@ -11,7 +11,7 @@ class Kelompok_Norekening extends Model
     protected $guarded = [];
 
     // Relasi ke Detail Norekening
-    public function detail_norekenings()
+    public function detail_norekening()
     {
         return $this->hasMany(Detail_Norekening::class);
     }
