@@ -13,8 +13,7 @@
         <div class="col-12">
             <h2 class="text-center mb-4">{{ __('Selamat Datang di Dashboard') }}</h2>
         </div>
-    </div>
-
+    </div> 
     <div class="row">
         <!-- Analytic cards start -->
         <div class="col-xl-3 col-md-6">
