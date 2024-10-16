@@ -7,6 +7,7 @@ use App\Http\Requests\SuratUpdateRequest;
 use App\Models\Surat;
 use App\Models\Anggaran; // Pastikan model Anggaran diimpor
 use Illuminate\Http\Request;
+use PDF;
 
 class SuratController extends Controller
 {
@@ -35,10 +36,9 @@ class SuratController extends Controller
         return redirect()->route('surat.index')->with('success', 'Surat berhasil ditambahkan.');
     }
 
-    public function show(Surat $surat)
-    {
-        // Tampilkan detail surat
-        return view('sp2ds.surat_show', compact('surat'));
+    public function show($id) {
+        $anggaran = Anggaran::findOrFail($id); // Gantilah 'Anggaran' dengan nama model yang sesuai
+        return view('sp2ds.surat_show', compact('anggaran'));
     }
 
     public function edit(Surat $surat)
@@ -71,5 +71,11 @@ class SuratController extends Controller
     
         // Kirim data ke tampilan print untuk ditampilkan dalam format cetak
         return view('sp2ds.surat_print', compact('anggaran', 'tahun_anggaran'));
+    }
+
+    public function downloadPDF($id) {
+        $anggaran = Anggaran::findOrFail($id);
+        $pdf = PDF::loadView('sp2ds.surat_pdf', compact('anggaran'));
+        return $pdf->download('surat_'.$anggaran->id.'.pdf');
     }
 }
