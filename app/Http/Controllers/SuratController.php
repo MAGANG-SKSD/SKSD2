@@ -60,4 +60,16 @@ class SuratController extends Controller
         $surat->delete();
         return redirect()->route('surat.index')->with('success', 'Surat berhasil dihapus.');
     }
+
+    public function print(PrintSuratRequest $request)
+    {
+        // Ambil tahun anggaran dari request
+        $tahun_anggaran = $request->input('tahun_anggaran');
+    
+        // Ambil data anggaran berdasarkan tahun
+        $anggaran = Anggaran::where('tahun', $tahun_anggaran)->get();
+    
+        // Kirim data ke tampilan print untuk ditampilkan dalam format cetak
+        return view('sp2ds.surat_print', compact('anggaran', 'tahun_anggaran'));
+    }
 }

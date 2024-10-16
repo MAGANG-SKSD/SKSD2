@@ -10,6 +10,9 @@
         <a href="{{ route('surat.create') }}" class="btn btn-primary">
             <i class="fa fa-plus"></i> Tambah Surat
         </a>
+        <a href="{{ route('surat.print') }}" class="btn btn-secondary">
+            <i class="fa fa-print"></i> Cetak Surat
+        </a>
     </div>
 
     <table class="table table-bordered" id="suratTable">

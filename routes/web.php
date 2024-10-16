@@ -414,4 +414,11 @@ Route::prefix('surat')->group(function () {
     Route::get('/{surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
     Route::put('/{surat}', [SuratController::class, 'update'])->name('surat.update');
     Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat.destroy');
+    Route::get('/print', [SuratController::class, 'print'])->name('surat.print'); // Rute untuk mencetak surat
 });
+
+// Route untuk halaman index surat
+Route::resource('surat', SuratController::class);
+
+// Route untuk mencetak surat
+Route::get('surat/print', [SuratController::class, 'print'])->name('surat.print');

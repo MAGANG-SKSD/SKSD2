@@ -198,4 +198,6 @@ class Sp2dController extends AppBaseController
     {
         return view('sp2ds.surat_pengantar');
     }
+
+    
 }
