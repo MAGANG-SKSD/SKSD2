@@ -1,11 +1,13 @@
 @extends('layouts.admin')
+
 @section('title')
-    {{ __(' Dashboard') }}
+    {{ __('Dashboard') }}
 @endsection
+
 @section('content')
     <!-- [ breadcrumb ] start -->
-
     <!-- [ breadcrumb ] end -->
+    
     <!-- [ Main Content ] start -->
     <div class="row">
         <div class="col-12">
@@ -13,7 +15,7 @@
         </div>
     </div> 
     <div class="row">
-        <!-- analytic cards start -->
+        <!-- Analytic cards start -->
         <div class="col-xl-3 col-md-6">
             @can('manage-user')
             <div class="card comp-card text-center">
@@ -73,31 +75,6 @@
             </div>
             @endcan
         </div>
-
-        <!-- Chart Section -->
-        <div class="col-lg-12 mt-4">
-            @role('admin')
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">{{ __('User Statistics') }}</h4>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <div class="btn-group btn-group-toggle" role="group" aria-label="User Stats Toggle">
-                                <input type="radio" class="btn-check" id="option1" name="options" autocomplete="off" checked>
-                                <label class="btn btn-outline-primary" for="option1">{{ __('Month') }}</label>
-
-                                <input type="radio" class="btn-check" id="option2" name="options" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="option2">{{ __('Year') }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="c-chart-wrapper">
-                        <canvas class="chart" id="main-chart" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-            @endrole
-        </div>
     </div>
     <!-- [ Main Content ] end -->
 @endsection
@@ -108,7 +85,7 @@
 @endpush
 
 @section('javascript')
-@role('admin')
+    @role('admin')
     <script src="{{ asset('js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
@@ -120,7 +97,7 @@
         $(document).on("click", "#option1", function() {
             getChartData('month');
         });
-        
+
         $(document).ready(function() {
             getChartData('month');
         });
@@ -144,5 +121,5 @@
             });
         }
     </script>
-@endrole
+    @endrole
 @endsection
