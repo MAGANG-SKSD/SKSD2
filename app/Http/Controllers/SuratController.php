@@ -9,6 +9,7 @@ use App\Models\Anggaran; // Pastikan model Anggaran diimpor
 use Illuminate\Http\Request;
 use PDF;
 
+
 class SuratController extends Controller
 {
     public function index()
@@ -72,10 +73,12 @@ class SuratController extends Controller
         // Kirim data ke tampilan print untuk ditampilkan dalam format cetak
         return view('sp2ds.surat_print', compact('anggaran', 'tahun_anggaran'));
     }
-
+    
     public function downloadPDF($id) {
         $anggaran = Anggaran::findOrFail($id);
         $pdf = PDF::loadView('sp2ds.surat_pdf', compact('anggaran'));
         return $pdf->download('surat_'.$anggaran->id.'.pdf');
     }
+    
+    
 }

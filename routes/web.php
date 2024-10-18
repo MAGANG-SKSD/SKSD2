@@ -421,3 +421,5 @@ Route::resource('surat', SuratController::class);
 
 // Route untuk mencetak surat
 Route::get('surat/print', [SuratController::class, 'print'])->name('surat.print');
+
+Route::get('/surat/{id}/download', [SuratController::class, 'downloadPDF'])->name('surat.download');
