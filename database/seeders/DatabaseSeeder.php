@@ -13,7 +13,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
-
 class DatabaseSeeder extends Seeder
 {
     /**

@@ -16,7 +16,6 @@ class AnggaranController extends Controller
         $anggaran = Anggaran::paginate(10);
         return view('apbdes.verifikasi', compact('anggaran'));
     }
-
     // Fungsi untuk toggle status verifikasi
     public function toggleVerifikasi($id)
     {
@@ -96,19 +95,60 @@ class AnggaranController extends Controller
     // Fungsi untuk membuat anggaran baru
     public function create()
     {
-        // Mengambil semua data jenis norekening dan detail norekening
-        $jenis_norekening = Jenis_Norekening::all();
-        $detail_norekening = Detail_Norekening::all();
-
-        return view('apbdes.create', compact('jenis_norekening', 'detail_norekening'));
+        $jenis_norekening = Jenis_Norekening::all(); // Pastikan ini mengembalikan koleksi objek
+        $kelompok_norekening = Kelompok_Norekening::all(); // Pastikan ini mengembalikan koleksi objek
+    
+        return view('apbdes.create', compact('jenis_norekening', 'kelompok_norekening'));
     }
+
+    public function getKelompokNorekening(Request $request)
+    {
+        // Cek apakah jenis_id ada di request
+        if (!$request->has('jenis_id')) {
+            return response()->json(['error' => 'Jenis ID tidak ditemukan'], 400);
+        }
+
+        // Ambil detail norekening berdasarkan jenis_norekening_id
+        $kelompok_norekening = Detail_Norekening::where('jenis_norekening_id', $request->jenis_id)
+            ->with('kelompok_norekening') // Pastikan relasi diambil
+            ->get()
+            ->map(function ($detail) {
+                return [
+                    'id' => $detail->kelompok_norekening->id,
+                    'nama' => $detail->kelompok_norekening->nama
+                ];
+            })
+            ->unique('nama') // Menghindari duplikasi nama
+            ->values(); // Memastikan indeksnya terurut ulang
+
+        return response()->json($kelompok_norekening);
+    }
+
+
 
     // Method untuk mengambil detail norekening berdasarkan jenis norekening
     public function getDetailNorekening(Request $request)
     {
-        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $request->jenis_id)->get();
+        if (!$request->has('jenis_id') || !$request->has('kelompok_id')) {
+            return response()->json([], 400);
+        }
+
+        $jenis_id = $request->input('jenis_id');
+        $kelompok_id = $request->input('kelompok_id'); // Ini akan menjadi ID sekarang
+
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $jenis_id)
+            ->where('kelompok_norekening_id', $kelompok_id)
+            ->get(['id', 'nama']);
+
+        if ($detail_norekening->isEmpty()) {
+            return response()->json([], 404);
+        }
+
         return response()->json($detail_norekening);
     }
+
+
+    
 
     // Menyimpan data anggaran
     public function store(Request $request)
@@ -148,45 +188,61 @@ class AnggaranController extends Controller
         return response()->json(Detail_Norekening::where('jenis_norekening_id', $id)->get());
     }
 
-    // Fungsi untuk mengedit anggaran
     public function edit($id)
-    
     {
         // Ambil data anggaran berdasarkan ID
         $anggaran = Anggaran::findOrFail($id);
-
-        // Ambil data yang dibutuhkan seperti jenis norekening dan detail norekening
+    
+        // Ambil semua data jenis norekening
         $jenis_norekening = Jenis_Norekening::all();
-        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)->get();
-
-        // Arahkan ke view 'edit' dengan data yang diperlukan
-        return view('apbdes.edit', compact('anggaran', 'jenis_norekening', 'detail_norekening'));
+    
+        // Ambil kelompok norekening berdasarkan relasi dengan detail norekening
+        $kelompok_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)
+            ->with('kelompok_norekening')
+            ->get()
+            ->map(function ($detail) {
+                return $detail->kelompok_norekening;  // Pastikan ini mengembalikan objek, bukan array
+            })
+            ->unique('id')  // Menghindari duplikasi id
+            ->values();  // Memastikan indeksnya terurut ulang
+    
+        // Ambil detail norekening berdasarkan jenis_norekening dan kelompok_norekening
+        $detail_norekening = Detail_Norekening::where('jenis_norekening_id', $anggaran->detail_norekening->jenis_norekening_id)
+            ->where('kelompok_norekening_id', $anggaran->detail_norekening->kelompok_norekening_id)
+            ->get();
+    
+        // Kirim data ke view
+        return view('apbdes.edit', compact('anggaran', 'jenis_norekening', 'kelompok_norekening', 'detail_norekening'));
     }
-
+    
 
     // Fungsi untuk memperbarui anggaran
     public function update(Request $request, $id)
     {
         $request->validate([
             'tahun' => 'required|integer',
-            'jenis_norekening_id' => 'required|integer',
-            'detail_norekening_id' => 'required|integer',
+            'jenis_norekening_id' => 'required|exists:jenis_norekening,id',
+            'kelompok_norekening_id' => 'required|exists:kelompok_norekening,id', // Validasi kelompok norekening
+            'detail_norekening_id' => 'required|exists:detail_norekening,id',
             'nilai_anggaran' => 'required|numeric',
         ]);
-    
+
         // Cari anggaran berdasarkan ID
         $anggaran = Anggaran::findOrFail($id);
-    
+
         // Update data anggaran
         $anggaran->update([
             'tahun' => $request->tahun,
             'detail_norekening_id' => $request->detail_norekening_id,
+            'kelompok_norekening_id' => $request->kelompok_norekening_id, // Pastikan ini ikut diperbarui
             'keterangan_lainnya' => $request->keterangan_lainnya,
             'nilai_anggaran' => $request->nilai_anggaran,
         ]);
-    
+
         return redirect()->route('apbdes.index')->with('success', 'Anggaran berhasil diupdate');
     }
+
+
 
     // Fungsi untuk menghapus anggaran
     public function destroy(Anggaran $anggaran)

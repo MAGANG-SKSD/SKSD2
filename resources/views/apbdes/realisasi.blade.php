@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h2 class="text-center">Daftar Anggaran untuk Realisasi</h2>
                     <div class="text-center mb-5">
-                        <a href="{{ route('anggaran.index') }}" class="btn btn-primary">Anggaran</a>
+                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
                         <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
                         <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
                     </div>
@@ -86,25 +86,8 @@
 @endsection
 
 @push('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
-    <style>
-        table {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .table th, .table td {
-            padding: 10px;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .mb-5 {
-            margin-bottom: 60px;
-        }
-    </style>
 @endpush
 
 @push('scripts')
