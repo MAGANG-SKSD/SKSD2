@@ -18,10 +18,17 @@ class NoRekeningDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('jenis_norekening_nama', function (NoRekening $noRekening) {
+                return $noRekening->jenis_norekening_nama; // Menggunakan accessor
+            })
+            ->addColumn('kelompok_norekening_nama', function (NoRekening $noRekening) {
+                return $noRekening->kelompok_norekening_nama; // Menggunakan accessor
+            })
             ->addColumn('action', function (NoRekening $noRekening) {
                 return view('no_rekenings.action', compact('noRekening'));
             });
     }
+
 
     /**
      * Get query source of dataTable.
@@ -31,8 +38,23 @@ class NoRekeningDataTable extends DataTable
      */
     public function query(NoRekening $model)
     {
-        return $model->newQuery()->orderBy('id', 'ASC');
+        // Get filtered data based on request
+        $query = $model->newQuery()->orderBy('id', 'ASC');
+
+        // Check if there's a jenis_norekening_id filter applied
+        if (request()->has('jenis_norekening_id') && request()->get('jenis_norekening_id') != '') {
+            $query->where('jenis_norekening_id', request()->get('jenis_norekening_id'));
+        }
+
+        // Check if there's a kelompok_norekening_id filter applied
+        if (request()->has('kelompok_norekening_id') && request()->get('kelompok_norekening_id') != '') {
+            $query->where('kelompok_norekening_id', request()->get('kelompok_norekening_id'));
+        }
+
+        return $query;
     }
+
+
 
     /**
      * Optional method if you want to use html builder.
@@ -89,14 +111,17 @@ class NoRekeningDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->title('Nomor Rekening'),
+            Column::make('jenis_norekening_nama')->title('Jenis Norekening'),
+            Column::make('kelompok_norekening_nama')->title('Kelompok Norekening'),
             Column::make('nama'),
-            Column::computed('action')
+            Column::computed('action') // This should match the action parameter in your map function
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),
         ];
     }
+
 
     /**
      * Get filename for export.

@@ -146,3 +146,23 @@
 #### [(2024-10-11)]
 
 -   Create datatable, controller, model to make view for Rekening (On Progress) waiting fix database rekening
+
+#### [(2024-10-14)]
+
+-   Modify view no rekening to clickable go to view kelompok rekening
+
+#### [(2024-10-15)]
+
+-   Try to make view no rekening for displays a list of nomor rekening
+
+#### [(2024-10-16)]
+
+-   Make filter in no rekening for filtering detail norekening with jenis norekening and kelompok rekening
+
+#### [(2024-10-17)]
+
+-   Still make filter in no rekening for filtering detail norekening with jenis norekening and kelompok rekening
+
+#### [(2024-10-18)]
+
+-   Modify filter dropdown in no rekening to make filtering table in index no rekening
