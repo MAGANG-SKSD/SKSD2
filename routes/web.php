@@ -23,7 +23,7 @@ use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\LaporanController; 
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\ViewController;
-
+use App\Models\NoRekening;
 
 /*
 |--------------------------------------------------------------------------
@@ -325,6 +325,10 @@ Route::group(
         Route::put('no_rekenings/{id}', [NoRekeningController::class, 'update'])->name('no_rekenings.update');
         Route::delete('no_rekenings/{id}', [NoRekeningController::class, 'destroy'])->name('no_rekenings.destroy');
         Route::get('no_rekenings/{id}', [NoRekeningController::class, 'show'])->name('no_rekenings.show');
+
+        Route::get('no_rekenings/{jenis_norekening_id}', [NoRekeningController::class, 'showByJenis'])->name('no_rekenings.showByJenis');
+        Route::get('/norekening/filter', [NoRekeningController::class, 'filter'])->name('norekening.filter');
+        Route::get('norekening/getKelompokNorekening', [NoRekeningController::class, 'getKelompokNorekening'])->name('norekening.getKelompokNorekening');
     }
 );
 

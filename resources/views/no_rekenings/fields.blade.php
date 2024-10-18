@@ -1,5 +1,5 @@
 <div class="form-group col-sm-6">
-    {!! Form::label('id', 'ID:') !!}
+    {!! Form::label('id', 'Nomor Rekening:') !!}
     {!! Form::number('id', null, ['class' => 'form-control', 'readonly' => true]) !!} <!-- Field ID, readonly jika ID otomatis -->
 </div>
 
