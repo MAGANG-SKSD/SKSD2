@@ -389,6 +389,8 @@ Route::get('/sp2d/notulen', [SP2DController::class, 'notulen'])->name('notulen.i
 Route::get('/sp2d/rekomendasi', [SP2DController::class, 'rekomendasi'])->name('rekomendasi.index');
 Route::get('/sp2d/surat-pengantar', [SP2DController::class, 'suratPengantar'])->name('surat_pengantar.index');
 Route::get('/sp2d/surat', [SP2DController::class, 'surat'])->name('surat.index');
+Route::post('/terbilang/convert', [SuratController::class, 'convert'])->name('terbilang.convert');
+
 
 
 

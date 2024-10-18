@@ -49,7 +49,10 @@
                     </tr>
                     <tr>
                         <th>Uang Sejumlah</th>
-                        <td>{{ number_format($anggaran->jumlah_uang, 2, ',', '.') }}</td>
+                        <td>
+                            <span id="formatted-amount">{{ number_format($anggaran->nilai_anggaran, 2, ',', '.') }}</span>
+                            (Terbilang: <span id="terbilang-text">...</span>)
+                        </td>
                     </tr>
                 </table>
 
@@ -103,39 +106,61 @@
                 </table>
 
                 <!-- Kolom 3 -->
-<h5><strong>Kolom 3</strong></h5>
-<table class="table table-bordered">
-    <tr>
-        <th>Nomor</th>
-        <th>Kode Rekening</th>
-        <th>Uraian</th>
-        <th>Jumlah</th>
-    </tr>
-    @if(!empty($anggaran->detail_rekening) && $anggaran->detail_rekening->count() > 0)
-        @foreach($anggaran->detail_rekening as $index => $detail)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $detail->kode_rekening }}</td>
-                <td>{{ $detail->uraian }}</td>
-                <td>{{ number_format($detail->jumlah, 2, ',', '.') }}</td>
-            </tr>
-        @endforeach
-    @else
-        <tr>
-            <td colspan="4" class="text-center">Tidak ada data detail rekening.</td>
-        </tr>
-    @endif
-</table>
+                <h5><strong>Kolom 3</strong></h5>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nomor</th>
+                        <th>Kode Rekening</th>
+                        <th>Uraian</th>
+                        <th>Jumlah</th>
+                    </tr>
+                    @if($anggaran->detail_norekening) <!-- Cek jika relasi detail_norekening ada -->
+                        <tr>
+                            <td>1</td>
+                            <td>{{ $anggaran->detail_norekening->id ?? '-' }}</td> <!-- Mengisi Kode Rekening dengan ID detail_norekening -->
+                            <td>{{ $anggaran->keterangan_lainnya ?? '-' }}</td> <!-- Mengisi uraian dengan keterangan lainnya -->
+                            <td>{{ isset($anggaran->nilai_anggaran) ? number_format($anggaran->nilai_anggaran, 2, ',', '.') : '-' }}</td> <!-- Mengisi jumlah dengan nilai anggaran -->
+                        </tr>
+                    @else
+                        <tr>
+                            <td colspan="4" class="text-center">Tidak ada data detail rekening.</td>
+                        </tr>
+                    @endif
+                </table>
 
-            <!-- Tombol Kembali & Download PDF -->
-            <div class="mt-4">
-                <a href="{{ route('surat.index') }}" class="btn btn-secondary">
-                    <i class="fa fa-arrow-left"></i> Kembali
-                </a>
-                <a href="{{ route('surat.download', $anggaran->id) }}" class="btn btn-primary">
-                    <i class="fa fa-download"></i> Download PDF
-                </a>
+                <!-- Tombol Kembali & Download PDF -->
+                <div class="mt-4">
+                    <a href="{{ route('surat.index') }}" class="btn btn-secondary">
+                        <i class="fa fa-arrow-left"></i> Kembali
+                    </a>
+                    <a href="{{ route('surat.download', $anggaran->id) }}" class="btn btn-primary">
+                        <i class="fa fa-download"></i> Download PDF
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var jumlahUang = {{ $anggaran->nilai_anggaran }}; // Pastikan ini adalah angka yang tepat
+            $.ajax({
+                url: "{{ route('terbilang.convert') }}",
+                type: "POST",
+                data: {
+                    number: jumlahUang,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    $('#terbilang-text').text(response.terbilang);
+                },
+                error: function () {
+                    $('#terbilang-text').text('Terjadi kesalahan.');
+                }
+            });
+        });
+    </script>
 @endsection

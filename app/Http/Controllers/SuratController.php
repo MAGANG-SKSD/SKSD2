@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SuratCreateRequest;
 use App\Http\Requests\SuratUpdateRequest;
 use App\Models\Surat;
-use App\Models\Anggaran; // Pastikan model Anggaran diimpor
+use App\Models\Anggaran;
 use Illuminate\Http\Request;
 use PDF;
-
+use NumberFormatter;
 
 class SuratController extends Controller
 {
@@ -38,7 +38,7 @@ class SuratController extends Controller
     }
 
     public function show($id) {
-        $anggaran = Anggaran::findOrFail($id); // Gantilah 'Anggaran' dengan nama model yang sesuai
+        $anggaran = Anggaran::findOrFail($id);
         return view('sp2ds.surat_show', compact('anggaran'));
     }
 
@@ -79,6 +79,42 @@ class SuratController extends Controller
         $pdf = PDF::loadView('sp2ds.surat_pdf', compact('anggaran'));
         return $pdf->download('surat_'.$anggaran->id.'.pdf');
     }
-    
-    
+
+    // Fungsi untuk mengonversi angka ke terbilang
+    public function convert(Request $request)
+{
+    $number = $request->input('number');
+
+    // Mengonversi angka ke terbilang
+    $terbilang = $this->convertToTerbilang($number); 
+
+    return response()->json(['terbilang' => $terbilang]);
+}
+
+private function convertToTerbilang($number)
+{
+    $huruf = array(
+        '', 'satu', 'dua', 'tiga', 'empat',
+        'lima', 'enam', 'tujuh', 'delapan', 'sembilan',
+        'sepuluh', 'sebelas'
+    );
+
+    if ($number < 12) {
+        return ' ' . $huruf[$number];
+    } elseif ($number < 20) {
+        return $this->convertToTerbilang($number - 10) . ' belas';
+    } elseif ($number < 100) {
+        return $this->convertToTerbilang(floor($number / 10)) . ' puluh' . $this->convertToTerbilang($number % 10);
+    } elseif ($number < 200) {
+        return ' seratus' . $this->convertToTerbilang($number - 100);
+    } elseif ($number < 1000) {
+        return $this->convertToTerbilang(floor($number / 100)) . ' ratus' . $this->convertToTerbilang($number % 100);
+    } elseif ($number < 2000) {
+        return ' seribu' . $this->convertToTerbilang($number - 1000);
+    } else {
+        return 'Angka terlalu besar';
+    }
+}
+
+
 }
