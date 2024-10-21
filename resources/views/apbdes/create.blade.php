@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="card">
             <div class="card-body">
                 <h2 class="text-center">Tambah Anggaran Baru</h2>
@@ -30,51 +30,65 @@
                 <form action="{{ route('anggaran.store') }}" method="POST">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="tahun">Tahun</label>
-                        <input type="number" name="tahun" id="tahun" class="form-control" required>
+                    <div class="form-group row">
+                        <label for="tahun" class="col-md-4 col-form-label">Tahun</label>
+                        <div class="col-md-8">
+                            <input type="number" name="tahun" id="tahun" class="form-control" required>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="jenis_norekening_id">Jenis Anggaran</label>
-                        <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
-                            <option value="">Pilih Jenis Anggaran</option>
-                            @foreach ($jenis_norekening as $jenis)
-                                <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label for="jenis_norekening_id" class="col-md-4 col-form-label">Jenis Anggaran</label>
+                        <div class="col-md-8">
+                            <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
+                                <option value="">Pilih Jenis Anggaran</option>
+                                @foreach ($jenis_norekening as $jenis)
+                                    <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="kelompok_norekening_id">Kelompok Anggaran</label>
-                        <select id="kelompok_norekening_id" class="form-control" required>
-                            <option value="">Pilih Kelompok Anggaran</option>
-                            @foreach ($kelompok_norekening as $kelompok)
-                                <option value="{{ $kelompok->id }}">{{ $kelompok->nama }}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label for="kelompok_norekening_id" class="col-md-4 col-form-label">Kelompok Anggaran</label>
+                        <div class="col-md-8">
+                            <select id="kelompok_norekening_id" class="form-control" required>
+                                <option value="">Pilih Kelompok Anggaran</option>
+                                @foreach ($kelompok_norekening as $kelompok)
+                                    <option value="{{ $kelompok->id }}">{{ $kelompok->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="detail_norekening_id">Detail Anggaran</label>
-                        <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
-                            <option value="">Pilih Detail Anggaran</option>
-                            <!-- Data akan diisi dengan AJAX -->
-                        </select>
+                    <div class="form-group row">
+                        <label for="detail_norekening_id" class="col-md-4 col-form-label">Detail Anggaran</label>
+                        <div class="col-md-8">
+                            <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
+                                <option value="">Pilih Detail Anggaran</option>
+                                <!-- Data akan diisi dengan AJAX -->
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="keterangan_lainnya">Keterangan Lainnya</label>
-                        <input type="text" name="keterangan_lainnya" id="keterangan_lainnya" class="form-control">
+                    <div class="form-group row">
+                        <label for="keterangan_lainnya" class="col-md-4 col-form-label">Keterangan Lainnya</label>
+                        <div class="col-md-8">
+                            <input type="text" name="keterangan_lainnya" id="keterangan_lainnya" class="form-control">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="nilai_anggaran">Jumlah Anggaran</label>
-                        <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" required>
+                    <div class="form-group row">
+                        <label for="nilai_anggaran" class="col-md-4 col-form-label">Jumlah Anggaran</label>
+                        <div class="col-md-8">
+                            <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" required>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan Anggaran</button>
-                    <a href="{{ route('apbdes.index') }}" class="btn btn-secondary">Kembali</a>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Simpan Anggaran</button>
+                        <a href="{{ route('apbdes.index') }}" class="btn btn-secondary">Kembali</a>
+                    </div>
                 </form>
             </div>
         </div>
@@ -99,7 +113,7 @@
                         });
                     },
                     error: function(xhr) {
-                        console.error(xhr.responseText); // Cek pesan error di konsol
+                        console.error(xhr.responseText);
                     }
                 });
             } else {
@@ -109,22 +123,22 @@
         });
 
         $('#kelompok_norekening_id').change(function() {
-            var kelompok_id = $(this).val(); // Ambil ID kelompok
-            var jenis_id = $('#jenis_norekening_id').val(); // Ambil ID jenis
+            var kelompok_id = $(this).val();
+            var jenis_id = $('#jenis_norekening_id').val();
             if (kelompok_id && jenis_id) {
                 $.ajax({
                     url: "{{ route('apbdes.getDetailNorekening') }}",
                     type: "GET",
-                    data: { jenis_id: jenis_id, kelompok_id: kelompok_id }, // Kirim ID
+                    data: { jenis_id: jenis_id, kelompok_id: kelompok_id },
                     success: function(data) {
                         $('#detail_norekening_id').empty();
                         $('#detail_norekening_id').append('<option value="">Pilih Detail Norekening</option>');
                         $.each(data, function(key, value) {
-                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>'); // Menggunakan value.id dan value.nama
+                            $('#detail_norekening_id').append('<option value="' + value.id + '">' + value.nama + '</option>');
                         });
                     },
                     error: function(xhr) {
-                        console.error(xhr.responseText); // Cek pesan error di konsol
+                        console.error(xhr.responseText);
                     }
                 });
             } else {

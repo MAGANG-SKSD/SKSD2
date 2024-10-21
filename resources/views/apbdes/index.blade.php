@@ -110,59 +110,65 @@
         table {
             font-family: Arial, sans-serif;
             font-size: 14px;
-            width: 100%; /* Tabel selalu menggunakan lebar penuh */
+            width: 100%;
         }
-
+    
         .table th, .table td {
             padding: 10px;
-            white-space: normal; /* Mengizinkan teks untuk wrap (berpindah baris) */
-            word-wrap: break-word; /* Memaksa kata yang panjang untuk dipotong */
-            overflow: hidden; /* Menghindari overflow */
-            
+            white-space: normal;
+            word-wrap: break-word;
+            overflow: hidden;
         }
-
-        .table-responsive {
-            overflow-x: auto; /* Mengizinkan tabel untuk digeser di perangkat kecil */
+    
+        /* Membatasi lebar kolom ID */
+        .table td:nth-child(1), .table th:nth-child(1) {
+            width: 50px; /* Tetapkan lebar tetap untuk kolom ID */
+            max-width: 50px;
+            text-align: center;
         }
-
-        /* Menyesuaikan tampilan untuk perangkat yang lebih kecil */
+    
         @media (max-width: 768px) {
-            table {
-                font-size: 12px; /* Ukuran font lebih kecil untuk perangkat kecil */
+            .table td:nth-child(1), .table th:nth-child(1) {
+                width: 30px; /* Lebar lebih kecil untuk perangkat mobile */
+                max-width: 30px;
             }
-
+    
+            table {
+                font-size: 12px;
+            }
+    
             .breadcrumb {
                 font-size: 12px;
             }
-
+    
             .btn {
                 padding: 5px 10px;
             }
-
+    
             .table th, .table td {
                 font-size: 12px;
-                white-space: normal; /* Pastikan teks bisa wrap */
+                white-space: normal;
                 word-wrap: break-word;
             }
-
-            /* Untuk menyesuaikan ukuran input di dalam tabel */
+    
             .input-group input {
-                width: 100%; /* Input mengambil seluruh lebar */
+                width: 100%;
             }
         }
-
-        /* Menyesuaikan tampilan untuk perangkat yang lebih besar */
+    
         @media (min-width: 992px) {
             .table th, .table td {
-                font-size: 14px; /* Ukuran font normal untuk desktop */
+                font-size: 14px;
             }
-
+    
             .input-group input {
-                width: 120px; /* Input tetap pada ukuran yang sesuai untuk desktop */
+                width: 120px;
             }
         }
     </style>
+    
 @endpush
+
 
 @push('scripts')
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

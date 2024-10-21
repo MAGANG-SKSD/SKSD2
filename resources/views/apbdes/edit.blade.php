@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="card">
             <div class="card-body">
                 <h2 class="text-center">Edit Anggaran</h2>
@@ -31,68 +31,82 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="form-group">
-                        <label for="tahun">Tahun</label>
-                        <input type="number" name="tahun" id="tahun" class="form-control" value="{{ $anggaran->tahun }}" required>
+                    <div class="form-group row">
+                        <label for="tahun" class="col-md-4 col-form-label">Tahun</label>
+                        <div class="col-md-8">
+                            <input type="number" name="tahun" id="tahun" class="form-control" value="{{ $anggaran->tahun }}" required>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="jenis_norekening_id">Jenis Anggaran</label>
-                        <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
-                            <option value="">Pilih Jenis Anggaran</option>
-                            @foreach ($jenis_norekening as $jenis)
-                                <option value="{{ $jenis->id }}" {{ $anggaran->jenis_norekening_id == $jenis->id ? 'selected' : '' }}>
-                                    {{ $jenis->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label for="jenis_norekening_id" class="col-md-4 col-form-label">Jenis Anggaran</label>
+                        <div class="col-md-8">
+                            <select name="jenis_norekening_id" id="jenis_norekening_id" class="form-control" required>
+                                <option value="">Pilih Jenis Anggaran</option>
+                                @foreach ($jenis_norekening as $jenis)
+                                    <option value="{{ $jenis->id }}" {{ $anggaran->jenis_norekening_id == $jenis->id ? 'selected' : '' }}>
+                                        {{ $jenis->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="kelompok_norekening_id">Kelompok Anggaran</label>
-                        <select name="kelompok_norekening_id" id="kelompok_norekening_id" class="form-control" required>
-                            <option value="">Pilih Kelompok Anggaran</option>
-                            @foreach ($kelompok_norekening as $kelompok)
-                                <option value="{{ $kelompok->id }}" {{ $anggaran->kelompok_norekening_id == $kelompok->id ? 'selected' : '' }}>
-                                    {{ $kelompok->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label for="kelompok_norekening_id" class="col-md-4 col-form-label">Kelompok Anggaran</label>
+                        <div class="col-md-8">
+                            <select name="kelompok_norekening_id" id="kelompok_norekening_id" class="form-control" required>
+                                <option value="">Pilih Kelompok Anggaran</option>
+                                @foreach ($kelompok_norekening as $kelompok)
+                                    <option value="{{ $kelompok->id }}" {{ $anggaran->kelompok_norekening_id == $kelompok->id ? 'selected' : '' }}>
+                                        {{ $kelompok->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="detail_norekening_id">Detail Anggaran</label>
-                        <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
-                            <option value="">Pilih Detail Anggaran</option>
-                            @foreach ($detail_norekening as $detail)
-                                <option value="{{ $detail->id }}" {{ $anggaran->detail_norekening_id == $detail->id ? 'selected' : '' }}>
-                                    {{ $detail->nama }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label for="detail_norekening_id" class="col-md-4 col-form-label">Detail Anggaran</label>
+                        <div class="col-md-8">
+                            <select name="detail_norekening_id" id="detail_norekening_id" class="form-control" required>
+                                <option value="">Pilih Detail Anggaran</option>
+                                @foreach ($detail_norekening as $detail)
+                                    <option value="{{ $detail->id }}" {{ $anggaran->detail_norekening_id == $detail->id ? 'selected' : '' }}>
+                                        {{ $detail->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="keterangan_lainnya">Keterangan Lainnya</label>
-                        <input type="text" name="keterangan_lainnya" id="keterangan_lainnya" class="form-control" value="{{ $anggaran->keterangan_lainnya }}">
+                    <div class="form-group row">
+                        <label for="keterangan_lainnya" class="col-md-4 col-form-label">Keterangan Lainnya</label>
+                        <div class="col-md-8">
+                            <input type="text" name="keterangan_lainnya" id="keterangan_lainnya" class="form-control" value="{{ $anggaran->keterangan_lainnya }}">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="nilai_anggaran">Jumlah Anggaran</label>
-                        <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" value="{{ $anggaran->nilai_anggaran }}" required>
+                    <div class="form-group row">
+                        <label for="nilai_anggaran" class="col-md-4 col-form-label">Jumlah Anggaran</label>
+                        <div class="col-md-8">
+                            <input type="number" name="nilai_anggaran" id="nilai_anggaran" class="form-control" value="{{ $anggaran->nilai_anggaran }}" required>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Update Anggaran</button>
-                    <a href="{{ route('apbdes.index') }}" class="btn btn-secondary">Kembali</a>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Update Anggaran</button>
+                        <a href="{{ route('apbdes.index') }}" class="btn btn-secondary">Kembali</a>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Mengambil kelompok norekening ketika jenis norekening dipilih
         $('#jenis_norekening_id').change(function() {
             var jenis_id = $(this).val();
             if (jenis_id) {
@@ -117,7 +131,6 @@
             }
         });
 
-        // Mengambil detail norekening ketika kelompok norekening dipilih
         $('#kelompok_norekening_id').change(function() {
             var kelompok_id = $(this).val();
             var jenis_id = $('#jenis_norekening_id').val();
