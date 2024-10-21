@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateSp2dRequest;
 use App\Repositories\Sp2dRepository;
 use Flash;
 use Response;
+use Illuminate\Http\Request;
+use PDF; // Pastikan Anda sudah menginstal PDF
+use Illuminate\Support\Facades\View;
 
 class Sp2dController extends AppBaseController
 {
@@ -166,8 +169,157 @@ class Sp2dController extends AppBaseController
 
     public function beritaAcara()
     {
-        return view('sp2ds.berita_acara');
+        $hari = "Senin";
+        $tanggal = "21";
+        $bulan = "Oktober";
+        $tahun = "2024";
+        $lokasi = "Kota ABC";
+        $tanggal_pembuatan = "21 Oktober 2024";
+        
+        // Contoh data pejabat
+        $pejabat1 = [
+            'nama' => 'John Doe',
+            'jabatan' => 'Kepala Bagian Keuangan',
+            'instansi' => 'Dinas Keuangan Kota ABC'
+        ];
+    
+        $pejabat2 = [
+            'nama' => 'Jane Doe',
+            'jabatan' => 'Kepala Bagian Anggaran',
+            'instansi' => 'Dinas Anggaran Kota ABC'
+        ];
+    
+        // Data contoh untuk pendapatan, belanja, dan SP2D
+        $pendapatan = [
+            (object)['jenis' => 'Pajak Daerah', 'anggaran' => 500000000, 'realisasi' => 450000000],
+            (object)['jenis' => 'Retribusi', 'anggaran' => 200000000, 'realisasi' => 180000000]
+        ];
+    
+        $belanja = [
+            (object)['jenis' => 'Infrastruktur', 'anggaran' => 600000000, 'realisasi' => 550000000],
+            (object)['jenis' => 'Operasional', 'anggaran' => 300000000, 'realisasi' => 290000000]
+        ];
+    
+        // Contoh data laporan SKPD
+        $laporan_skpd = [
+            (object)[
+                'bulan' => 'Oktober', 
+                'nama_skpd' => 'Dinas Pendidikan', 
+                'jumlah_anggaran' => 1500000000, 
+                'jumlah_realisasi' => 1400000000,
+                'realisasi_sp2d' => 1350000000,
+                'realisasi_spj' => 1300000000,
+                'saldo_kas' => 50000000,
+                'sp2d_minus_spj' => 50000000,
+                'lap_fungsional' => 15000000
+            ],
+            (object)[
+                'bulan' => 'Oktober', 
+                'nama_skpd' => 'Dinas Kesehatan', 
+                'jumlah_anggaran' => 1200000000, 
+                'jumlah_realisasi' => 1100000000,
+                'realisasi_sp2d' => 1050000000,
+                'realisasi_spj' => 1000000000,
+                'saldo_kas' => 50000000,
+                'sp2d_minus_spj' => 50000000,
+                'lap_fungsional' => 10000000
+            ]
+        ];
+    
+        // Data untuk Catatan Seksi Akuntansi
+        $catatan_seksi = [
+            (object)['bulan' => 'Oktober', 'realisasi_sp2d' => 1350000000],
+            (object)['bulan' => 'Oktober', 'realisasi_sp2d' => 1050000000]
+        ];
+    
+        return view('sp2ds.berita_acara', compact(
+            'hari', 'tanggal', 'bulan', 'tahun', 
+            'lokasi', 'tanggal_pembuatan', 'pejabat1', 'pejabat2', 
+            'pendapatan', 'belanja', 'laporan_skpd', 'catatan_seksi'
+        ));
     }
+
+    public function download()
+    {
+        $hari = "Senin";
+        $tanggal = "21";
+        $bulan = "Oktober";
+        $tahun = "2024";
+        $lokasi = "Kota ABC";
+        $tanggal_pembuatan = "21 Oktober 2024";
+
+        // Contoh data pejabat
+        $pejabat1 = [
+            'nama' => 'John Doe',
+            'jabatan' => 'Kepala Bagian Keuangan',
+            'instansi' => 'Dinas Keuangan Kota ABC'
+        ];
+
+        $pejabat2 = [
+            'nama' => 'Jane Doe',
+            'jabatan' => 'Kepala Bagian Anggaran',
+            'instansi' => 'Dinas Anggaran Kota ABC'
+        ];
+
+        // Data contoh untuk pendapatan dan belanja
+        $pendapatan = [
+            (object)['jenis' => 'Pajak Daerah', 'anggaran' => 500000000, 'realisasi' => 450000000],
+            (object)['jenis' => 'Retribusi', 'anggaran' => 200000000, 'realisasi' => 180000000]
+        ];
+
+        $belanja = [
+            (object)['jenis' => 'Infrastruktur', 'anggaran' => 600000000, 'realisasi' => 550000000],
+            (object)['jenis' => 'Operasional', 'anggaran' => 300000000, 'realisasi' => 290000000]
+        ];
+
+        // Contoh data laporan SKPD
+        $laporan_skpd = [
+            (object)[
+                'bulan' => 'Oktober', 
+                'nama_skpd' => 'Dinas Pendidikan', 
+                'jumlah_anggaran' => 1500000000, 
+                'jumlah_realisasi' => 1400000000,
+                'realisasi_sp2d' => 1350000000,
+                'realisasi_spj' => 1300000000,
+                'saldo_kas' => 50000000,
+                'sp2d_minus_spj' => 50000000,
+                'lap_fungsional' => 15000000
+            ],
+            (object)[
+                'bulan' => 'Oktober', 
+                'nama_skpd' => 'Dinas Kesehatan', 
+                'jumlah_anggaran' => 1200000000, 
+                'jumlah_realisasi' => 1100000000,
+                'realisasi_sp2d' => 1050000000,
+                'realisasi_spj' => 1000000000,
+                'saldo_kas' => 50000000,
+                'sp2d_minus_spj' => 50000000,
+                'lap_fungsional' => 10000000
+            ]
+        ];
+
+        // Data untuk Catatan Seksi Akuntansi
+        $catatan_seksi = [
+            (object)['bulan' => 'Oktober', 'realisasi_sp2d' => 1350000000],
+            (object)['bulan' => 'Oktober', 'realisasi_sp2d' => 1050000000]
+        ];
+
+        // Membuat PDF
+        $pdf = PDF::loadView('sp2ds.template_berita_acara', compact(
+            'hari', 'tanggal', 'bulan', 'tahun', 
+            'lokasi', 'tanggal_pembuatan', 'pejabat1', 'pejabat2', 
+            'pendapatan', 'belanja', 'laporan_skpd', 'catatan_seksi'
+        ));
+
+        // Mengunduh file PDF
+        return $pdf->download('berita_acara_rekonsiliasi.pdf');
+    }
+
+
+    
+    
+
+
 
     public function beritaDesa()
     {
@@ -198,6 +350,5 @@ class Sp2dController extends AppBaseController
     {
         return view('sp2ds.surat_pengantar');
     }
-
-    
+   
 }

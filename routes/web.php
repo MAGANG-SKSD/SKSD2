@@ -427,3 +427,5 @@ Route::resource('surat', SuratController::class);
 Route::get('surat/print', [SuratController::class, 'print'])->name('surat.print');
 
 Route::get('/surat/{id}/download', [SuratController::class, 'downloadPDF'])->name('surat.download');
+
+Route::get('/download-berita-acara', [Sp2dController::class, 'download'])->name('download.berita_acara');
