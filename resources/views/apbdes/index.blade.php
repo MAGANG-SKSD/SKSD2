@@ -112,63 +112,62 @@
             font-size: 14px;
             width: 100%;
         }
-    
+
         .table th, .table td {
             padding: 10px;
             white-space: normal;
             word-wrap: break-word;
             overflow: hidden;
         }
-    
+
         /* Membatasi lebar kolom ID */
         .table td:nth-child(1), .table th:nth-child(1) {
             width: 50px; /* Tetapkan lebar tetap untuk kolom ID */
             max-width: 50px;
             text-align: center;
         }
-    
+
         @media (max-width: 768px) {
             .table td:nth-child(1), .table th:nth-child(1) {
                 width: 30px; /* Lebar lebih kecil untuk perangkat mobile */
                 max-width: 30px;
             }
-    
+
             table {
                 font-size: 12px;
             }
-    
+
             .breadcrumb {
                 font-size: 12px;
             }
-    
+
             .btn {
                 padding: 5px 10px;
             }
-    
+
             .table th, .table td {
                 font-size: 12px;
                 white-space: normal;
                 word-wrap: break-word;
             }
-    
+
             .input-group input {
                 width: 100%;
             }
         }
-    
+
         @media (min-width: 992px) {
             .table th, .table td {
                 font-size: 14px;
             }
-    
+
             .input-group input {
                 width: 120px;
             }
         }
     </style>
-    
-@endpush
 
+@endpush
 
 @push('scripts')
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -192,3 +191,4 @@
     });
 </script>
 @endpush
+
