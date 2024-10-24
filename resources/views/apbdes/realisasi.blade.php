@@ -11,20 +11,24 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="text-center">Daftar Anggaran untuk Realisasi</h2>
-                    <div class="text-center mb-5">
-                        <a href="{{ route('apbdes.index') }}" class="btn btn-primary">Anggaran</a>
-                        <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning">Verifikasi</a>
-                        <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success">Realisasi</a>
-                    </div>
-                    <div class="mb-5">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-sm">
-                                <thead>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Daftar Anggaran untuk Realisasi</h2>
+                        
+                        <!-- Tombol Navigasi Anggaran, Verifikasi, Realisasi -->
+                        <div class="d-flex justify-content-center mb-4 flex-wrap">
+                            <a href="{{ route('apbdes.index') }}" class="btn btn-primary mx-2 my-2 btn-sm">Anggaran</a>
+                            <a href="{{ route('apbdes.verifikasi') }}" class="btn btn-warning mx-2 my-2 btn-sm">Verifikasi</a>
+                            <a href="{{ route('apbdes.realisasi') }}" class="btn btn-success mx-2 my-2 btn-sm">Realisasi</a>
+                        </div>
+
+                        <!-- Tabel Realisasi Anggaran -->
+                        <div class="table-responsive-sm">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>{{ __('ID') }}</th>
                                         <th>{{ __('Nama Anggaran') }}</th>
@@ -51,20 +55,22 @@
                                                     <span class="badge bg-warning">Belum TerRealisasi</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <form action="{{ route('status.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                            <td class="d-flex justify-content-center flex-wrap">
+                                                <!-- Tombol Realisasi -->
+                                                <form action="{{ route('status.toggle', $item->id) }}" method="POST" class="mx-1 my-1">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-info btn-sm">
+                                                    <button type="submit" class="btn btn-info btn-sm btn-block">
                                                         {{ $item->status ? 'Batalkan Realisasi' : 'Realisasikan' }}
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{ route('anggaran.realisasi.update', $item->id) }}" method="POST" style="display:inline;">
+                                                <!-- Form Update Realisasi -->
+                                                <form action="{{ route('anggaran.realisasi.update', $item->id) }}" method="POST" class="mx-1 my-1">
                                                     @csrf
                                                     @method('PUT')
-                                                    <div class="input-group">
-                                                        <input type="number" name="nilai_realisasi" required class="form-control" style="width: 100px;">
+                                                    <div class="input-group justify-content-center">
+                                                        <input type="number" name="nilai_realisasi" required class="form-control" style="max-width: 100px;">
                                                         <button type="submit" class="btn btn-success btn-sm">Update</button>
                                                     </div>
                                                 </form>
@@ -74,10 +80,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
 
-                    <div class="mt-3">
-                        {{ $anggaran->links() }} <!-- Untuk paginasi -->
+                        <!-- Paginasi -->
+                        <div class="mt-3 d-flex justify-content-center">
+                            {{ $anggaran->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,8 +93,33 @@
 @endsection
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <style>
+        /* Tabel lebih responsif dengan horizontal scroll */
+        .table-responsive-sm {
+            overflow-x: auto;
+        }
+
+        /* Memperbaiki tampilan font dan padding di layar kecil */
+        .table {
+            font-size: 14px;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* Untuk layar kecil, atur padding dan font lebih kecil */
+        @media (max-width: 768px) {
+            .table th, .table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 @endpush
 
 @push('scripts')
