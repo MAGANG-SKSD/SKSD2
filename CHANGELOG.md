@@ -167,6 +167,14 @@
 
 -   Modify filter dropdown in no rekening to make filtering table in index no rekening
 
+#### [(2024-10-21)]
+
+-   Make feature filter dropdown shorting to be filtering in no rekening
+
+#### [(2024-10-22)]
+
+-   Add navbar into view feature desa (on progress)
+
 #### [(2024-10-23)]
 
 -   Make new view for desas and adding nav-bar into it (on progress)
@@ -174,6 +182,10 @@
 -   fix bugs in the village budget and add code so that the realization feature can be responsive
 
 -   adjustment of Notulen template, changing notulen.php file, controller
-adding button and download function to pdf
+    adding button and download function to pdf
 
 -   to fix one of the account number features that is not yet working, namely the account filter
+
+#### [(2024-10-24)]
+
+-   Add nav-bar from nav-builder into feature profile desa
