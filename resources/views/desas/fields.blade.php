@@ -20,6 +20,18 @@
     {!! Form::number('kode_pos', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Kecamatan Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('kecamatan', 'Kecamatan:') !!}
+    {!! Form::number('kecamatan', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Kabupaten Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('kabupaten', 'Kabupaten:') !!}
+    {!! Form::number('kabupaten', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Telepon Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telepon', 'Telepon:') !!}

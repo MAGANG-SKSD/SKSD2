@@ -19,6 +19,9 @@ class CreateDesasTable extends Migration
             // Menggunakan string dengan panjang yang jelas
             $table->string('nama_desa', 255);
             $table->string('alamat_desa', 255);
+
+            $table->string('kecamatan', 255);
+            $table->string('kabupaten', 255);
             
             // Kode pos bisa tetap integer karena angka
             $table->integer('kode_pos');

@@ -35,6 +35,18 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>KecamatanPos:</strong>
+                {{ $desa->kecamatan }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Kabupaten</strong>
+                {{ $desa->kabupaten }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Telepon:</strong>
                 {{ $desa->telepon }}
             </div>
