@@ -62,6 +62,18 @@ $desaDetail = auth()->user()->desa; // Mengambil desa dari user yang sedang logi
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
+                                                    <label class="form-label">{{ __('Kecamatan') }}</label>
+                                                    <input type="text" name="kecamatan" value="{{ $desaDetail->kecamatan }}" class="form-control" placeholder="{{ __('Kecamatan') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">{{ __('Kabupaten') }}</label>
+                                                    <input type="text" name="kabupaten" value="{{ $desaDetail->kabupaten }}" class="form-control" placeholder="{{ __('Kabupaten') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
                                                     <label class="form-label">{{ __('Telepon') }}</label>
                                                     <input type="text" name="telepon" value="{{ $desaDetail->telepon }}" class="form-control" placeholder="{{ __('Telepon') }}">
                                                 </div>

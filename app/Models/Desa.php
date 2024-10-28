@@ -18,6 +18,8 @@ class Desa extends Model
         'nama_desa',
         'alamat_desa',
         'kode_pos',
+        'kecamatan',
+        'kabupaten',
         'telepon',
         'email',
     ];

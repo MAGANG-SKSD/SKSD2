@@ -38,6 +38,14 @@
                                 <label for="kode_pos" class="col-form-label">{{ __('Kode Pos') }}</label>
                                 <input type="number" name="kode_pos" id="kode_pos" class="form-control" value="{{ old('kode_pos', $desa->kode_pos) }}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="kecamatan" class="col-form-label">{{ __('Kecamatan') }}</label>
+                                <input type="number" name="kecamatan" id="kecamatan" class="form-control" value="{{ old('kecamatan', $desa->kecamatan) }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kabupaten" class="col-form-label">{{ __('Kabupaten') }}</label>
+                                <input type="number" name="kabupaten" id="kabupaten" class="form-control" value="{{ old('kabupaten', $desa->kabupaten) }}" required>
+                            </div>
 
                             <div class="form-group">
                                 <label for="telepon" class="col-form-label">{{ __('Telepon') }}</label>

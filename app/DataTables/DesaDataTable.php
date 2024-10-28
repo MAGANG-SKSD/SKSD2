@@ -98,6 +98,8 @@ class DesaDataTable extends DataTable
             Column::make('nama_desa'),
             Column::make('alamat_desa'),
             Column::make('kode_pos'),
+            Column::make('kecamatan'),
+            Column::make('kabupaten'),
             Column::make('telepon'),
             Column::make('email'),
             Column::computed('action')
