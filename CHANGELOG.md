@@ -189,3 +189,13 @@
 #### [(2024-10-24)]
 
 -   Add nav-bar from nav-builder into feature profile desa
+
+-   Add nav-bar from nav-builder into feature profile desa
+
+#### [(2024-10-25)]
+
+-   Finishing add nav-bar from nav-builder into feature profile desa
+
+#### [(2024-10-28)]
+
+-   Add new column in tabel desa is kecamatan and kabupaten
