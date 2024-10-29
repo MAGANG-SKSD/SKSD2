@@ -96,24 +96,24 @@ $settings = Utility::settings();
                         </a>
                     </li>
                     @endrole
-                    <li class="dash-item dash-hasmenu {{ request()->is('anggaranKas*') ? 'active' : '' }}">
+                    {{-- <li class="dash-item dash-hasmenu {{ request()->is('anggaranKas*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('anggaranKas.index') }}">
                             <span class="dash-micon"><i class="ti ti-map"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('Anggaran kas') }}</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="dash-item dash-hasmenu {{ request()->is('apbdes*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('apbdes.index') }}">
                             <span class="dash-micon"><i class="ti ti-wallet"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('APBDes') }}</span>
                         </a>
                     </li>
-                    <li class="dash-item dash-hasmenu {{ request()->is('danas*') ? 'active' : '' }}">
+                    {{-- <li class="dash-item dash-hasmenu {{ request()->is('danas*') ? 'active' : '' }}">
                         <a class="dash-link" href="{{ route('danas.index') }}">
                             <span class="dash-micon"><i class="ti ti-bell"></i></span>
                             <span class="dash-mtext custom-weight">{{ __('Dana') }}</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="dash-item dash-hasmenu {{ request()->is('desas*') ? 'active' : '' }}">
                         {{-- <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => 1]) }}"> --}}
                         <a class="dash-link" href="{{ route('desas.profile', ['desa_id' => auth()->user()->desa->desa_id]) }}">
