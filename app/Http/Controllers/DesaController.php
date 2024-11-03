@@ -38,6 +38,8 @@ class DesaController extends Controller
             'nama_desa' => 'required',
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
+            'kecamatan' => 'required',
+            'kabupaten' => 'required',
             'telepon' => 'required',
             'email' => 'required|email|unique:desas,email',
         ]);
@@ -46,6 +48,8 @@ class DesaController extends Controller
             'nama_desa' => $request->input('nama_desa'),
             'alamat_desa' => $request->input('alamat_desa'),
             'kode_pos' => $request->input('kode_pos'),
+            'kecamatan' => $request->input('kode_pos'),
+            'kabupaten' => $request->input('kode_pos'),
             'telepon' => $request->input('telepon'),
             'email' => $request->input('email'),
             'created_by' => Auth::user()->id,
@@ -82,6 +86,8 @@ class DesaController extends Controller
             'nama_desa' => 'required',
             'alamat_desa' => 'required',
             'kode_pos' => 'required',
+            'kecamatan' => 'required',
+            'kabupaten' => 'required',
             'telepon' => 'required',
             'email' => 'required|email|unique:desas,email,' . $desa_id . ',desa_id',
         ]);

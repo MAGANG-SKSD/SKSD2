@@ -22,6 +22,18 @@
     <p>{{ $desa->kode_pos }}</p>
 </div>
 
+<!-- Kode Pos Field -->
+<div class="form-group">
+    {!! Form::label('kecamatan', 'Kecamatan:') !!}
+    <p>{{ $desa->kode_pos }}</p>
+</div>
+
+<!-- Kode Pos Field -->
+<div class="form-group">
+    {!! Form::label('kabupaten', 'Kabupaten:') !!}
+    <p>{{ $desa->kabupaten }}</p>
+</div>
+
 <!-- Telepon Field -->
 <div class="form-group">
     {!! Form::label('telepon', 'Telepon:') !!}
