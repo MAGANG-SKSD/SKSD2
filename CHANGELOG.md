@@ -189,3 +189,9 @@
 #### [(2024-10-24)]
 
 -   Add nav-bar from nav-builder into feature profile desa
+
+#### [(2024-10-25)]
+
+- add view surat to responsive
+
+- 
