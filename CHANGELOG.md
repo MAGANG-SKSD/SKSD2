@@ -190,6 +190,13 @@
 
 -   Add nav-bar from nav-builder into feature profile desa
 
+<<<<<<< HEAD
+#### [(2024-10-25)]
+
+- add view surat to responsive
+
+- 
+=======
 -   Add nav-bar from nav-builder into feature profile desa
 
 #### [(2024-10-25)]
@@ -199,3 +206,4 @@
 #### [(2024-10-28)]
 
 -   Add new column in tabel desa is kecamatan and kabupaten
+>>>>>>> 987b34e43dc3c400b58e08a8153d832cb2a4b250
