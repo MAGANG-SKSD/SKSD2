@@ -6,7 +6,10 @@
     <h2>Halaman Surat</h2>
     <p>Ini adalah halaman untuk mengelola Surat.</p>
 
-    <div class="mb-3">
+    <div class="mb-3 d-flex gap-2">
+        <a href="{{ url()->previous() }}" class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Kembali
+        </a>
         <a href="{{ route('surat.print') }}" class="btn btn-secondary">
             <i class="fa fa-print"></i> Cetak Surat
         </a>
