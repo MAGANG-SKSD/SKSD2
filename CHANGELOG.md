@@ -41,7 +41,7 @@
 
 -   Fix in web.php
 -   add model & controller Anggaran ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](https://github.com/MAGANG-SKSD/SKSD2/commit/11db7b0129ad92b8af3a5bb4a1cf51bd1d993061))
--   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](11db7b0129ad92b8af3a5bb4a1cf51bd1d993061)))
+-   Perbaikan model dan penambahan controller kelompok ,jenis & Detail norekening ([11db7b0129ad92b8af3a5bb4a1cf51bd1d993061](11db7b0129ad92b8af3a5bb4a1cf51bd1d993061))
 
 -   Fix it conflict modul, datatable, controller and view in APBDes
 
@@ -190,20 +190,58 @@
 
 -   Add nav-bar from nav-builder into feature profile desa
 
-<<<<<<< HEAD
 #### [(2024-10-25)]
 
 - add view surat to responsive
 
-- 
-=======
--   Add nav-bar from nav-builder into feature profile desa
+- mengelola surat yang ada di sp2d
 
-#### [(2024-10-25)]
-
--   Finishing add nav-bar from nav-builder into feature profile desa
+- Finishing add nav-bar from nav-builder into feature profile desa
 
 #### [(2024-10-28)]
 
 -   Add new column in tabel desa is kecamatan and kabupaten
->>>>>>> 987b34e43dc3c400b58e08a8153d832cb2a4b250
+
+-   help create letter templates that are in sp2d with different types
+
+-   mambuat surat laporan ke uangan dib fitur kelola surat
+
+#### [(2024-10-29)]
+
+-   mambuat surat laporan sp2d di fitur kelola surat
+
+-   edit & fix modul pada navbar menghilangkan dana dan no rekenings yang tidak terpakai
+
+-   Learning work-flow about shipping and learn how to roles work
+
+#### [(2024-10-30)]
+
+-   membuat tampilan sp2d yang lebih responsif serta menyesuaikan isi tabel agar tidak keluar dari container
+
+-   membuat fungsi surat pada sp2d dengan jenis berbeda
+
+-   memmbuat surat laporan  dan kelola template surat di sp2d
+
+-   Membuat surat dan mencari template kembali yang lebih multifungsi untuk kegunaan sp2d
+
+#### [(2024-10-31)]
+
+-   membuat fitur surat keuangan sp2d dan mempelajari sedikit teknik shipping 
+
+-   edit surat anggaran yang belum selesai
+
+-   melanjutkan membuat fungsi surat yang ada di sp2d laporan dengan mengunduh template yang berbeda
+
+#### [(2024-11-1)]
+
+-   edit surat desa dengan menambahkan template dan add changelog
+
+-   Menyesuaikan template untuk surat anggaran yang belum selesai
+
+-   mecoba mengatur role
+
+-   Membuat surat template rekomendasi.blade
+
+#### [(2024-11-20)]
+
+-   edit fitur surat in kelola surat for responsive view
